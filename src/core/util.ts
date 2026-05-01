@@ -44,8 +44,8 @@ function copyArray<T>(array: T[], inherited: boolean): T[] {
 			: _mixin({
 					deep: true,
 					inherited: inherited,
-					sources: <Array<T>>[item],
-					target: <T>{}
+					sources: [item] as Array<T>,
+					target: {} as T
 			  });
 	});
 }

@@ -163,7 +163,7 @@ if (!has('es6-set')) {
 		}
 
 		keys(): IterableIterator<T> {
-			return new ShimIterator(this._setData);
+			return new ShimIterator(this._setData) as IterableIterator<T>;
 		}
 
 		get size(): number {
@@ -171,11 +171,11 @@ if (!has('es6-set')) {
 		}
 
 		values(): IterableIterator<T> {
-			return new ShimIterator(this._setData);
+			return new ShimIterator(this._setData) as IterableIterator<T>;
 		}
 
 		[Symbol.iterator](): IterableIterator<T> {
-			return new ShimIterator(this._setData);
+			return new ShimIterator(this._setData) as IterableIterator<T>;
 		}
 
 		[Symbol.toStringTag]: 'Set' = 'Set';
