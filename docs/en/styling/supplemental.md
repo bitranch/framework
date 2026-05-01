@@ -48,7 +48,7 @@ This stylesheet can be used within a corresponding widget as follows:
 > src/widgets/MyWidget.ts
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 import * as css from '../styles/MyWidget.m.css';
 
@@ -165,7 +165,7 @@ By convention, there is a third requirement that is useful when developing widge
 
 3.  The widget's root VDOM node - that is, the outer-most node rendered by the widget - should include a styling class named `root`. Doing so provides a predictable way to target the top-level node of a third-party themeable widget when overriding its styles in a custom theme.
 
-The `theme` middleware is imported from the `@dojo/framework/core/middleware/theme` module.
+The `theme` middleware is imported from the `@dojo-ng/framework/core/middleware/theme` module.
 
 ### `theme.classes` method
 
@@ -219,8 +219,8 @@ This stylesheet can be used within a corresponding themeable widget as follows:
 > src/widgets/MyThemeableWidget.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import * as css from '../styles/MyThemeableWidget.m.css';
 
@@ -265,8 +265,8 @@ Extending the above example:
 > src/widgets/MyThemeableWidget.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import * as css from '../styles/MyThemeableWidget.m.css';
 import * as commonCss from '../styles/MyThemeCommonStyles.m.css';
@@ -311,7 +311,7 @@ export default {
 > src/widgets/MyApp.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 import MyThemeableWidget from './src/widgets/MyThemeableWidget.tsx';
 import * as myThemeOverride from '../themes/myThemeOverride/theme.ts';
@@ -368,17 +368,17 @@ As an example of providing extra classes, the following tweaks an instance of a 
 > src/widgets/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
-import ComboBox from '@dojo/widgets/combobox';
+import ComboBox from '@dojo-ng/widgets/combobox';
 import * as myComboBoxStyleTweaks from '../styles/MyComboBoxStyleTweaks.m.css';
 
 const myExtraClasses = {
-	'@dojo/widgets/combobox': {
+	'@dojo-ng/widgets/combobox': {
 		controls: [myComboBoxStyleTweaks.blueBackground],
 		trigger: [myComboBoxStyleTweaks.redArrow]
 	},
-	'@dojo/widgets/text-input': {
+	'@dojo-ng/widgets/text-input': {
 		input: [myComboBoxStyleTweaks.blueBackground]
 	}
 };
@@ -406,8 +406,8 @@ For example, specifying a primary application theme:
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import myTheme from '../themes/MyTheme/theme';
 
@@ -445,8 +445,8 @@ The `theme` middleware `.set(theme)` function can be used to change the active t
 > src/widgets/ThemeSwitcher.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import myTheme from '../themes/MyTheme/theme';
 import alternativeTheme from '../themes/MyAlternativeTheme/theme';
@@ -541,10 +541,10 @@ The theme associates the new `root` styling class to `MyWidget` via its [theme k
 
 It is likely that application themes will need to include styling of any third-party widgets that may be used, such as those provided by [Dojo's native widget library](https://github.com/dojo/widgets).
 
-The [`@dojo/cli-create-theme`](https://github.com/dojo/cli-create-theme) package provides tooling support to quickly generate theme scaffolding for third party widgets, via its `dojo create theme` CLI command. It can be installed locally within an application via:
+The [`@dojo-ng/cli-create-theme`](https://github.com/dojo/cli-create-theme) package provides tooling support to quickly generate theme scaffolding for third party widgets, via its `dojo create theme` CLI command. It can be installed locally within an application via:
 
 ```bash
-npm install --save-dev @dojo/cli-create-theme
+npm install --save-dev @dojo-ng/cli-create-theme
 ```
 
 and can be used as follows from a project's root directory:
@@ -556,7 +556,7 @@ dojo create theme -n {myThemeName}
 Running this command will begin to create the specified `myThemeName` theme by asking two questions:
 
 -   **What Package to do you want to theme?**
-    -   The answer to this should be all the packages that contain the third-party widgets intended for theming, for example `@dojo/widgets`. The command will continue to ask for more packages until a user is done.
+    -   The answer to this should be all the packages that contain the third-party widgets intended for theming, for example `@dojo-ng/widgets`. The command will continue to ask for more packages until a user is done.
 -   **Which of the _{third-party-package}_ theme files would you like to scaffold?**
     -   A list will be shown of all themeable widgets in the third-party packages that were specified when answering the first question. Users can then pick the subset of all compatible widgets that should be included in the resulting theme - usually only the widgets that are actually used in the current application will be selected, to help keep the theme's size to a minimum.
 
@@ -583,12 +583,12 @@ For example:
 
 Dojo's [`cli-build-theme`](https://github.com/dojo/cli-build-theme) package provides a CLI command to help build themes that are intended for distribution across multiple applications. It will create all files necessary to [use the theme in a variety of different ways](/learn/styling/theming-a-dojo-application).
 
-Note that when using [`dojo create theme`](/learn/styling/working-with-themes#scaffolding-themes-for-third-party-widgets) to scaffold a new theme, there is no need to use `dojo build theme`, as all relevant files will already be in place. This applies to themes in projects that are built either via [`@dojo/cli-build-app`](https://github.com/dojo/cli-build-app) or [`@dojo/cli-build-widget`](https://github.com/dojo/cli-build-widget).
+Note that when using [`dojo create theme`](/learn/styling/working-with-themes#scaffolding-themes-for-third-party-widgets) to scaffold a new theme, there is no need to use `dojo build theme`, as all relevant files will already be in place. This applies to themes in projects that are built either via [`@dojo-ng/cli-build-app`](https://github.com/dojo/cli-build-app) or [`@dojo-ng/cli-build-widget`](https://github.com/dojo/cli-build-widget).
 
-To use the tooling, install `@dojo/cli-build-theme` locally in a theme project:
+To use the tooling, install `@dojo-ng/cli-build-theme` locally in a theme project:
 
 ```bash
-npm install --save-dev @dojo/cli-build-theme
+npm install --save-dev @dojo-ng/cli-build-theme
 ```
 
 Then to build a theme, run the command and specify a theme name as well as an optional release version:
@@ -611,36 +611,36 @@ Running the command will create a new `dist/src/{myThemeName}` directory in the 
 
 ## Using Dojo-provided themes
 
-The [`@dojo/themes`](https://github.com/dojo/themes) package provides a collection of ready-to-use themes that cover all widgets in Dojo's [native widget library](https://github.com/dojo/widgets). The themes can be used as-is, or [composed as the basis](/learn/styling/working-with-themes#composing-off-dojo-themes) for a full application theme.
+The [`@dojo-ng/themes`](https://github.com/dojo/themes) package provides a collection of ready-to-use themes that cover all widgets in Dojo's [native widget library](https://github.com/dojo/widgets). The themes can be used as-is, or [composed as the basis](/learn/styling/working-with-themes#composing-off-dojo-themes) for a full application theme.
 
-1.  To use the themes, install `@dojo/themes` into your project, for example through `npm i @dojo/themes`. Then, for regular Dojo applications:
+1.  To use the themes, install `@dojo-ng/themes` into your project, for example through `npm i @dojo-ng/themes`. Then, for regular Dojo applications:
 
 2.  Import the theme CSS into your project's `main.css`:
 
     ```css
-    @import '~@dojo/themes/dojo/index.css';
+    @import '~@dojo-ng/themes/dojo/index.css';
     ```
 
 3.  Import the theme TypeScript module and use it [as per any other theme](/learn/styling/theming-a-dojo-application#making-themeable-applications):
 
     ```ts
-    import theme from '@dojo/themes/dojo';
+    import theme from '@dojo-ng/themes/dojo';
 
     render() {
     	return w(Button, { theme }, [ 'Hello World' ]);
     }
     ```
 
-If attempting to use the themes in custom elements, after installing `@dojo/themes`:
+If attempting to use the themes in custom elements, after installing `@dojo-ng/themes`:
 
 1.  Add the custom element-specific theme CSS to `index.html`:
 
     ```html
-    <link rel="stylesheet" href="node_modules/@dojo/themes/dojo/dojo-{version}.css" />
+    <link rel="stylesheet" href="node_modules/@dojo-ng/themes/dojo/dojo-{version}.css" />
     ```
 
 2.  Add the custom element-specific theme JS to `index.html`:
 
     ```html
-    <script src="node_modules/@dojo/themes/dojo/dojo-{version}.js"></script>
+    <script src="node_modules/@dojo-ng/themes/dojo/dojo-{version}.js"></script>
     ```

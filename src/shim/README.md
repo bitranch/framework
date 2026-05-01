@@ -11,7 +11,7 @@ There are two exceptions to this. One is the `Promise` object, which needs to be
 Include the module in your project to load the global shims and Typescript helpers.
 
 ```typescript
-import '@dojo/framework/shim';
+import '@dojo-ng/framework/shim';
 ```
 
 Since the main module loads the Typescript helpers, you'll want to turn off helper generation in your project. Add the following option to your `tsconfig.json`.
@@ -24,11 +24,11 @@ Since the main module loads the Typescript helpers, you'll want to turn off help
 }
 ```
 
-If you are using Dojo in the browser, you will want to load the browser polyfills. These are available by simply importing the `@dojo/framework/shim/browser` module.
+If you are using Dojo in the browser, you will want to load the browser polyfills. These are available by simply importing the `@dojo-ng/framework/shim/browser` module.
 
 ```typescript
 // load polyfills for features used by Dojo
-import '@dojo/framework/shim/browser';
+import '@dojo-ng/framework/shim/browser';
 ```
 
 _Note_: Other Dojo packages will include these dependencies. You only need to worry about this if you are using this package stand alone.
@@ -57,21 +57,21 @@ Many of the features in this package will fallback to a native implementation if
 
 ### Array Methods
 
-[`@dojo/framework/shim/array`](../../docs/shim/array.md) provides implementations of many array utilities.
+[`@dojo-ng/framework/shim/array`](../../docs/shim/array.md) provides implementations of many array utilities.
 
 ### Data Structures
 
 #### Map
 
-The [`@dojo/framework/shim/Map` class](../../docs/shim/Map.md) is an implementation of the ES2015 Map specification
+The [`@dojo-ng/framework/shim/Map` class](../../docs/shim/Map.md) is an implementation of the ES2015 Map specification
 without iterators for use in older browsers.
 
 #### Set
 
-The `@dojo/framework/shim/Set` class is an implementation of the [ES2015 Set specification](http://www.ecma-international.org/ecma-262/6.0/#sec-set-objects). A Set is used to create a collection of unique values.
+The `@dojo-ng/framework/shim/Set` class is an implementation of the [ES2015 Set specification](http://www.ecma-international.org/ecma-262/6.0/#sec-set-objects). A Set is used to create a collection of unique values.
 
 ```typescript
-import Set from '@dojo/framework/shim/Set';
+import Set from '@dojo-ng/framework/shim/Set';
 
 const values = new Set<string>();
 values.add('one');
@@ -89,7 +89,7 @@ values.forEach((value) => {
 
 #### WeakMap
 
-The `@dojo/framework/shim/WeakMap` class is an implementation of the ES2015 WeakMap specification
+The `@dojo-ng/framework/shim/WeakMap` class is an implementation of the ES2015 WeakMap specification
 without iterators for use in older browsers. The main difference between WeakMap and Map
 is that WeakMap's keys can only be objects and that the store has a weak reference
 to the key/value pair. This allows for the garbage collector to remove pairs.
@@ -98,11 +98,11 @@ See the [Map](../../docs/shim/Map.md) documentation for more information on how 
 
 ### Iterators
 
-The `@dojo/framework/shim/iterator` module is an implementation of the [ES2015 Iterator specification](http://www.ecma-international.org/ecma-262/6.0/#sec-iteration).
+The `@dojo-ng/framework/shim/iterator` module is an implementation of the [ES2015 Iterator specification](http://www.ecma-international.org/ecma-262/6.0/#sec-iteration).
 
 ### Math
 
-The [`@dojo/framework/shim/math`](../../docs/shim/math.md) module provides implementations for many math methods.
+The [`@dojo-ng/framework/shim/math`](../../docs/shim/math.md) module provides implementations for many math methods.
 
 ### Number
 
@@ -126,19 +126,19 @@ The `dojo/shim/object` provides implementations of `Object` methods.
 
 ### Observables
 
-The [`@dojo/framework/shim/Observable`](../../docs/shim/Observable.md) class is an implementation of the proposed [Observable specification](https://tc39.github.io/proposal-observable/).
+The [`@dojo-ng/framework/shim/Observable`](../../docs/shim/Observable.md) class is an implementation of the proposed [Observable specification](https://tc39.github.io/proposal-observable/).
 
 ### Promises
 
-[`@dojo/framework/shim/Promise`](../../docs/shim/Promise.md) is an implementation of the [ES2015 Promise specification](http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects).
+[`@dojo-ng/framework/shim/Promise`](../../docs/shim/Promise.md) is an implementation of the [ES2015 Promise specification](http://www.ecma-international.org/ecma-262/6.0/#sec-promise-objects).
 
 ### String
 
-The [`@dojo/framework/shim/string`](../../docs/shim/string.md) module contains `String` methods.
+The [`@dojo-ng/framework/shim/string`](../../docs/shim/string.md) module contains `String` methods.
 
 ### Symbols
 
-`@dojo/framework/shim/Symbol` provides an implementation of the [ES2015 Symbol specification](http://www.ecma-international.org/ecma-262/6.0/#sec-symbol-objects) for environments that do not natively support `Symbol`.
+`@dojo-ng/framework/shim/Symbol` provides an implementation of the [ES2015 Symbol specification](http://www.ecma-international.org/ecma-262/6.0/#sec-symbol-objects) for environments that do not natively support `Symbol`.
 
 <!-- doc-viewer-config
 {

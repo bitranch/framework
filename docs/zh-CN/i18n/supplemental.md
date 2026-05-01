@@ -84,8 +84,8 @@ export default {
 > widgets/MyI18nWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import myWidgetMessageBundle from '../nls/en/MyI18nWidget';
 
@@ -136,7 +136,7 @@ export default {
 
 一个国际化的应用程序，应该在它的构建配置文件 `.dojorc` 中指定支持的区域。应该将其中一个区域指定为应用程序的主（默认）区域，其余受支持的区域可作为辅助选项，可在需要时激活。这是通过 `build-app` 中的 `locale` 属性和 `supportedLocales` 列表实现的。
 
-**注意**：因为大量的格式化和解析器都依赖于特定语言环境的 [CLDR](http://cldr.unicode.org) 数据，所以为了能正常运行，`@dojo/framework/i18n` 提供的大部分功能都要求在 `.dojorc` 中设置至少一个 `locale`。比如，如果没有指定默认的 `locale`，则只返回默认包中的消息，并且将禁用 [ICU 消息格式化](#icu-message-formatting)功能。
+**注意**：因为大量的格式化和解析器都依赖于特定语言环境的 [CLDR](http://cldr.unicode.org) 数据，所以为了能正常运行，`@dojo-ng/framework/i18n` 提供的大部分功能都要求在 `.dojorc` 中设置至少一个 `locale`。比如，如果没有指定默认的 `locale`，则只返回默认包中的消息，并且将禁用 [ICU 消息格式化](#icu-message-formatting)功能。
 
 -   `locale`: string
     -   应用程序支持的主区域。即，如果没有指定覆盖的区域，将使用此作为默认语言。
@@ -158,7 +158,7 @@ export default {
 
 ## 创建支持 i18n 的部件
 
-使用 `@dojo/framework/core/middleware/i18n` 中的 `i18n` 中间件，可国际化单个部件。使用中间件向部件的属性接口添加额外的 i18n 相关属性。`i18n` 中间件的 API 包含一个方法 `localize(bundle)`，用于获取消息包中的本地化消息文本；以及两外两个方法，用于获取和设置应用程序的区域详情。
+使用 `@dojo-ng/framework/core/middleware/i18n` 中的 `i18n` 中间件，可国际化单个部件。使用中间件向部件的属性接口添加额外的 i18n 相关属性。`i18n` 中间件的 API 包含一个方法 `localize(bundle)`，用于获取消息包中的本地化消息文本；以及两外两个方法，用于获取和设置应用程序的区域详情。
 
 ### `i18n` 部件属性
 
@@ -201,10 +201,10 @@ export default {
 > widgets/MyI18nWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
-import Label from '@dojo/widgets/label';
-import Button from '@dojo/widgets/button';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
+import Label from '@dojo-ng/widgets/label';
+import Button from '@dojo-ng/widgets/button';
 
 import greetingsBundle from '../nls/en/MyI18nWidget';
 
@@ -240,7 +240,7 @@ export default factory(function MyI18nWidget({ middleware: { i18n } }) {
 
 ### 基于类的部件使用 `I18nMixin`
 
-通过混入 `@dojo/framework/core/mixins/I18n` 中的 `I18nMixin`，可国际化单个基于类的部件。这个 Mixin 将与 `i18n` 中间件相同的 i18n 相关属性添加到部件属性中，并且提供了一个 `localizeBundle` 方法，将导入的消息包与部件当前设置的区域关联。
+通过混入 `@dojo-ng/framework/core/mixins/I18n` 中的 `I18nMixin`，可国际化单个基于类的部件。这个 Mixin 将与 `i18n` 中间件相同的 i18n 相关属性添加到部件属性中，并且提供了一个 `localizeBundle` 方法，将导入的消息包与部件当前设置的区域关联。
 
 #### `localizeBundle()` 方法
 
@@ -274,11 +274,11 @@ export default {
 > widgets/MyI18nWidget.ts
 
 ```ts
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { v, w } from '@dojo/framework/core/vdom';
-import I18nMixin from '@dojo/framework/core/mixins/I18n';
-import Label from '@dojo/widgets/label';
-import Button from '@dojo/widgets/button';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { v, w } from '@dojo-ng/framework/core/vdom';
+import I18nMixin from '@dojo-ng/framework/core/mixins/I18n';
+import Label from '@dojo-ng/widgets/label';
+import Button from '@dojo-ng/widgets/button';
 
 import greetingsBundle from '../nls/en/MyI18nWidget';
 
@@ -312,17 +312,17 @@ export default class MyI18nWidget extends I18nMixin(WidgetBase) {
 
 ## 为支持 i18n 的部件提供本地化数据
 
-当应用程序使用支持 i18n 的基于类的部件时（专指使用 `I18nMixin` 的部件），还需要通过 Dojo 注册表管理区域设置的详情。这适用于应用程序内部包含此类部件，或者外部依赖中包含此类部件，包括 Dojo 的 `@dojo/widgets` 套件中的部件。通过部件的注册系统，将本地化数据注入到所有此类部件中；当应用程序的区域设置变化时，这些部件将会失效并使用更新后的本地化数据重新渲染。
+当应用程序使用支持 i18n 的基于类的部件时（专指使用 `I18nMixin` 的部件），还需要通过 Dojo 注册表管理区域设置的详情。这适用于应用程序内部包含此类部件，或者外部依赖中包含此类部件，包括 Dojo 的 `@dojo-ng/widgets` 套件中的部件。通过部件的注册系统，将本地化数据注入到所有此类部件中；当应用程序的区域设置变化时，这些部件将会失效并使用更新后的本地化数据重新渲染。
 
-这个机制是通过 `@dojo/framework/core/mixins/I18n` 提供的工具方法 `registerI18nInjector` 实现的。调用此方法会将 `i18n` 注入器注册到指定的 registry 实例中。通常这是在应用程序引导阶段完成的，而 i18n 注入器是通过将全局的 registry 传给 `renderer.mount()` 方法完成注册的。
+这个机制是通过 `@dojo-ng/framework/core/mixins/I18n` 提供的工具方法 `registerI18nInjector` 实现的。调用此方法会将 `i18n` 注入器注册到指定的 registry 实例中。通常这是在应用程序引导阶段完成的，而 i18n 注入器是通过将全局的 registry 传给 `renderer.mount()` 方法完成注册的。
 
 > main.ts
 
 ```ts
-import renderer from '@dojo/framework/core/vdom';
-import { w } from '@dojo/framework/core/vdom';
-import Registry from '@dojo/framework/core/Registry';
-import { registerI18nInjector } from '@dojo/framework/core/mixins/I18n';
+import renderer from '@dojo-ng/framework/core/vdom';
+import { w } from '@dojo-ng/framework/core/vdom';
+import Registry from '@dojo-ng/framework/core/Registry';
+import { registerI18nInjector } from '@dojo-ng/framework/core/mixins/I18n';
 
 import App from './App';
 
@@ -342,8 +342,8 @@ r.mount({ registry });
 下面的示例展示了一个支持 i18n 的部件，它会渲染两个按钮，用于在英语和法语之间切换应用程序的区域。
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import nlsBundle from '../nls/main';
 
@@ -384,7 +384,7 @@ export default factory(function LocaleChanger({ middleware: { i18n } }) {
 在子部件中覆写包的示例：
 
 ```ts
-import { Bundle } from '@dojo/framework/i18n/i18n';
+import { Bundle } from '@dojo-ng/framework/i18n/i18n';
 
 // A complete bundle to replace WidgetA's message bundle
 import overrideBundleForWidgetA from './nls/widgetA';
@@ -422,8 +422,8 @@ export class MyWidget extends WidgetBase {
 |    3 | **`I18nMixin` 或 `i18n` 中间件以及 i18n 注入器** | 初始注册 [i18n 注入器](#providing-locale-data-to-i18n-aware-widgets)时设置的默认区域                                                                     |
 |    4 | **`.dojorc`**                                    | 用户当前的区域，例如浏览器中的语言设置，同时该区域也[存在于应用程序的 `build-app`.`supportedLocales` 列表中](#configuring-supported-application-locales) |
 |    5 | **`.dojorc`**                                    | [在应用程序的 `build-app`.`locale` 中指定的默认区域](#configuring-supported-application-locales)                                                         |
-|    6 | **`@dojo/framework/i18n`**                       | 通过 [Dojo i18n 中的 `switchLocale` 方法](#changing-the-root-locale-and-observing-locale-changes)显式设置的区域                                          |
-|    7 | **`@dojo/framework/i18n`**                       | [为当前执行环境设置的 `systemLocale`](#determining-the-current-locale)。                                                                                 |
+|    6 | **`@dojo-ng/framework/i18n`**                       | 通过 [Dojo i18n 中的 `switchLocale` 方法](#changing-the-root-locale-and-observing-locale-changes)显式设置的区域                                          |
+|    7 | **`@dojo-ng/framework/i18n`**                       | [为当前执行环境设置的 `systemLocale`](#determining-the-current-locale)。                                                                                 |
 
 # 高级格式化
 
@@ -454,8 +454,8 @@ export default {
 > widgets/MyI18nWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import nlsBundle from '../nls/main';
 
@@ -481,7 +481,7 @@ export default factory(function MyI18nWidget({ middleware: { i18n } }) {
 `i18n` 模块的 [`localizeBundle` 函数](#accessing-locale-message-bundles)返回的对象中，有一个用于处理消息格式化的 `format` 方法：
 
 ```ts
-import { localizeBundle } from '@dojo/framework/i18n/i18n';
+import { localizeBundle } from '@dojo-ng/framework/i18n/i18n';
 import bundle from 'nls/main';
 
 localizeBundle(bundle, { locale: 'en' }).then(({ format }) => {
@@ -495,7 +495,7 @@ localizeBundle(bundle, { locale: 'en' }).then(({ format }) => {
 
 ### ICU 消息格式化
 
-`@dojo/framework/i18n` 使用 [Globalize.js](https://github.com/jquery/globalize/blob/master/doc/api/message/message-formatter.md) 进行 [ICU 消息格式化](http://userguide.icu-project.org/formatparse/messages)，因此 Globalize.js 提供的所有功能都可以通过 `@dojo/framework/i18n` 访问。
+`@dojo-ng/framework/i18n` 使用 [Globalize.js](https://github.com/jquery/globalize/blob/master/doc/api/message/message-formatter.md) 进行 [ICU 消息格式化](http://userguide.icu-project.org/formatparse/messages)，因此 Globalize.js 提供的所有功能都可以通过 `@dojo-ng/framework/i18n` 访问。
 
 接下来两个小节的消失格式化示例中将使用已更新了 `guestInfo` 消息的[消息包](#working-with-message-bundles)，如下所示：
 
@@ -536,8 +536,8 @@ ICU 格式的 `guestInfo` 消息会被渲染为：
 > widgets/MyI18nWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import nlsBundle from '../nls/main';
 
@@ -567,7 +567,7 @@ export default factory(function MyI18nWidget({ middleware: { i18n } }) {
 可以使用 [`localizeBundle`](#accessing-locale-message-bundles) 返回的 `format` 方法直接转换 ICU 格式的 `guestInfo` 消息。
 
 ```ts
-import { localizeBundle } from '@dojo/framework/i18n/i18n';
+import { localizeBundle } from '@dojo-ng/framework/i18n/i18n';
 import bundle from 'nls/main';
 
 // 1. Load the messages for the locale.
@@ -592,14 +592,14 @@ localizeBundle(bundle, { locale: 'en' }).then(({ format }) => {
 
 ## 格式化日期和数字
 
-跟文本消息格式化功能一样，`@dojo/framework/i18n` 使用 Globalize.js 为日期、时间、货币、数字和单位提供特定区域的格式化。格式化工具本身是对 Globalize.js 相应函数的轻量级封装，这有助于确保 Dojo 生态系统的一致性，并避免直接使用 `Globalize` 对象。与文本消息的格式化不同，日期、数字和单位格式化不会缓存，因为它们有一组更加复杂的选项。因此，多次使用相同的输入执行各种“获取格式化函数”的方法不会返回完全相同的函数对象。
+跟文本消息格式化功能一样，`@dojo-ng/framework/i18n` 使用 Globalize.js 为日期、时间、货币、数字和单位提供特定区域的格式化。格式化工具本身是对 Globalize.js 相应函数的轻量级封装，这有助于确保 Dojo 生态系统的一致性，并避免直接使用 `Globalize` 对象。与文本消息的格式化不同，日期、数字和单位格式化不会缓存，因为它们有一组更加复杂的选项。因此，多次使用相同的输入执行各种“获取格式化函数”的方法不会返回完全相同的函数对象。
 
-`@dojo/framework/i18n` 对各种格式化函数进行分组：日期和时间格式化（`@dojo/framework/i18n/date`）；数字、货币和多元化的格式化（`@dojo/framework/i18n/number`）；单位格式化（`@dojo/framework/i18n/unit`）。每个方法都与 Globalize.js 中的方法一一对应（见下文），每个方法都遵循相同的基本格式：最后一个参数是可选的区域，倒数第二个参数是一个方法选项。如果指定了区域，但没有方法选项，则为 `options` 参数传入 `null`。如果没有提供区域设置，则假定使用当前区域（`i18n.locale`）。
+`@dojo-ng/framework/i18n` 对各种格式化函数进行分组：日期和时间格式化（`@dojo-ng/framework/i18n/date`）；数字、货币和多元化的格式化（`@dojo-ng/framework/i18n/number`）；单位格式化（`@dojo-ng/framework/i18n/unit`）。每个方法都与 Globalize.js 中的方法一一对应（见下文），每个方法都遵循相同的基本格式：最后一个参数是可选的区域，倒数第二个参数是一个方法选项。如果指定了区域，但没有方法选项，则为 `options` 参数传入 `null`。如果没有提供区域设置，则假定使用当前区域（`i18n.locale`）。
 
 ```ts
-import { formatDate, getDateFormatter, formatRelativeTime } from '@dojo/framework/i18n/date';
-import { formatCurrency, getCurrencyFormatter } from '@dojo/framework/i18n/number';
-import { formatUnit, getUnitFormatter } from '@dojo/framework/i18n/unit';
+import { formatDate, getDateFormatter, formatRelativeTime } from '@dojo-ng/framework/i18n/date';
+import { formatCurrency, getCurrencyFormatter } from '@dojo-ng/framework/i18n/number';
+import { formatUnit, getUnitFormatter } from '@dojo-ng/framework/i18n/unit';
 
 const date = new Date(1815, 11, 10, 11, 27);
 
@@ -634,7 +634,7 @@ frUnitFormatter(1000); // 1 000 mètres'
 formatUnit(1000, 'meter', null, 'fr); // 1 000 mètres'
 ```
 
-**`@dojo/framework/i18n/date` 方法：**
+**`@dojo-ng/framework/i18n/date` 方法：**
 
 -   `formatDate` => [`Globalize.formatDate`](https://github.com/globalizejs/globalize/blob/master/doc/api/date/date-formatter.md)
 -   `formatRelativeTime` => [`Globalize.formatRelativeTime`](https://github.com/globalizejs/globalize/blob/master/doc/api/relative-time/relative-time-formatter.md)
@@ -643,7 +643,7 @@ formatUnit(1000, 'meter', null, 'fr); // 1 000 mètres'
 -   `getRelativeTimeFormatter` => [`Globalize.relativeTimeFormatter`](https://github.com/globalizejs/globalize/blob/master/doc/api/relative-time/relative-time-formatter.md)
 -   `parseDate` => [`Globalize.parseDate`](https://github.com/globalizejs/globalize/blob/master/doc/api/date/date-parser.md)
 
-**`@dojo/framework/i18n/number` 方法：**
+**`@dojo-ng/framework/i18n/number` 方法：**
 
 -   `formatCurrency` => [`Globalize.formatCurrency`](https://github.com/globalizejs/globalize/blob/master/doc/api/currency/currency-formatter.md)
 -   `formatNumber` => [`Globalize.formatNumber`](https://github.com/globalizejs/globalize/blob/master/doc/api/number/number-formatter.md)
@@ -654,7 +654,7 @@ formatUnit(1000, 'meter', null, 'fr); // 1 000 mètres'
 -   `parseNumber` => [`Globalize.parseNumber`](https://github.com/globalizejs/globalize/blob/master/doc/api/number/number-parser.md)
 -   `pluralize` => [`Globalize.plural`](https://github.com/globalizejs/globalize/blob/master/doc/api/plural/plural-generator.md)
 
-**`@dojo/framework/i18n/unit` 方法：**
+**`@dojo-ng/framework/i18n/unit` 方法：**
 
 -   `formatUnit` => [`Globalize.formatUnit`](https://github.com/globalizejs/globalize/blob/master/doc/api/unit/unit-formatter.md)
 -   `getUnitFormatter` => [`Globalize.unitFormatter`](https://github.com/globalizejs/globalize/blob/master/doc/api/unit/unit-formatter.md)
@@ -668,7 +668,7 @@ formatUnit(1000, 'meter', null, 'fr); // 1 000 mètres'
 例如：
 
 ```ts
-import { localizeBundle } from '@dojo/framework/i18n/i18n';
+import { localizeBundle } from '@dojo-ng/framework/i18n/i18n';
 import bundle from 'nls/main';
 
 localizeBundle(bundle, { locale: 'fr' }).then(({ messages }) => {
@@ -681,7 +681,7 @@ localizeBundle(bundle, { locale: 'fr' }).then(({ messages }) => {
 
 ## 确定当前区域
 
-`@dojo/framework/i18n/i18n` 公开了两个确定当前区域的方法：
+`@dojo-ng/framework/i18n/i18n` 公开了两个确定当前区域的方法：
 
 -   `getCurrentLocale`， 用于获取应用程序当前使用的顶层区域设置。
 -   `getComputedLocale`， 支持的区域中包含用户的系统区域，则返回用户的系统区域设置；如果不支持用户的系统区域，则返回 `.dojorc` 中指定的默认区域。

@@ -33,8 +33,8 @@ While a large subset of its functionality can be used as a standalone module, it
 **Function-based variant:**
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import myWidgetMessageBundle from '../nls/en/MyI18nWidget.ts';
 
@@ -50,10 +50,10 @@ export default factory(function MyI18nWidget({ middleware: { i18n } }) {
 **Class-based variant:**
 
 ```tsx
-import { WidgetBase } from '@dojo/framework/core/WidgetBase';
-import { tsx } from '@dojo/framework/core/vdom';
+import { WidgetBase } from '@dojo-ng/framework/core/WidgetBase';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 
-import I18nMixin from '@dojo/framework/core/mixins/I18n';
+import I18nMixin from '@dojo-ng/framework/core/mixins/I18n';
 import myWidgetMessageBundle from '../nls/en/MyI18nWidget.ts';
 
 export default class MyI18nWidget extends I18nMixin(WidgetBase) {
@@ -120,12 +120,12 @@ Note that the fs language bundle simply returns the message bundle, not an objec
 
 ### Specifying a root locale within an application
 
-Using function-based widgets and `i18n` middleware exclusively within an application means there is no requirement to add bootstrapping code to the application's `main.ts`/`main.tsx` entry point. The default application locale can instead be set in a top-level `App` widget, using the `i18n` middleware from `@dojo/framework/core/middleware/i18n`. A default locale can be set when a locale has not already been defined.
+Using function-based widgets and `i18n` middleware exclusively within an application means there is no requirement to add bootstrapping code to the application's `main.ts`/`main.tsx` entry point. The default application locale can instead be set in a top-level `App` widget, using the `i18n` middleware from `@dojo-ng/framework/core/middleware/i18n`. A default locale can be set when a locale has not already been defined.
 
 > src/App.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 const factory = create({ i18n });
 
@@ -137,14 +137,14 @@ export default factory(function App({ middleware: { i18n } }) {
 });
 ```
 
-However, if the application uses any class-based widgets, such as those from the `@dojo/widgets` suite, the default locale details will need to be defined in the application registry. This can be done using the `registryI18nInjector` utility function, available from `@dojo/framework/core/mixins/I18n`.
+However, if the application uses any class-based widgets, such as those from the `@dojo-ng/widgets` suite, the default locale details will need to be defined in the application registry. This can be done using the `registryI18nInjector` utility function, available from `@dojo-ng/framework/core/mixins/I18n`.
 
 > src/main.tsx
 
 ```ts
-import renderer, { tsx } from '@dojo/framework/core/vdom';
-import Registry from '@dojo/framework/core/Registry';
-import { registerI18nInjector } from '@dojo/framework/core/mixins/I18n';
+import renderer, { tsx } from '@dojo-ng/framework/core/vdom';
+import Registry from '@dojo-ng/framework/core/Registry';
+import { registerI18nInjector } from '@dojo-ng/framework/core/mixins/I18n';
 
 import App from './App';
 
@@ -164,8 +164,8 @@ r.mount({ registry });
 > src/widgets/LocaleChanger.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 const factory = create({ i18n });
 

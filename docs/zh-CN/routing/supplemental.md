@@ -124,8 +124,8 @@ const routes = [
 在上面的路由配置中，定义了两个 outlet，`main` 和 `side-menu`，下面显示了使用这两个 outlet 的简化版应用程序布局。默认情况下，`Outlet` 将会渲染 key 值与 outlet 下的路由 id 匹配的路由，如本例中的 `main`。如果为 `Outlet` 传入的是一个函数，则与 outlet 中的 _任一_ 路由匹配时，都会渲染。
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Outlet from '@dojo/framework/routing/Outlet';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Outlet from '@dojo-ng/framework/routing/Outlet';
 
 import Menu from './Menu';
 import SideMenu from './SideMenu';
@@ -164,8 +164,8 @@ const App = factory(function App() {
 `App` 的节点结构看起来很直观，简洁的描述出实际视觉输出，只是有一小处重复，即仍然需要在不同路由中重复使用 `Example` 部件。这可以通过使用 `matcher` 属性来覆盖默认的路由匹配规则来解决。`matcher` 会接收 `defaultMatches` 和 `matchDetailsMap` 两个参数，以便自定义匹配策略。在下面最后一个示例中，将重复使用的 `Example` 合并为一个新 `key`，即 `details`，但在路由定义中并不存在。如果不覆写默认匹配，让匹配到 `example` 或 `overview` 路由时将其设置为 true，则此 outlet 永远不会匹配到 `details`。最后，在 `details` 渲染函数中，将 example 属性的默认值设置为 `overview`，以与之前的行为保持一致。
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Outlet from '@dojo/framework/routing/Outlet';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Outlet from '@dojo-ng/framework/routing/Outlet';
 
 import Menu from './Menu';
 import SideMenu from './SideMenu';
@@ -254,7 +254,7 @@ export default [
 > src/main.ts
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
+import Router from '@dojo-ng/framework/routing/Router';
 
 import routes from './routes';
 
@@ -287,7 +287,7 @@ console.log(router.link('unknown'));
 ## 更改路由
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
+import Router from '@dojo-ng/framework/routing/Router';
 
 import routes from './routes';
 
@@ -300,7 +300,7 @@ router.setPath('#home');
 ## 获取当前参数
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
+import Router from '@dojo-ng/framework/routing/Router';
 
 import routes from './routes';
 
@@ -325,7 +325,7 @@ const params = router.currentParams;
 -   `type: 'index' | 'partial' | 'error'`: 路由的匹配类型，值为 `index`、`partial` 或 `error`。
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
+import Router from '@dojo-ng/framework/routing/Router';
 
 import routes from './routes';
 
@@ -418,8 +418,8 @@ export default [
 > src/App.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 
@@ -522,8 +522,8 @@ export default [
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 
@@ -573,8 +573,8 @@ Dojo 路由自带三个历史管理器，用于管理应用程序的导航状态
 > src/main.ts
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
-import StateHistory from '@dojo/framework/routing/history/StateHistory';
+import Router from '@dojo-ng/framework/routing/Router';
+import StateHistory from '@dojo-ng/framework/routing/history/StateHistory';
 
 import routes from './routes';
 
@@ -590,9 +590,9 @@ const routerWithHistoryOverride = new Router(routes, { HistoryManager: StateHist
 > src/main.ts
 
 ```ts
-import Registry from '@dojo/framework/core/Registry';
-import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
-import StateHistory from '@dojo/framework/routing/history/StateHistory';
+import Registry from '@dojo-ng/framework/core/Registry';
+import { registerRouterInjector } from '@dojo-ng/framework/routing/RouterInjector';
+import StateHistory from '@dojo-ng/framework/routing/history/StateHistory';
 
 import routes from './routes';
 
@@ -610,7 +610,7 @@ registerRouterInjector(routes, registry, { HistoryManager: StateHistory });
 `HashHistory` 使用片段标识符（fragment identifier）来处理路由变更，比如 `https://foo.com/#home` 中的 `home` 就是路由的路径。因为 `HashHistory` 是默认管理器，因此不需要导入模块。
 
 ```ts
-import { Router } from '@dojo/framework/routing/Router';
+import { Router } from '@dojo-ng/framework/routing/Router';
 
 const router = new Router(config);
 ```
@@ -624,11 +624,11 @@ const router = new Router(config);
 1.  重写 `index.html` 请求，以从应用程序根目录加载。
 2.  重写加载静态资源（`.js`、`.css`等）的请求，以从应用程序根目录加载。
 
-**注意：** 当使用 `@dojo/cli-build-app` 的 `--serve` 选项时，本机制已经包含在其中（仅用于开发环境）。
+**注意：** 当使用 `@dojo-ng/cli-build-app` 的 `--serve` 选项时，本机制已经包含在其中（仅用于开发环境）。
 
 ```ts
-import { Router } from '@dojo/framework/routing/Router';
-import { StateHistory } from '@dojo/framework/routing/history/StateHistory';
+import { Router } from '@dojo-ng/framework/routing/Router';
+import { StateHistory } from '@dojo-ng/framework/routing/history/StateHistory';
 
 const router = new Router(config, { HistoryManager: StateHistory });
 ```
@@ -638,8 +638,8 @@ const router = new Router(config, { HistoryManager: StateHistory });
 `MemoryHistory` 不依赖任何浏览器 API，而是自己保存内部的路径状态。不要在生产应用程序中使用它，但在测试路由时却很有用。
 
 ```ts
-import { Router } from '@dojo/framework/routing/Router';
-import { MemoryHistory } from '@dojo/framework/routing/history/MemoryHistory';
+import { Router } from '@dojo-ng/framework/routing/Router';
+import { MemoryHistory } from '@dojo-ng/framework/routing/history/MemoryHistory';
 
 const router = new Router(config, { HistoryManager: MemoryHistory });
 ```
@@ -647,9 +647,9 @@ const router = new Router(config, { HistoryManager: MemoryHistory });
 > src/main.tsx
 
 ```tsx
-import renderer from '@dojo/framework/core/vdom';
-import { tsx } from '@dojo/framework/core/vdom';
-import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
+import renderer from '@dojo-ng/framework/core/vdom';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import { registerRouterInjector } from '@dojo-ng/framework/routing/RouterInjector';
 
 import routes from './routes';
 import App from './App';
@@ -669,8 +669,8 @@ r.mount({ registry });
 当路由跟路由配置中的每个路由都匹配不上（`exact` 或 `partial`）时，会注册一个特殊的 `route`，称为 `errorRoute`。可以使用这个 `route` 来渲染一个部件来告知用户该路由不存在。
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 

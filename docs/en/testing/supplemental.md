@@ -9,8 +9,8 @@ The expected structure of a widget is defined using an assertion and passed to t
 > src/MyWidget.spec.tsx
 
 ```tsx
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -31,12 +31,12 @@ r.expect(baseAssertion);
 
 In order for the test renderer and assertions to be able to identify nodes within the expected and actual node structure a special wrapping node must be used. The wrapped nodes can get used in place of the real node in the expected assertion structure, maintaining all the correct property and children typings.
 
-To create a wrapped test node use the `wrap` function from `@dojo/framework/testing/renderer`:
+To create a wrapped test node use the `wrap` function from `@dojo-ng/framework/testing/renderer`:
 
 > src/MyWidget.spec.tsx
 
 ```tsx
-import { wrap } from '@dojo/framework/testing/renderer';
+import { wrap } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -60,7 +60,7 @@ Given a widget that renders output differently based on property values:
 > src/Profile.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 import * as css from './Profile.m.css';
 
@@ -78,14 +78,14 @@ const Profile = factory(function Profile({ properties }) {
 export default Profile;
 ```
 
-Create an assertion using `@dojo/framework/testing/renderer#assertion`:
+Create an assertion using `@dojo-ng/framework/testing/renderer#assertion`:
 
 > src/Profile.spec.tsx
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import Profile from '../../../src/widgets/Profile';
 import * as css from '../../../src/widgets/Profile.m.css';
@@ -114,8 +114,8 @@ To help avoid the maintenance overhead and reduce duplication, assertions offer 
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import Profile from '../../../src/widgets/Profile';
 import * as css from '../../../src/widgets/Profile.m.css';
@@ -262,9 +262,9 @@ In addition to asserting the output from a widget, widget behavior can be tested
 > src/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
-import { RenderResult } from '@dojo/framework/core/interfaces';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
+import { RenderResult } from '@dojo-ng/framework/core/interfaces';
 
 import MyWidgetWithChildren from './MyWidgetWithChildren';
 
@@ -293,8 +293,8 @@ export const MyWidget = factory(function MyWidget({ properties, middleware: { ic
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 import * as sinon from 'sinon';
 
 import MyWidget from './MyWidget';
@@ -349,8 +349,8 @@ The test renderer `renderer.child()` function enables children to get resolved i
 > src/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { RenderResult } from '@dojo/framework/core/interfaces';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { RenderResult } from '@dojo-ng/framework/core/interfaces';
 
 import MyWidgetWithChildren from './MyWidgetWithChildren';
 
@@ -370,8 +370,8 @@ export const MyWidget = factory(function MyWidget() {
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidgetWithChildren from './MyWidgetWithChildren';
 import MyWidget from './MyWidget';
@@ -401,14 +401,14 @@ describe('MyWidget', () => {
 
 ## Custom Property Comparators
 
-There are circumstances where the exact value of a property is unknown during testing, so will require the use of a custom comparator. Custom comparators get used for any wrapped widget along with the `@dojo/framework/testing/renderer#compare` function in place of the usual widget or node property.
+There are circumstances where the exact value of a property is unknown during testing, so will require the use of a custom comparator. Custom comparators get used for any wrapped widget along with the `@dojo-ng/framework/testing/renderer#compare` function in place of the usual widget or node property.
 
 ```tsx
 compare(comparator: (actual) => boolean)
 ```
 
 ```tsx
-import { assertion, wrap, compare } from '@dojo/framework/testing/renderer';
+import { assertion, wrap, compare } from '@dojo-ng/framework/testing/renderer';
 
 // create a wrapped node the `h1`
 const WrappedHeader = wrap('h1');
@@ -425,8 +425,8 @@ const baseAssertion = assertion(() => (
 When dealing with widgets that render multiple items, for example a list it can be desirable to be able to instruct the test renderer to ignore sections of the output. For example asserting that the first and last items are valid and then ignoring the detail of the items in-between, simply asserting that they are the expected type. To do this with the test renderer the `ignore` function can be used that instructs the test renderer to ignore the node, as long as it is the same type, i.e. matching tag name or matching widget factory/constructor.
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, ignore } from '@dojo/framework/testing/renderer';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, ignore } from '@dojo-ng/framework/testing/renderer';
 
 const factory = create().properties<{ items: string[] }>();
 
@@ -461,7 +461,7 @@ When initializing the test renderer, mock middleware can get specified as part o
 ```tsx
 import myMiddleware from './myMiddleware';
 import myMockMiddleware from './myMockMiddleware';
-import renderer from '@dojo/framework/testing/renderer';
+import renderer from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -492,8 +492,8 @@ A common type of test is validating a widget's user interface renders as expecte
 > src/widgets/Action.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Button from '@dojo/widgets/button';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Button from '@dojo-ng/widgets/button';
 
 import * as css from './Action.m.css';
 
@@ -518,13 +518,13 @@ To test that the `properties().fetchItems` method is called when the button is c
 
 ```ts
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import Action from '../../../src/widgets/Action';
 import * as css from '../../../src/widgets/Action.m.css';
 
-import Button from '@dojo/widgets/button';
+import Button from '@dojo-ng/widgets/button';
 
 import { stub } from 'sinon';
 import { assert } from 'chai';
@@ -559,15 +559,15 @@ There are a number of mock middleware available to support testing widgets that 
 
 ### Mock `breakpoint` middleware
 
-Using `createBreakpointMock` from `@dojo/framework/testing/mocks/middleware/breakpoint` offers tests manual control over resizing events to trigger breakpoint tests.
+Using `createBreakpointMock` from `@dojo-ng/framework/testing/mocks/middleware/breakpoint` offers tests manual control over resizing events to trigger breakpoint tests.
 
 Consider the following widget which displays an additional `h2` when the `LG` breakpoint is activated:
 
 > src/Breakpoint.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import breakpoint from '@dojo/framework/core/middleware/breakpoint';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import breakpoint from '@dojo-ng/framework/core/middleware/breakpoint';
 
 const factory = create({ breakpoint });
 
@@ -591,10 +591,10 @@ By using the `mockBreakpoint(key: string, contentRect: Partial<DOMRectReadOnly>)
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
-import breakpoint from '@dojo/framework/core/middleware/breakpoint';
-import createBreakpointMock from '@dojo/framework/testing/mocks/middleware/breakpoint';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
+import breakpoint from '@dojo-ng/framework/core/middleware/breakpoint';
+import createBreakpointMock from '@dojo-ng/framework/testing/mocks/middleware/breakpoint';
 import Breakpoint from '../../src/Breakpoint';
 
 describe('Breakpoint', () => {
@@ -621,15 +621,15 @@ describe('Breakpoint', () => {
 
 ### Mock `focus` middleware
 
-Using `createFocusMock` from `@dojo/framework/testing/middleware/focus` provides tests with manual control over when the `focus` middleware reports that a node with a specified key gets focused.
+Using `createFocusMock` from `@dojo-ng/framework/testing/middleware/focus` provides tests with manual control over when the `focus` middleware reports that a node with a specified key gets focused.
 
 Consider the following widget:
 
 > src/FormWidget.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import focus, { FocusProperties } from '@dojo/framework/core/middleware/focus';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import focus, { FocusProperties } from '@dojo-ng/framework/core/middleware/focus';
 import * as css from './FormWidget.m.css';
 
 export interface FormWidgetProperties extends FocusProperties {}
@@ -651,10 +651,10 @@ By calling `focusMock(key: string | number, value: boolean)` the result of the `
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
-import focus from '@dojo/framework/core/middleware/focus';
-import createFocusMock from '@dojo/framework/testing/mocks/middleware/focus';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
+import focus from '@dojo-ng/framework/core/middleware/focus';
+import createFocusMock from '@dojo-ng/framework/testing/mocks/middleware/focus';
 import * as css from './FormWidget.m.css';
 
 describe('Focus', () => {
@@ -681,16 +681,16 @@ describe('Focus', () => {
 
 ### Mock `icache` middleware
 
-Using `createICacheMiddleware` from `@dojo/framework/testing/mocks/middleware/icache` allows tests to access cache items directly while the mock provides a sufficient `icache` experience for the widget under test. This is particularly useful when `icache` is used to asynchronously retrieve data. Direct cache access enables the test to `await` the same promise as the widget.
+Using `createICacheMiddleware` from `@dojo-ng/framework/testing/mocks/middleware/icache` allows tests to access cache items directly while the mock provides a sufficient `icache` experience for the widget under test. This is particularly useful when `icache` is used to asynchronously retrieve data. Direct cache access enables the test to `await` the same promise as the widget.
 
 Consider the following widget which retrieves data from an API:
 
 > src/MyWidget.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import { icache } from '@dojo/framework/core/middleware/icache';
-import fetch from '@dojo/framework/shim/fetch';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import { icache } from '@dojo-ng/framework/core/middleware/icache';
+import fetch from '@dojo-ng/framework/shim/fetch';
 
 const factory = create({ icache });
 
@@ -710,12 +710,12 @@ Testing the asynchronous result using the mock `icache` middleware is simple:
 
 ```tsx
 const { describe, it, afterEach } = intern.getInterface('bdd');
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
-import { tsx } from '@dojo/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 import * as sinon from 'sinon';
-import global from '@dojo/framework/shim/global';
-import icache from '@dojo/framework/core/middleware/icache';
-import createICacheMock from '@dojo/framework/testing/mocks/middleware/icache';
+import global from '@dojo-ng/framework/shim/global';
+import icache from '@dojo-ng/framework/core/middleware/icache';
+import createICacheMock from '@dojo-ng/framework/testing/mocks/middleware/icache';
 import MyWidget from '../../src/MyWidget';
 
 describe('MyWidget', () => {
@@ -742,13 +742,13 @@ describe('MyWidget', () => {
 
 ### Mock `intersection` middleware
 
-Using `createIntersectionMock` from `@dojo/framework/testing/mocks/middleware/intersection` creates a mock intersection middleware. To set the expected return from the intersection mock, call the created mock intersection middleware with a `key` and expected intersection details.
+Using `createIntersectionMock` from `@dojo-ng/framework/testing/mocks/middleware/intersection` creates a mock intersection middleware. To set the expected return from the intersection mock, call the created mock intersection middleware with a `key` and expected intersection details.
 
 Consider the following widget:
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import intersection from '@dojo/framework/core/middleware/intersection';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import intersection from '@dojo-ng/framework/core/middleware/intersection';
 
 const factory = create({ intersection });
 
@@ -761,10 +761,10 @@ const App = factory(({ middleware: { intersection } }) => {
 Using the mock `intersection` middleware:
 
 ```tsx
-import { tsx } from '@dojo/framework/core/vdom';
-import createIntersectionMock from '@dojo/framework/testing/mocks/middleware/intersection';
-import intersection from '@dojo/framework/core/middleware/intersection';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import createIntersectionMock from '@dojo-ng/framework/testing/mocks/middleware/intersection';
+import intersection from '@dojo-ng/framework/core/middleware/intersection';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -794,10 +794,10 @@ describe('MyWidget', () => {
 
 ### Mock `node` middleware
 
-Using `createNodeMock` from `@dojo/framework/testing/mocks/middleware/node` creates a mock for the node middleware. To set the expected return from the node mock, call the created mock node middleware with a `key` and expected DOM node.
+Using `createNodeMock` from `@dojo-ng/framework/testing/mocks/middleware/node` creates a mock for the node middleware. To set the expected return from the node mock, call the created mock node middleware with a `key` and expected DOM node.
 
 ```ts
-import createNodeMock from '@dojo/framework/testing/mocks/middleware/node';
+import createNodeMock from '@dojo-ng/framework/testing/mocks/middleware/node';
 
 // create the mock node middleware
 const mockNode = createNodeMock();
@@ -812,7 +812,7 @@ mockNode('key', domNode);
 
 ### Mock `resize` middleware
 
-Using `createResizeMock` from `@dojo/framework/testing/mocks/middleware/resize` creates a mock resize middleware. To set the expected return from the resize mock, call the created mock resize middleware with a `key` and expected content rects.
+Using `createResizeMock` from `@dojo-ng/framework/testing/mocks/middleware/resize` creates a mock resize middleware. To set the expected return from the resize mock, call the created mock resize middleware with a `key` and expected content rects.
 
 ```ts
 const mockResize = createResizeMock();
@@ -822,8 +822,8 @@ mockResize('key', { width: 100 });
 Consider the following widget:
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom'
-import resize from '@dojo/framework/core/middleware/resize'
+import { create, tsx } from '@dojo-ng/framework/core/vdom'
+import resize from '@dojo-ng/framework/core/middleware/resize'
 
 const factory = create({ resize });
 
@@ -837,10 +837,10 @@ export const MyWidget = factory(function MyWidget({ middleware }) => {
 Using the mock `resize` middleware:
 
 ```tsx
-import { tsx } from '@dojo/framework/core/vdom';
-import createResizeMock from '@dojo/framework/testing/mocks/middleware/resize';
-import resize from '@dojo/framework/core/middleware/resize';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import createResizeMock from '@dojo-ng/framework/testing/mocks/middleware/resize';
+import resize from '@dojo-ng/framework/core/middleware/resize';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -870,7 +870,7 @@ describe('MyWidget', () => {
 
 ### Mock `store` middleware
 
-Using `createMockStoreMiddleware` from `@dojo/framework/testing/mocks/middleware/store` creates a typed mock store middleware, which optionally supports mocking processes. To mock a store process pass a tuple of the original store process and the stub process. The middleware will swap out the call to the original process for the passed stub. If no stubs are passed, the middleware will simply no-op all process calls.
+Using `createMockStoreMiddleware` from `@dojo-ng/framework/testing/mocks/middleware/store` creates a typed mock store middleware, which optionally supports mocking processes. To mock a store process pass a tuple of the original store process and the stub process. The middleware will swap out the call to the original process for the passed stub. If no stubs are passed, the middleware will simply no-op all process calls.
 
 To make changes to the mock store, call the `mockStore` with a function that returns an array of store operations. This is injected with the stores `path` function to create the pointer to the state that needs changing.
 
@@ -883,7 +883,7 @@ Consider the following widget:
 > src/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom'
+import { create, tsx } from '@dojo-ng/framework/core/vdom'
 import { myProcess } from './processes';
 import MyState from './interfaces';
 // application store middleware typed with the state interface
@@ -916,9 +916,9 @@ Using the mock `store` middleware:
 > tests/unit/MyWidget.tsx
 
 ```tsx
-import { tsx } from '@dojo/framework/core/vdom'
-import createMockStoreMiddleware from '@dojo/framework/testing/mocks/middleware/store';
-import renderer from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom'
+import createMockStoreMiddleware from '@dojo-ng/framework/testing/mocks/middleware/store';
+import renderer from '@dojo-ng/framework/testing/renderer';
 
 import { myProcess } from './processes';
 import MyWidget from './MyWidget';
@@ -968,16 +968,16 @@ describe('MyWidget', () => {
 
 ### Mock `validity` middleware
 
-Using `createValidityMock` from `@dojo/framework/testing/mocks/middleware/validity` creates a mock validity middleware where the return value of the `get` method can get controlled in a test.
+Using `createValidityMock` from `@dojo-ng/framework/testing/mocks/middleware/validity` creates a mock validity middleware where the return value of the `get` method can get controlled in a test.
 
 Consider the following example:
 
 > src/FormWidget.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import validity from '@dojo/framework/core/middleware/validity';
-import icache from '@dojo/framework/core/middleware/icache';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import validity from '@dojo-ng/framework/core/middleware/validity';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 import * as css from './FormWidget.m.css';
 
 const factory = create({ validity, icache });
@@ -1001,10 +1001,10 @@ Using `validityMock(key: string, value: { valid?: boolean, message?: string; })`
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion } from '@dojo/framework/testing/renderer';
-import validity from '@dojo/framework/core/middleware/validity';
-import createValidityMock from '@dojo/framework/testing/mocks/middleware/validity';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion } from '@dojo-ng/framework/testing/renderer';
+import validity from '@dojo-ng/framework/core/middleware/validity';
+import createValidityMock from '@dojo-ng/framework/testing/mocks/middleware/validity';
 import * as css from './FormWidget.m.css';
 
 describe('Validity', () => {
@@ -1086,9 +1086,9 @@ When validating application output for a certain route, an `id` should be added 
 > src/widgets/Menu.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Link from '@dojo/framework/routing/ActiveLink';
-import Toolbar from '@dojo/widgets/toolbar';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Link from '@dojo-ng/framework/routing/ActiveLink';
+import Toolbar from '@dojo-ng/widgets/toolbar';
 
 import * as css from './Menu.m.css';
 

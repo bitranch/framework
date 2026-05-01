@@ -1,11 +1,11 @@
 # Version 6.0.0 Migration Guide
 
-Dojo version 6 contains several major ergonomic changes along with a few breaking changes to be aware of when migrating from version 5. As much as possible, these updates are automated by using the `@dojo/cli-upgrade-app` CLI command. When the upgrade command cannot automate the upgrade, helpful hints and information are provided in the output to guide you through the manual upgrade process for these changes.
+Dojo version 6 contains several major ergonomic changes along with a few breaking changes to be aware of when migrating from version 5. As much as possible, these updates are automated by using the `@dojo-ng/cli-upgrade-app` CLI command. When the upgrade command cannot automate the upgrade, helpful hints and information are provided in the output to guide you through the manual upgrade process for these changes.
 
 To install the upgrade command, run the following from the project root:
 
 ```
-npm install @dojo/cli-upgrade-app --no-save
+npm install @dojo-ng/cli-upgrade-app --no-save
 ```
 
 To perform the migration, run the following command from the project root. The Dojo migration tool should automatically detect the necessary migration from your `package.json`.
@@ -16,8 +16,8 @@ dojo upgrade app
 
 If you are upgrading from a version before 5.0.0, please first see the [previous migration guides](./V5-Migration-Guide) for more details.
 
--   The `@dojo/cli` should be updated to version 6.0.0, along with all the commands used by the project.
--   If your project is using `@dojo/widgets` and `@dojo/interop`, these packages also require upgrading to version 6.0.0.
+-   The `@dojo-ng/cli` should be updated to version 6.0.0, along with all the commands used by the project.
+-   If your project is using `@dojo-ng/widgets` and `@dojo-ng/interop`, these packages also require upgrading to version 6.0.0.
 
 **Note:** The migration tool may create line lengths that violate your projects linting rules, be sure to run your linter and manually fix any linting rule violations.
 
@@ -33,21 +33,21 @@ In addition to upgrading TypeScript, the complementary library `tslib` should be
 
 #### [`has`](https://github.com/dojo/framework/pull/361) and [`widget-core`](https://github.com/dojo/framework/pull/306) merged with `core`
 
-As part of Dojo version 6 we have continued to re-organize `@dojo/framework`'s module structure. As a result, `@dojo/framework/widget-core` and `@dojo/framework/has` have been merged with `@dojo/framework/core`.
+As part of Dojo version 6 we have continued to re-organize `@dojo-ng/framework`'s module structure. As a result, `@dojo-ng/framework/widget-core` and `@dojo-ng/framework/has` have been merged with `@dojo-ng/framework/core`.
 
-The `@dojo/cli-upgrade-app` command should automatically migrate your project's imports. Please let us know if you encounter any issues.
+The `@dojo-ng/cli-upgrade-app` command should automatically migrate your project's imports. Please let us know if you encounter any issues.
 
-#### [`@dojo/framework/widget-core/d` and `@dojo/framework/widget-core/tsx` moved to `@dojo/framework/core/vdom`](https://github.com/dojo/framework/pull/360)
+#### [`@dojo-ng/framework/widget-core/d` and `@dojo-ng/framework/widget-core/tsx` moved to `@dojo-ng/framework/core/vdom`](https://github.com/dojo/framework/pull/360)
 
 In addition to merging `widget-core` with `core`, the `d` and `tsx` exports have been moved into `vdom`.
 
 **Note:** There is one exception, `decorate` has been moved from `d` to `util`.
 
-The `@dojo/cli-upgrade-app` command should automatically migrate your project's imports. please let us know if you encounter any issues.
+The `@dojo-ng/cli-upgrade-app` command should automatically migrate your project's imports. please let us know if you encounter any issues.
 
-As part of Dojo version 6 we have continued to re-organize `@dojo/framework`'s module structure. As a result, `@dojo/framework/widget-core` and `@dojo/framework/has` have merged into `@dojo/framework/core`.
+As part of Dojo version 6 we have continued to re-organize `@dojo-ng/framework`'s module structure. As a result, `@dojo-ng/framework/widget-core` and `@dojo-ng/framework/has` have merged into `@dojo-ng/framework/core`.
 
-The `@dojo/cli-upgrade-app` command should automatically migrate your project's imports. Please let us know if you encounter any issues.
+The `@dojo-ng/cli-upgrade-app` command should automatically migrate your project's imports. Please let us know if you encounter any issues.
 
 #### [`WNode` are no longer decorated with `bind`](https://github.com/dojo/framework/pull/290)
 
@@ -78,8 +78,8 @@ base.setChildren('@div', () => [v('span')]);
 In Dojo 6, the Dojo router has changed from extending the `QueueingEvented` as a way to enable users to subscribe to events that occur when the router started automatically. Instead an extra option is available, `autostart` which can be used to control when the router actually starts up. This is defaulted to `true` as this is the most common use case. For scenarios where the initial routing events need to be captured, `autostart` can be set to `false` and then `.start()` explicitly called on the router instance.
 
 ```ts
-import Registry from '@dojo/framework/core/Registry';
-import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
+import Registry from '@dojo-ng/framework/core/Registry';
+import { registerRouterInjector } from '@dojo-ng/framework/routing/RouterInjector';
 import routes from './routes.ts';
 
 const registry = new Registry();
@@ -102,8 +102,8 @@ The `QueueingEvented` module has been removed from Dojo, this was only ever inte
 The transition strategy for the virtual DOM renderer is no longer implicitly imported in `vdom`. To use `VNode` transitions that leverage `exitAnimation` or `enterAnimation`, the transition strategy needs to get explicitly imported and passed to the applications `.mount` call.
 
 ```ts
-import renderer, { w } from '@dojo/framework/core/vdom';
-import transition from '@dojo/framework/core/animations/cssTransitions';
+import renderer, { w } from '@dojo-ng/framework/core/vdom';
+import transition from '@dojo-ng/framework/core/animations/cssTransitions';
 
 const r = renderer(() => w(App, {}));
 r.mount({ transition });
@@ -135,7 +135,7 @@ render() {
 
 ## Widget changes
 
-Work has begun on adding `helperText` and a consistent validation approach to `@dojo/widgets`.
+Work has begun on adding `helperText` and a consistent validation approach to `@dojo-ng/widgets`.
 
 One of the knock-on effects of adding `helperText` is that `labelAfter` no longer makes sense as it would clash with the `helperText`; as such, all labels will appear before / above the widget they belong to. If you with to place the label elsewhere, you can do so by manually creating one and using the `for` property to link it to your input.
 
@@ -168,7 +168,7 @@ Finally, we have started writing our new widgets in TSX. We may convert existing
 
 ### Enhanced Text Input
 
-This widget has been removed in favour of the new `leading` / `trailing` properties on `@dojo/text-input`. We plan to adopt this approach for other widgets such as `select` / `combobox` etc in future.
+This widget has been removed in favour of the new `leading` / `trailing` properties on `@dojo-ng/text-input`. We plan to adopt this approach for other widgets such as `select` / `combobox` etc in future.
 
 To create a text-input with a leading dollar sign for example:
 

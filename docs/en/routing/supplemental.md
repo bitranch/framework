@@ -121,8 +121,8 @@ const routes = [
 In the routing configuration above, there are two outlets defined, `main` and `side-menu`, and a simplified application layout using outlets is shown below. By default the `Outlet` will render any of the keys that equal a route id that has been matched for the outlet, in this case `main`. If a function is passed to the `Outlet` then it will render whenever _any_ route is matched for the outlet specified.
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Outlet from '@dojo/framework/routing/Outlet';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Outlet from '@dojo-ng/framework/routing/Outlet';
 
 import Menu from './Menu';
 import SideMenu from './SideMenu';
@@ -161,8 +161,8 @@ const App = factory(function App() {
 The node structure of the `App` looks good and succinctly represents the actual visual output for the user with minimal duplication, there still is a need to duplicate the usage of the `Example` widget across to different routes. This can be solved by using the `matcher` property to override the default route matching rules. The `matcher` receives the `defaultMatches` and a `matchDetailsMap` in order to make custom matching decisions. In the final example below the usage of `Example` has been combined into a new `key`, `details` that does not exist as a route. This will never match for the outlet unless we override the default matches to set it to true when either the `example` or `overview` route has matched. Finally in the `details` renderer the example property has been defaulted to `overview` to maintain the same behavior as before.
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Outlet from '@dojo/framework/routing/Outlet';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Outlet from '@dojo-ng/framework/routing/Outlet';
 
 import Menu from './Menu';
 import SideMenu from './SideMenu';
@@ -251,7 +251,7 @@ export default [
 > src/main.ts
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
+import Router from '@dojo-ng/framework/routing/Router';
 
 import routes from './routes';
 
@@ -284,7 +284,7 @@ console.log(router.link('unknown'));
 ## Changing a route
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
+import Router from '@dojo-ng/framework/routing/Router';
 
 import routes from './routes';
 
@@ -297,7 +297,7 @@ router.setPath('#home');
 ## Getting the current parameters
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
+import Router from '@dojo-ng/framework/routing/Router';
 
 import routes from './routes';
 
@@ -322,7 +322,7 @@ Use the `getRoute` to return the `RouteContext` for a matched route id, or `unde
 -   `type: 'index' | 'partial' | 'error'`: The type of match for the route, either `index`, `partial` or `error`.
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
+import Router from '@dojo-ng/framework/routing/Router';
 
 import routes from './routes';
 
@@ -415,8 +415,8 @@ export default [
 > src/App.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 
@@ -519,8 +519,8 @@ export default [
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 
@@ -570,8 +570,8 @@ Dojo Routing comes with three history managers for managing an application's nav
 > src/main.ts
 
 ```ts
-import Router from '@dojo/framework/routing/Router';
-import StateHistory from '@dojo/framework/routing/history/StateHistory';
+import Router from '@dojo-ng/framework/routing/Router';
+import StateHistory from '@dojo-ng/framework/routing/history/StateHistory';
 
 import routes from './routes';
 
@@ -587,9 +587,9 @@ Or using the `registerRouterInjector` helper function:
 > src/main.ts
 
 ```ts
-import Registry from '@dojo/framework/core/Registry';
-import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
-import StateHistory from '@dojo/framework/routing/history/StateHistory';
+import Registry from '@dojo-ng/framework/core/Registry';
+import { registerRouterInjector } from '@dojo-ng/framework/routing/RouterInjector';
+import StateHistory from '@dojo-ng/framework/routing/history/StateHistory';
 
 import routes from './routes';
 
@@ -607,7 +607,7 @@ registerRouterInjector(routes, registry, { HistoryManager: StateHistory });
 `HashHistory` uses the fragment identifier to process route changes, for example `https://foo.com/#home` would process the `home` as the route path. As `HashHistory` is the default manager, you do not need to import the module.
 
 ```ts
-import { Router } from '@dojo/framework/routing/Router';
+import { Router } from '@dojo-ng/framework/routing/Router';
 
 const router = new Router(config);
 ```
@@ -621,11 +621,11 @@ The `StateHistory` manager will require server-side machinery to enable an appli
 1.  Re-writing the `index.html` request to load from the application root.
 2.  Re-writing requests to load static resources (`.js`, `.css` etc) from the application root.
 
-**Note:** This machinery is included with `@dojo/cli-build-app` using the `--serve` option (intended for development only).
+**Note:** This machinery is included with `@dojo-ng/cli-build-app` using the `--serve` option (intended for development only).
 
 ```ts
-import { Router } from '@dojo/framework/routing/Router';
-import { StateHistory } from '@dojo/framework/routing/history/StateHistory';
+import { Router } from '@dojo-ng/framework/routing/Router';
+import { StateHistory } from '@dojo-ng/framework/routing/history/StateHistory';
 
 const router = new Router(config, { HistoryManager: StateHistory });
 ```
@@ -635,8 +635,8 @@ const router = new Router(config, { HistoryManager: StateHistory });
 The `MemoryHistory` does not rely on any browser API but keeps its own internal path state. It should not be used in production applications but is useful for testing application routing.
 
 ```ts
-import { Router } from '@dojo/framework/routing/Router';
-import { MemoryHistory } from '@dojo/framework/routing/history/MemoryHistory';
+import { Router } from '@dojo-ng/framework/routing/Router';
+import { MemoryHistory } from '@dojo-ng/framework/routing/history/MemoryHistory';
 
 const router = new Router(config, { HistoryManager: MemoryHistory });
 ```
@@ -644,9 +644,9 @@ const router = new Router(config, { HistoryManager: MemoryHistory });
 > src/main.tsx
 
 ```tsx
-import renderer from '@dojo/framework/core/vdom';
-import { tsx } from '@dojo/framework/core/vdom';
-import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
+import renderer from '@dojo-ng/framework/core/vdom';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import { registerRouterInjector } from '@dojo-ng/framework/routing/RouterInjector';
 
 import routes from './routes';
 import App from './App';
@@ -666,8 +666,8 @@ These history managers work like adapters, meaning that custom history managers 
 A special `route` called `errorRoute` is registered that will match when the route doesn't match (`exact` or `partial`) any route in the routing configuration. You can use this `route` to render a widget to inform the user that the route does not exist.
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 

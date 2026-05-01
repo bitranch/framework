@@ -15,7 +15,7 @@ Bundles can be automatically created, PWAs can cache application files locally, 
 
 ## Basic usage
 
-Dojo provides a set of CLI commands that assist in creating and building an application. This guide assumes that `@dojo/cli` has been installed globally and [@dojo/cli-build-app](https://github.com/dojo/cli-build-app) and [@dojo/cli-test-intern](https://github.com/dojo/cli-test-intern) are available in the project. If the application was initialized using [@dojo/cli-create-app](https://github.com/dojo/cli-create-app) then these dependencies should already be present.
+Dojo provides a set of CLI commands that assist in creating and building an application. This guide assumes that `@dojo-ng/cli` has been installed globally and [@dojo-ng/cli-build-app](https://github.com/dojo/cli-build-app) and [@dojo-ng/cli-test-intern](https://github.com/dojo/cli-test-intern) are available in the project. If the application was initialized using [@dojo-ng/cli-create-app](https://github.com/dojo/cli-create-app) then these dependencies should already be present.
 
 ### Building
 
@@ -58,7 +58,7 @@ npm run test:functional
 
 ### Browser support
 
-Dojo is an evergreen framework. By default the build will support the last two versions of the latest browsers when it was released. Any polyfills needed by Dojo to normalize functionality across browsers is conditionally provided by the `@dojo/framework/shim`. To support IE11 run the build with the `--legacy` flag.
+Dojo is an evergreen framework. By default the build will support the last two versions of the latest browsers when it was released. Any polyfills needed by Dojo to normalize functionality across browsers is conditionally provided by the `@dojo-ng/framework/shim`. To support IE11 run the build with the `--legacy` flag.
 
 ## Dojo configuration
 
@@ -83,4 +83,4 @@ Additional configuration options can be added in `.dojorc`. The options generall
 }
 ```
 
-In this example there is a section for each of the three CLI command modules: [@dojo/cli-build-app](https://github.com/dojo/cli-build-app/), [@dojo/cli-test-intern](https://github.com/dojo/cli-test-intern), and [@dojo/cli-create-widget](https://github.com/dojo/cli-create-widget). Configuration is _always_ hierarchical and in the order of command => feature => configuration.
+In this example there is a section for each of the three CLI command modules: [@dojo-ng/cli-build-app](https://github.com/dojo/cli-build-app/), [@dojo-ng/cli-test-intern](https://github.com/dojo/cli-test-intern), and [@dojo-ng/cli-create-widget](https://github.com/dojo/cli-create-widget). Configuration is _always_ hierarchical and in the order of command => feature => configuration.

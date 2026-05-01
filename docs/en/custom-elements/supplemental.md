@@ -7,9 +7,9 @@ The following `EmailSignup` widget contains several different property types.
 > src/widgets/EmailSignup.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
 import * as css from './styles/EmailSignup.m.css';
-import icache from '@dojo/framework/core/middleware/icache';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 export interface EmailSignupProperties {
 	title?: string;

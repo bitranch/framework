@@ -11,12 +11,12 @@ The resource template is a description that the resource uses work with the reso
 
 Templates should be stateless so they can be re-used throughout an application by using the resource options to determine the data required and the resource controls to interact with the resource store, such as putting the data into the store.
 
-Templates are created using the `createResourceTemplate` factory from the `@dojo/framework/core/middleware/resources` module. The API of a resource template is flexible and can be defined when creating the template, however by default the API requires a single `read` function that is intended to receive requests and store the resource data using the template `controls`.
+Templates are created using the `createResourceTemplate` factory from the `@dojo-ng/framework/core/middleware/resources` module. The API of a resource template is flexible and can be defined when creating the template, however by default the API requires a single `read` function that is intended to receive requests and store the resource data using the template `controls`.
 
 > userResourceTemplate.ts
 
 ```tsx
-import { createResourceTemplate } from '@dojo/framework/core/middleware/resources';
+import { createResourceTemplate } from '@dojo-ng/framework/core/middleware/resources';
 
 interface User {
 	firsName: string;
@@ -44,8 +44,8 @@ The `resource` middleware is the interface required to work with resource templa
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 import FancyLoadingIndicator from './FancyLoadingIndicator';
 
@@ -174,7 +174,7 @@ interface ResourceFindRequest<S> {
 ```
 
 ```tsx
-import { createResourceTemplate } from '@dojo/framework/core/middleware/resources';
+import { createResourceTemplate } from '@dojo-ng/framework/core/middleware/resources';
 
 interface User {
 	firsName: string;
@@ -198,7 +198,7 @@ The `type` describes how to use the query to find the item in the resource, ther
 The `init` function is used to deal with options passed with the `template` using the `resource` middleware. These options are defined when creating the template and passing an interface for the required options, `createResourceTemplate<RESOURCE, INIT>` as the second generic parameter.
 
 ```tsx
-import { createResourceTemplate } from '@dojo/framework/core/middleware/resources';
+import { createResourceTemplate } from '@dojo-ng/framework/core/middleware/resources';
 
 
 // only showing the init api
@@ -225,13 +225,13 @@ The init options are injected into the function along with the standard `Resourc
 
 ## Default Resource Templates
 
-Dojo resources offers a pre-configured default resource template that implements the complete resource template API. The default template is designed to work with [data passed to a widget when using the template](/learn/resources/using-resource-templates) that initializes the resource store for the template. The memory template is created using the `createResourceTemplate` factory from `@dojo/framework/core/middleware/resources` passing no arguments.
+Dojo resources offers a pre-configured default resource template that implements the complete resource template API. The default template is designed to work with [data passed to a widget when using the template](/learn/resources/using-resource-templates) that initializes the resource store for the template. The memory template is created using the `createResourceTemplate` factory from `@dojo-ng/framework/core/middleware/resources` passing no arguments.
 
 > MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceTemplate, createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceTemplate, createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 interface ResourceItem {
 	value: string;
@@ -261,7 +261,7 @@ To connect a resource to an custom data-source - such as a RESTful API - the `cr
 > myResourceTemplate.ts
 
 ```tsx
-import { createResourceTemplate } from '@dojo/framework/core/middleware/resources';
+import { createResourceTemplate } from '@dojo-ng/framework/core/middleware/resources';
 
 interface MyResource {
 	id: string;
@@ -294,7 +294,7 @@ export default createResourceTemplate<MyResource>({
 If the resource template needs to support custom initialization the `createResourceTemplate` can be used. This requires the template to have an `init` API that will be called when a backing resource is created. The initialize options required are typed using the second generic on the factory function.
 
 ```tsx
-import { createResourceTemplate } from '@dojo/framework/core/middleware/resources';
+import { createResourceTemplate } from '@dojo-ng/framework/core/middleware/resources';
 
 interface MyResource {
 	id: string;
@@ -334,7 +334,7 @@ All resource template factories accept a generic that is used to type the shape 
 > userResourceTemplate.ts
 
 ```tsx
-import { createResourceTemplate } from '@dojo/framework/core/middleware/resources';
+import { createResourceTemplate } from '@dojo-ng/framework/core/middleware/resources';
 
 interface User {
 	firsName: string;
@@ -355,8 +355,8 @@ Resource templates can be passed using the `resource` middleware to any widget t
 > MyWidget.ts
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceTemplate, createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceTemplate, createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 import MyResourceAwareWidget from './MyResourceAwareWidget';
 
@@ -390,8 +390,8 @@ Initialization options can be passed with any template created using the `create
 > MyWidget.ts
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceTemplate, createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceTemplate, createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 import MyResourceAwareWidget from './MyResourceAwareWidget';
 
@@ -425,8 +425,8 @@ When a widget has been configured to use `resources` middleware with a data inte
 > MyWidget.ts
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceTemplate, createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceTemplate, createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 import MyResourceAwareWidget from './MyResourceAwareWidget';
 
@@ -462,8 +462,8 @@ The `resource` property consists of the `template` and an optional set of `optio
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 interface ResourceData {
 	value: string;
@@ -515,8 +515,8 @@ The `getOrRead` function takes a `template`, the `ResourceOptions`, and optional
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 const resource = createResourceMiddleware<{ value: string }>();
 
@@ -541,8 +541,8 @@ The `query` object can be passed to specify a filter for a property of the data.
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 const resource = createResourceMiddleware<{ value: string }>();
 
@@ -567,8 +567,8 @@ Multiple pages can be passed in the `options`. Each of the pages requested will 
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 const resource = createResourceMiddleware<{ value: string }>();
 
@@ -601,8 +601,8 @@ meta(template, options, initOptions, request): MetaResponse;
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 const resource = createResourceMiddleware<{ value: string }>();
 
@@ -628,8 +628,8 @@ By default, calling meta will not initiate a request. If there is no meta info -
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 const resource = createResourceMiddleware<{ value: string }>();
 
@@ -670,8 +670,8 @@ interface ResourceFindOptions {
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 const resource = createResourceMiddleware<{ value: string }>();
 
@@ -698,8 +698,8 @@ The `isLoading` function takes a `template`, `ResourceOptions` or `ResourceFindO
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 const resource = createResourceMiddleware<{ value: string }>();
 
@@ -726,8 +726,8 @@ The `isFailed` function takes a `template`, `ResourceOptions` or `ResourceFindOp
 > MyResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 const resource = createResourceMiddleware<{ value: string }>();
 
@@ -756,8 +756,8 @@ Resources can be used in multiple widgets and the cached data will be shared. Ho
 > MyComposedWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 interface ResourceData {
 	value: string;

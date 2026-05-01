@@ -39,7 +39,7 @@ core is a library to create powerful, composable user interface widgets.
 
 Dojo applications use the Virtual DOM (vdom) paradigm to represent what should be shown on the view. These vdom nodes are plain JavaScript objects that are more efficient to create from a performance perspective than browser DOM elements. Dojo uses these vdom elements to synchronize and update the browser DOM so that the application shows the expected view.
 
-There are two types of vdom within Dojo. The first type provides a pure representation of DOM elements, the fundamental building blocks of all Dojo applications. These are called `VNode`s and are created using the `v()` function available from the `@dojo/framework/core/d` module.
+There are two types of vdom within Dojo. The first type provides a pure representation of DOM elements, the fundamental building blocks of all Dojo applications. These are called `VNode`s and are created using the `v()` function available from the `@dojo-ng/framework/core/d` module.
 
 The following will create a `VNode` that represents a simple `div` DOM element, with a text node child: `Hello, Dojo!`:
 
@@ -47,7 +47,7 @@ The following will create a `VNode` that represents a simple `div` DOM element, 
 v('div', ['Hello, Dojo!']);
 ```
 
-The second vdom type, `WNode`, represent widgets. A widget is a class that extends `WidgetBase` from `@dojo/framework/core/WidgetBase` and implements a `render` function that returns one of the Dojo vdom types (known as a `DNode`). Widgets are used to represent reusable, independent sections of a Dojo application.
+The second vdom type, `WNode`, represent widgets. A widget is a class that extends `WidgetBase` from `@dojo-ng/framework/core/WidgetBase` and implements a `render` function that returns one of the Dojo vdom types (known as a `DNode`). Widgets are used to represent reusable, independent sections of a Dojo application.
 
 The following returns the `VNode` example from above from the `render` function:
 
@@ -61,13 +61,13 @@ class HelloDojo extends WidgetBase {
 
 #### Rendering a Widget in the DOM
 
-To display your new component in the view you will to use the `renderer` from the `@dojo/framework/core/vdom` module. The `renderer` function accepts function that returns your component using the `w()` pragma and calling `.mount()` on the returned API.
+To display your new component in the view you will to use the `renderer` from the `@dojo-ng/framework/core/vdom` module. The `renderer` function accepts function that returns your component using the `w()` pragma and calling `.mount()` on the returned API.
 
 <!--READMEONLY-->
 
 ```ts
-import renderer from '@dojo/framework/core/vdom';
-import { w } from '@dojo/framework/core/vdom';
+import renderer from '@dojo-ng/framework/core/vdom';
+import { w } from '@dojo-ng/framework/core/vdom';
 
 const r = renderer(() => w(HelloDojo, {}));
 r.mount();
@@ -108,8 +108,8 @@ Consider the following in your HTML file:
 You can target this Element:
 
 ```ts
-import renderer from '@dojo/framework/core/vdom';
-import { w } from '@dojo/framework/core/vdom';
+import renderer from '@dojo-ng/framework/core/vdom';
+import { w } from '@dojo-ng/framework/core/vdom';
 
 const root = document.getElementById('my-app');
 const r = renderer(() => w(HelloDojo, {}));
@@ -157,8 +157,8 @@ It is common for widgets to maintain internal state, that directly affects the r
 For class properties that always need to trigger a re-render when they're updated, a property decorator, `@watch` can be used, which implicitly calls `this.invalidate` each time the property is set.
 
 ```ts
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import watch from '@dojo/framework/core/decorators/watch';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import watch from '@dojo-ng/framework/core/decorators/watch';
 
 class Counter extends WidgetBase {
 
@@ -182,7 +182,7 @@ class Counter extends WidgetBase {
 
 As mentioned, often widgets are composed of other widgets in their `render` output. This promotes widget reuse across an application (or multiple applications) and promotes widget best practices.
 
-To compose widgets, we need to create `WNode`s and we can do this using the `w()` function from `@dojo/framework/core/d`.
+To compose widgets, we need to create `WNode`s and we can do this using the `w()` function from `@dojo-ng/framework/core/d`.
 
 Consider the previous `Hello` widget that we created:
 
@@ -259,8 +259,8 @@ This would mean a new function would be created every render but Dojo does not s
 To resolve this, the list item can be extracted into a separate widget:
 
 ```ts
-import { WidgetBase } from '@dojo/framework/core/WidgetBase';
-import { v, w } from '@dojo/framework/core/vdom';
+import { WidgetBase } from '@dojo-ng/framework/core/WidgetBase';
+import { v, w } from '@dojo-ng/framework/core/vdom';
 
 interface ListItemProperties {
 	id: string;
@@ -367,7 +367,7 @@ Dojo core provides a `WebAnimation` meta to apply web animations to VNodes.
 
 To specify the web animations pass an `AnimationProperties` object to the `WebAnimation` meta along with the key of the node you wish to animate. This can be a single animation or an array or animations.
 
-**Note**: The Web Animations API is not currently available even in the latest browsers. To use the Web Animations API, a polyfill needs to be included. Dojo does not include the polyfill by default, so will need to be added as a script tag in your index.html or alternatively imported in the application’s main.ts using `import 'web-animations-js/web-animations-next-lite.min';` after including the dependency in your source tree, or by importing `@dojo/framework/shim/browser`.
+**Note**: The Web Animations API is not currently available even in the latest browsers. To use the Web Animations API, a polyfill needs to be included. Dojo does not include the polyfill by default, so will need to be added as a script tag in your index.html or alternatively imported in the application’s main.ts using `import 'web-animations-js/web-animations-next-lite.min';` after including the dependency in your source tree, or by importing `@dojo-ng/framework/shim/browser`.
 
 #### Basic Example
 
@@ -488,7 +488,7 @@ export default class AnimatedWidget extends WidgetBase {
 
 #### Overview
 
-Dojo core provides `ThemedMixin` to decorate a widget with theming functionality and a `@theme` decorator to specify the classes available to the widget. Both `ThemedMixin` and `@theme` are provided by `@dojo/framework/core/mixins/Themed`.
+Dojo core provides `ThemedMixin` to decorate a widget with theming functionality and a `@theme` decorator to specify the classes available to the widget. Both `ThemedMixin` and `@theme` are provided by `@dojo-ng/framework/core/mixins/Themed`.
 
 To specify the theme classes for a widget, an interface needs to be imported with named exports for each class and passed to the `@theme` decorator. Importing the interface provides IntelliSense / auto-complete for the class names and passing this via the `@theme` decorator informs the `ThemedMixin` which classes can be themed.
 
@@ -511,7 +511,7 @@ The following example passes `css.root` that will be themeable and `css.rootFixe
 
 ```typescript
 import * as css from './styles/myWidget.m.css';
-import { ThemedMixin, theme } from '@dojo/framework/core/mixins/Themed';
+import { ThemedMixin, theme } from '@dojo-ng/framework/core/mixins/Themed';
 
 @theme(css)
 export default class MyWidget extends ThemedMixin(WidgetBase) {
@@ -575,10 +575,10 @@ interface Classes {
 }
 
 const myExtraClasses = {
-	'@dojo/widgets/icon': {
+	'@dojo-ng/widgets/icon': {
 		root: [css.extraRoot]
 	},
-	'@dojo/widgets/button': {
+	'@dojo-ng/widgets/button': {
 		root: [css.extraRoot]
 	}
 }
@@ -589,7 +589,7 @@ render() {
 }
 ```
 
-**Note:** The widget key is constructed by the package name from the `package.json` and the widget name, i.e. the `Icon` widget from `@dojo/widgets` has a key of `@dojo/widget/icon` or a widget called `Spinner` from a package called `all-the-dojo-spinners` would have a key of `all-the-dojo-spinners/spinners`.
+**Note:** The widget key is constructed by the package name from the `package.json` and the widget name, i.e. the `Icon` widget from `@dojo-ng/widgets` has a key of `@dojo-ng/widget/icon` or a widget called `Spinner` from a package called `all-the-dojo-spinners` would have a key of `all-the-dojo-spinners/spinners`.
 
 ### Internationalization
 
@@ -605,7 +605,7 @@ These are some of the **important** principles to keep in mind when creating and
     -   The Dojo widget system manages all instances required including caching and destruction, trying to create and manage other widgets will cause issues and will not work as expected.
 3.  **Never** update `properties` within a widget instance, they should be considered pure.
     -   Properties are considered read-only and should not be updated within a widget instance, updating properties could cause unexpected behavior and introduce bugs in your application.
-4.  Hyperscript should **always** be written using the `@dojo/framework/core/d#v()` function.
+4.  Hyperscript should **always** be written using the `@dojo-ng/framework/core/d#v()` function.
     -   The core abstraction for Hyperscript is the only type of vdom that core can process for standard DOM elements, any other mechanism will not work properly or at all.
 
 ## Advanced Concepts
@@ -614,7 +614,7 @@ This section provides some details on more advanced Dojo functionality and confi
 
 ### Handling Focus
 
-Handling focus is an important aspect in any application and can be tricky to do correctly. To help with this issue, `@dojo/framework/core` provides a primitive mechanism built into the Virtual DOM system that enables users to focus a Virtual DOM node once it has been appended to the DOM. This uses a special property called `focus` on the `VNodeProperties` interface that can be passed when using `v()`. The `focus` property is either a `boolean` or a function that returns a `boolean`.
+Handling focus is an important aspect in any application and can be tricky to do correctly. To help with this issue, `@dojo-ng/framework/core` provides a primitive mechanism built into the Virtual DOM system that enables users to focus a Virtual DOM node once it has been appended to the DOM. This uses a special property called `focus` on the `VNodeProperties` interface that can be passed when using `v()`. The `focus` property is either a `boolean` or a function that returns a `boolean`.
 
 When passing a function, focus will be called when `true` is returned without comparing the value of the previous result. However, when passing a `boolean`, focus will only be applied if the property is `true` and the previous property value was not.
 
@@ -729,7 +729,7 @@ DOCSONLY-->
 
 Controlling the diffing strategy can be done at an individual property level using the `diffProperty` decorator on a widget class.
 
-`core` provides a set of diffing strategy functions from `@dojo/framework/core/diff.ts` that can be used. When these functions do not provide the required functionality a custom diffing function can be provided. Properties that have been configured with a specific diffing type will be excluded from the automatic diffing.
+`core` provides a set of diffing strategy functions from `@dojo-ng/framework/core/diff.ts` that can be used. When these functions do not provide the required functionality a custom diffing function can be provided. Properties that have been configured with a specific diffing type will be excluded from the automatic diffing.
 
 | Diff Function | Description                                                                                                                  |
 | ------------- | ---------------------------------------------------------------------------------------------------------------------------- |
@@ -808,8 +808,8 @@ The `Registry` provides a mechanism to define widgets and injectors (see the [`C
 A main registry can be provided to the `renderer`, which will be automatically passed to all widgets within the tree (referred to as `baseRegistry`). Each widget also gets access to a private `Registry` instance that can be used to define registry items that are scoped to the widget. The locally defined registry items are considered a higher precedence than an item registered in the `baseRegistry`.
 
 ```ts
-import { Registry } from '@dojo/framework/core/Registry';
-import { w } from '@dojo/framework/core/vdom';
+import { Registry } from '@dojo-ng/framework/core/Registry';
+import { w } from '@dojo-ng/framework/core/vdom';
 
 import MyWidget from './MyWidget';
 import MyAppContext from './MyAppContext';
@@ -1004,7 +1004,7 @@ To connect the registered `payload` to a widget, we can use the `Container` HOC 
 `getProperties` receives the `payload` returned from the injector function and the `properties` passed to the container HOC component. These are used to map into the wrapped widget's properties.
 
 ```ts
-import { Container } from '@dojo/framework/core/Container';
+import { Container } from '@dojo-ng/framework/core/Container';
 import { MyWidget } from './MyWidget';
 
 function getProperties(payload: any, properties: any) {
@@ -1113,15 +1113,15 @@ const hasRootBeenRendered = this.meta(Dimensions).has('root');
 
 The Intersection Meta provides information on whether a Node is visible in the application's viewport using the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API).
 
-**Note**: The Intersection Observer API is not available in all browsers. To use the Intersection Observer API in all browsers supported by Dojo, a polyfill needs to be included. Dojo does not include the polyfill by default, so will need to be added as a script tag in your index.html or alternatively imported in the application’s main.ts using `import 'intersection-observer';` after including the dependency in your source tree, or by importing `@dojo/framework/shim/browser`.
+**Note**: The Intersection Observer API is not available in all browsers. To use the Intersection Observer API in all browsers supported by Dojo, a polyfill needs to be included. Dojo does not include the polyfill by default, so will need to be added as a script tag in your index.html or alternatively imported in the application’s main.ts using `import 'intersection-observer';` after including the dependency in your source tree, or by importing `@dojo-ng/framework/shim/browser`.
 
 This example renders a list with images, the image src is only added when the item is in the viewport which prevents needlessly downloading images until the user scrolls to them:
 
 ```ts
-import { WidgetBase } from '@dojo/framework/core/WidgetBase';
-import { v, w } from '@dojo/framework/core/vdom';
-import { DNode } from '@dojo/framework/core/interfaces';
-import { Intersection } from '@dojo/framework/core/meta/Intersection';
+import { WidgetBase } from '@dojo-ng/framework/core/WidgetBase';
+import { v, w } from '@dojo-ng/framework/core/vdom';
+import { DNode } from '@dojo-ng/framework/core/interfaces';
+import { Intersection } from '@dojo-ng/framework/core/meta/Intersection';
 
 // Add image URLs here to load
 const images = [];
@@ -1334,7 +1334,7 @@ class TestWidget extends WidgetBase {
 You can create your own meta if you need access to DOM nodes.
 
 ```typescript
-import MetaBase from '@dojo/framework/core/meta/Base';
+import MetaBase from '@dojo-ng/framework/core/meta/Base';
 
 class HtmlMeta extends MetaBase {
 	get(key: string): string {
@@ -1369,7 +1369,7 @@ Extending the base class found in `meta/Base` will provide the following functio
 Meta classes that require extra options should accept them in their methods.
 
 ```typescript
-import MetaBase from '@dojo/framework/core/meta/Base';
+import MetaBase from '@dojo-ng/framework/core/meta/Base';
 
 interface IsTallMetaOptions {
 	minHeight: number;
@@ -1434,7 +1434,7 @@ const vnode = dom({
 
 ### JSX Support
 
-In addition to creating widgets functionally using the `v()` and `w()` functions from `@dojo/framework/core/d`, Dojo optionally supports the use of the `jsx` syntax known as [`tsx`](https://www.typescriptlang.org/docs/handbook/jsx.html) in TypeScript.
+In addition to creating widgets functionally using the `v()` and `w()` functions from `@dojo-ng/framework/core/d`, Dojo optionally supports the use of the `jsx` syntax known as [`tsx`](https://www.typescriptlang.org/docs/handbook/jsx.html) in TypeScript.
 
 To start to use `jsx` in your project, widgets need to be named with a `.tsx` extension and some configuration is required in the project's `tsconfig.json`:
 
@@ -1457,7 +1457,7 @@ Include `.tsx` files in the project:
 Once the project is configured, `tsx` can be used in a widget's `render` function simply by importing the `tsx` function as:
 
 ```ts
-import { tsx } from '@dojo/framework/core/vdom';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 ```
 
 ```tsx
@@ -1513,7 +1513,7 @@ included such as webcomponents/custom-elements/master/custom-elements.min.js.
 Dojo does not include the polyfill by default, so will need to be
 added as a script tag in your index.html. Note that this polyfill cannot
 currently be ponyfilled like other polyfills used in Dojo, so it cannot
-be added with @dojo/framework/shim/browser or imported using ES modules.
+be added with @dojo-ng/framework/shim/browser or imported using ES modules.
 
 No additional steps are required. The custom element
 can be used in your application automatically. The decorator can be provided

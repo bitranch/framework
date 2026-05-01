@@ -1,6 +1,6 @@
 # Introduction
 
-Dojo provides a robust testing framework using `@dojo/cli-test-intern`. It allows you to efficiently test the output of your widgets and validate your expectations.
+Dojo provides a robust testing framework using `@dojo-ng/cli-test-intern`. It allows you to efficiently test the output of your widgets and validate your expectations.
 
 | Feature              | Description                                                                                                                                 |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -19,13 +19,13 @@ Dojo provides a robust testing framework using `@dojo/cli-test-intern`. It allow
 dojo test
 ```
 
-Dojo uses `@dojo/cli-test-intern` for running unit and functional tests in your `tests` folder.
+Dojo uses `@dojo-ng/cli-test-intern` for running unit and functional tests in your `tests` folder.
 
 ### Running specific test suites
 
 Dojo supports two types of testing approaches, unit and functional. Unit tests are tests run via node and the local
 [Selenium] tunnel and test isolated blocks of code. Functional tests are run using Selenium in the browser and test
-the overall functionality of the software as a user would interact with it. Running unit and functional tests against Selenium requires running the appropriate build using `@dojo/cli-build-app`.
+the overall functionality of the software as a user would interact with it. Running unit and functional tests against Selenium requires running the appropriate build using `@dojo-ng/cli-build-app`.
 
 -   Run a project's unit test suite
 
@@ -46,7 +46,7 @@ dojo test --functional --config local
 > src/widgets/Home.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 import * as css from './Home.m.css';
 
 const factory = create();
@@ -62,8 +62,8 @@ export default Home;
 
 ```ts
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion } from '@dojo-ng/framework/testing/renderer';
 
 import Home from '../../../src/widgets/Home';
 import * as css from '../../../src/widgets/Home.m.css';
@@ -126,7 +126,7 @@ Assertions provide a way to create a base assertion that allow parts of the expe
 > src/widgets/Profile.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 import * as css from './Profile.m.css';
 
@@ -144,14 +144,14 @@ const Profile = factory(function Profile({ properties }) {
 export default Profile;
 ```
 
--   Create an assertion using `@dojo/framework/testing/renderer#assertion`
+-   Create an assertion using `@dojo-ng/framework/testing/renderer#assertion`
 
 > tests/unit/widgets/Profile.tsx
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion } from '@dojo-ng/framework/testing/renderer';
 
 import Profile from '../../../src/widgets/Profile';
 import * as css from '../../../src/widgets/Profile.m.css';
@@ -168,14 +168,14 @@ describe('Profile', () => {
 });
 ```
 
-Wrapped test nodes, created using `@dojo/framework/testing/renderer#wrap` need to be specified in the assertion's expected output in place of the standard widget to interact with assertion's API. Note: when using wrapped `VNode`s with `v()`, the `.tag` property needs to get used, for example `v(WrappedDiv.tag, {} [])`.
+Wrapped test nodes, created using `@dojo-ng/framework/testing/renderer#wrap` need to be specified in the assertion's expected output in place of the standard widget to interact with assertion's API. Note: when using wrapped `VNode`s with `v()`, the `.tag` property needs to get used, for example `v(WrappedDiv.tag, {} [])`.
 
 > tests/unit/widgets/Profile.tsx
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer { wrap, assertion } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer { wrap, assertion } from '@dojo-ng/framework/testing/renderer';
 
 import Profile from '../../../src/widgets/Profile';
 import * as css from '../../../src/widgets/Profile.m.css';

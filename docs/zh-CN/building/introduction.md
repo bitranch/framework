@@ -20,7 +20,7 @@ Dojo 提供了一套强大的命令行工具，让构建现代应用程序更加
 
 ## 基本用法
 
-Dojo 提供了一组 CLI 命令，辅助创建和构建应用程序。本指南假设已全局安装 `@dojo/cli`，且在项目中安装了 [@dojo/cli-build-app](https://github.com/dojo/cli-build-app) 和 [@dojo/cli-test-intern](https://github.com/dojo/cli-test-intern)。如果项目是使用 [@dojo/cli-create-app](https://github.com/dojo/cli-create-app) 初始化的，那么这些依赖应该已经存在。
+Dojo 提供了一组 CLI 命令，辅助创建和构建应用程序。本指南假设已全局安装 `@dojo-ng/cli`，且在项目中安装了 [@dojo-ng/cli-build-app](https://github.com/dojo/cli-build-app) 和 [@dojo-ng/cli-test-intern](https://github.com/dojo/cli-test-intern)。如果项目是使用 [@dojo-ng/cli-create-app](https://github.com/dojo/cli-create-app) 初始化的，那么这些依赖应该已经存在。
 
 ### 构建
 
@@ -63,7 +63,7 @@ npm run test:functional
 
 ### 支持的浏览器
 
-Dojo 是一个持续演变的框架。默认情况下，发布的 dojo 版本会支持最新浏览器的最近两个版本。Dojo 要跨浏览器实现标准功能，其所需的 polyfill 都是通过 `@dojo/framework/shim` 按需提供的。要支持 IE11，需要打开 `--legacy` 标记。
+Dojo 是一个持续演变的框架。默认情况下，发布的 dojo 版本会支持最新浏览器的最近两个版本。Dojo 要跨浏览器实现标准功能，其所需的 polyfill 都是通过 `@dojo-ng/framework/shim` 按需提供的。要支持 IE11，需要打开 `--legacy` 标记。
 
 ## Dojo 配置
 
@@ -88,4 +88,4 @@ Dojo 是一个持续演变的框架。默认情况下，发布的 dojo 版本会
 }
 ```
 
-本示例中，[@dojo/cli-build-app](https://github.com/dojo/cli-build-app/)、[@dojo/cli-test-intern](https://github.com/dojo/cli-test-intern) 和 [@dojo/cli-create-widget](https://github.com/dojo/cli-create-widget) 三个 CLI 命令模块各对应一个节点。配置 _总是_ 分层的，按照 command => feature => configuration 的顺序排列。
+本示例中，[@dojo-ng/cli-build-app](https://github.com/dojo/cli-build-app/)、[@dojo-ng/cli-test-intern](https://github.com/dojo/cli-test-intern) 和 [@dojo-ng/cli-create-widget](https://github.com/dojo/cli-create-widget) 三个 CLI 命令模块各对应一个节点。配置 _总是_ 分层的，按照 command => feature => configuration 的顺序排列。

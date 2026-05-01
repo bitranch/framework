@@ -10,9 +10,9 @@ commit b61c6ff6ce70fa52dc3545f473b13db0d20df50c
 在现代浏览器中，`state` 对象是作为 `CommandRequest` 的一部分传入的。对 `state` 对象的任何修改都将转换为相应的 operation，然后应用到 store 上。
 
 ```ts
-import { createCommandFactory } from '@dojo/framework/stores/process';
+import { createCommandFactory } from '@dojo-ng/framework/stores/process';
 import { State } from './interfaces';
-import { remove, replace } from '@dojo/framework/stores/state/operations';
+import { remove, replace } from '@dojo-ng/framework/stores/state/operations';
 
 const createCommand = createCommandFactory<State>();
 
@@ -271,9 +271,9 @@ Dojo Store 通过 [Immutable](https://github.com/dojo/framework/blob/master/src/
 
 ```ts
 import State from './interfaces';
-import Store from '@dojo/framework/stores/Store';
-import Registry from '@dojo/framework/widget-core/Registry';
-import ImmutableState from '@dojo/framework/stores/state/ImmutableState';
+import Store from '@dojo-ng/framework/stores/Store';
+import Registry from '@dojo-ng/framework/widget-core/Registry';
+import ImmutableState from '@dojo-ng/framework/stores/state/ImmutableState';
 
 const registry = new Registry();
 const customStore = new ImmutableState<State>();
@@ -303,8 +303,8 @@ export const myProcess = createProcess(
 与状态结合：
 
 ```ts
-import { load } from '@dojo/framework/stores/middleware/localStorage';
-import { Store } from '@dojo/framework/stores/Store';
+import { load } from '@dojo-ng/framework/stores/middleware/localStorage';
+import { Store } from '@dojo-ng/framework/stores/Store';
 
 const store = new Store();
 load('my-process', store);
@@ -319,8 +319,8 @@ Dojo Store 使用 operation 来更改应用程序的底层状态。这样设计 
 在未初始化的 store 中执行一个深度 `add`：
 
 ```ts
-import Store from '@dojo/framework/stores/Store';
-import { add } from '@dojo/framework/stores/state/operations';
+import Store from '@dojo-ng/framework/stores/Store';
+import { add } from '@dojo-ng/framework/stores/state/operations';
 
 const store = new Store<State>();
 const { at, path, apply } = store;
@@ -351,8 +351,8 @@ apply([add(at(path('users', 'list'), 10), user)]);
 本示例使用 `test` 操作来确保已初始化，确保始终将 `user` 添加到列表的末尾：
 
 ```ts
-import Store from '@dojo/framework/stores/Store';
-import { test } from '@dojo/framework/stores/state/operations';
+import Store from '@dojo-ng/framework/stores/Store';
+import { test } from '@dojo-ng/framework/stores/state/operations';
 
 const store = new Store<State>();
 const { at, path, apply } = store;
@@ -363,8 +363,8 @@ apply([test(at(path('users', 'list', 'length'), 0))]);
 本示例通过编程的方式，确保 `user` 总是作为最后一个元素添加到列表的末尾：
 
 ```ts
-import Store from '@dojo/framework/stores/Store';
-import { add, test } from '@dojo/framework/stores/state/operations';
+import Store from '@dojo-ng/framework/stores/Store';
+import { add, test } from '@dojo-ng/framework/stores/state/operations';
 
 const store = new Store<State>();
 const { get, at, path, apply } = store;
@@ -377,4 +377,4 @@ apply([
 ]);
 ```
 
-禁止访问状态的根节点，如果访问将会引发错误，例如尝试执行 `get(path('/'))`。此限制也适用于 operation；不能创建一个更新状态根节点的 operation。`@dojo/framewok/stores` 的最佳实践是鼓励只访问 store 中最小的、必需的部分。
+禁止访问状态的根节点，如果访问将会引发错误，例如尝试执行 `get(path('/'))`。此限制也适用于 operation；不能创建一个更新状态根节点的 operation。`@dojo-ng/framewok/stores` 的最佳实践是鼓励只访问 store 中最小的、必需的部分。

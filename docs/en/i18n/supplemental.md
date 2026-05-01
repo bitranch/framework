@@ -90,8 +90,8 @@ This can be imported and referenced within a widget such as:
 > widgets/MyI18nWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import myWidgetMessageBundle from '../nls/en/MyI18nWidget';
 
@@ -142,7 +142,7 @@ export default {
 
 An internationalized application should specify all its supported locales within its `.dojorc` build configuration file. One locale should be designated as the primary/default locale for the application, with the remainder of the supported locales as secondary options that can be activated when required. This is done via the `locale` property and `supportedLocales` list within the `build-app` section.
 
-**Note**: Since the various formatters and parsers rely on locale-specific [CLDR](http://cldr.unicode.org) data, most of the functionality provided by `@dojo/framework/i18n` requires at least a `locale` to be set in the `.dojorc` in order to function properly. For example, if no default `locale` is specified, then only the default bundle messages will be returned and [ICU message formatting](#icu-message-formatting) will be disabled.
+**Note**: Since the various formatters and parsers rely on locale-specific [CLDR](http://cldr.unicode.org) data, most of the functionality provided by `@dojo-ng/framework/i18n` requires at least a `locale` to be set in the `.dojorc` in order to function properly. For example, if no default `locale` is specified, then only the default bundle messages will be returned and [ICU message formatting](#icu-message-formatting) will be disabled.
 
 -   `locale`: string
     -   The primary locale supported by the application. That is, the default language that will be used if an override locale is not specified.
@@ -164,7 +164,7 @@ For example, with the following configuration, an application specifies that its
 
 ## Creating i18n-aware widgets
 
-Individual widgets can be internationalized by using the `i18n` middleware from `@dojo/framework/core/middleware/i18n`. Using the middleware adds some optional i18n-related properties to the widget property interface. The API for the `i18n` middleware includes a method, `localize(bundle)` to get the localized nls values given a message bundle and two methods that can be used to get and set the application's locale details.
+Individual widgets can be internationalized by using the `i18n` middleware from `@dojo-ng/framework/core/middleware/i18n`. Using the middleware adds some optional i18n-related properties to the widget property interface. The API for the `i18n` middleware includes a method, `localize(bundle)` to get the localized nls values given a message bundle and two methods that can be used to get and set the application's locale details.
 
 ### `i18n` widget properties
 
@@ -207,10 +207,10 @@ export default {
 > widgets/MyI18nWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
-import Label from '@dojo/widgets/label';
-import Button from '@dojo/widgets/button';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
+import Label from '@dojo-ng/widgets/label';
+import Button from '@dojo-ng/widgets/button';
 
 import greetingsBundle from '../nls/en/MyI18nWidget';
 
@@ -246,7 +246,7 @@ Note that with this pattern it is possible for a widget to obtain its messages f
 
 ### `I18nMixin` for class-based widgets
 
-Individual class-based widgets can be internationalized by adding the `I18nMixin` mixin from `@dojo/framework/core/mixins/I18n`. This mixin adds the same optional i18n-related widget properties as the `i18n` middleware, and provides a `localizeBundle` method which is used to localize an imported message bundle to the widget's current locale.
+Individual class-based widgets can be internationalized by adding the `I18nMixin` mixin from `@dojo-ng/framework/core/mixins/I18n`. This mixin adds the same optional i18n-related widget properties as the `i18n` middleware, and provides a `localizeBundle` method which is used to localize an imported message bundle to the widget's current locale.
 
 #### `localizeBundle()` method
 
@@ -280,11 +280,11 @@ export default {
 > widgets/MyI18nWidget.ts
 
 ```ts
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { v, w } from '@dojo/framework/core/vdom';
-import I18nMixin from '@dojo/framework/core/mixins/I18n';
-import Label from '@dojo/widgets/label';
-import Button from '@dojo/widgets/button';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { v, w } from '@dojo-ng/framework/core/vdom';
+import I18nMixin from '@dojo-ng/framework/core/mixins/I18n';
+import Label from '@dojo-ng/widgets/label';
+import Button from '@dojo-ng/widgets/button';
 
 import greetingsBundle from '../nls/en/MyI18nWidget';
 
@@ -318,17 +318,17 @@ export default class MyI18nWidget extends I18nMixin(WidgetBase) {
 
 ## Providing locale data to i18n-aware widgets
 
-Locale details also need to be managed via a Dojo registry when applications use i18n-aware class-based widgets (specifically, those that use `I18nMixin`). This applies to any such widgets contained within the application itself or as part of an external dependency - including any widgets used from Dojo's `@dojo/widgets` suite. Locale data is injected into all such widgets through the Dojo registry system; these widgets will be invalidated and re-rendered with updated locale data when the application locale is changed.
+Locale details also need to be managed via a Dojo registry when applications use i18n-aware class-based widgets (specifically, those that use `I18nMixin`). This applies to any such widgets contained within the application itself or as part of an external dependency - including any widgets used from Dojo's `@dojo-ng/widgets` suite. Locale data is injected into all such widgets through the Dojo registry system; these widgets will be invalidated and re-rendered with updated locale data when the application locale is changed.
 
-This mechanism is enabled through `registerI18nInjector`, a convenience method provided by `@dojo/framework/core/mixins/I18n`. Calling this method will register the `i18n` injector within a specific registry instance. Typically this is done at application bootstrap, where the i18n injector is registered against the global registry passed to the `renderer.mount()` method.
+This mechanism is enabled through `registerI18nInjector`, a convenience method provided by `@dojo-ng/framework/core/mixins/I18n`. Calling this method will register the `i18n` injector within a specific registry instance. Typically this is done at application bootstrap, where the i18n injector is registered against the global registry passed to the `renderer.mount()` method.
 
 > main.ts
 
 ```ts
-import renderer from '@dojo/framework/core/vdom';
-import { w } from '@dojo/framework/core/vdom';
-import Registry from '@dojo/framework/core/Registry';
-import { registerI18nInjector } from '@dojo/framework/core/mixins/I18n';
+import renderer from '@dojo-ng/framework/core/vdom';
+import { w } from '@dojo-ng/framework/core/vdom';
+import Registry from '@dojo-ng/framework/core/Registry';
+import { registerI18nInjector } from '@dojo-ng/framework/core/mixins/I18n';
 
 import App from './App';
 
@@ -348,8 +348,8 @@ The `i18n` middleware can be used to change the application's locale. Calling `i
 The following example shows an i18n-aware widget that renders two buttons that allow switching the application locale between English and French.
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import nlsBundle from '../nls/main';
 
@@ -390,7 +390,7 @@ The widget's default bundle can also be replaced by passing an `i18nBundle` widg
 An example of overriding bundles within child widgets:
 
 ```ts
-import { Bundle } from '@dojo/framework/i18n/i18n';
+import { Bundle } from '@dojo-ng/framework/i18n/i18n';
 
 // A complete bundle to replace WidgetA's message bundle
 import overrideBundleForWidgetA from './nls/widgetA';
@@ -432,8 +432,8 @@ The locale that an [i18n-aware widget](#creating-i18n-aware-widgets) will use is
 |     3 | **`I18nMixin`/`i18n` middleware and i18n injector** | The default locale set when initially registering [the i18n injector](#providing-locale-data-to-i18n-aware-widgets).                                                                         |
 |     4 | **`.dojorc`**                                       | A user's current locale, such as their browser language setting, if the locale [is in the application's list of `build-app`.`supportedLocales`](#configuring-supported-application-locales). |
 |     5 | **`.dojorc`**                                       | The application's [default locale specified in `build-app`.`locale`](#configuring-supported-application-locales).                                                                            |
-|     6 | **`@dojo/framework/i18n`**                          | An explicit locale set via [Dojo i18n's `switchLocale` method](#changing-the-root-locale-and-observing-locale-changes).                                                                      |
-|     7 | **`@dojo/framework/i18n`**                          | The [`systemLocale` for the current execution environment](#determining-the-current-locale).                                                                                                 |
+|     6 | **`@dojo-ng/framework/i18n`**                          | An explicit locale set via [Dojo i18n's `switchLocale` method](#changing-the-root-locale-and-observing-locale-changes).                                                                      |
+|     7 | **`@dojo-ng/framework/i18n`**                          | The [`systemLocale` for the current execution environment](#determining-the-current-locale).                                                                                                 |
 
 # Advanced formatting
 
@@ -464,8 +464,8 @@ The `guestInfo` message can be rendered directly via `format`:
 > widgets/MyI18nWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import nlsBundle from '../nls/main';
 
@@ -491,7 +491,7 @@ export default factory(function MyI18nWidget({ middleware: { i18n } }) {
 The object returned by [the `localizeBundle` function](#accessing-locale-message-bundles) from the `i18n` module includes a `format` method that handles message formatting:
 
 ```ts
-import { localizeBundle } from '@dojo/framework/i18n/i18n';
+import { localizeBundle } from '@dojo-ng/framework/i18n/i18n';
 import bundle from 'nls/main';
 
 localizeBundle(bundle, { locale: 'en' }).then(({ format }) => {
@@ -505,7 +505,7 @@ localizeBundle(bundle, { locale: 'en' }).then(({ format }) => {
 
 ### ICU message formatting
 
-`@dojo/framework/i18n` relies on [Globalize.js](https://github.com/jquery/globalize/blob/master/doc/api/message/message-formatter.md) for [ICU message formatting](http://userguide.icu-project.org/formatparse/messages), and as such all of the features offered by Globalize.js are available through `@dojo/framework/i18n`.
+`@dojo-ng/framework/i18n` relies on [Globalize.js](https://github.com/jquery/globalize/blob/master/doc/api/message/message-formatter.md) for [ICU message formatting](http://userguide.icu-project.org/formatparse/messages), and as such all of the features offered by Globalize.js are available through `@dojo-ng/framework/i18n`.
 
 The message formatting examples in the next two subsections will use a [message bundle](#working-with-message-bundles) with an updated `guestInfo` message as follows:
 
@@ -546,8 +546,8 @@ The ICU-formatted `guestInfo` message can then be rendered as:
 > widgets/MyI18nWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import i18n from '@dojo/framework/core/middleware/i18n';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 
 import nlsBundle from '../nls/main';
 
@@ -577,7 +577,7 @@ export default factory(function MyI18nWidget({ middleware: { i18n } }) {
 The ICU-formatted `guestInfo` message can be converted directly with the `format` method included on the object returned by [`localizeBundle`](#accessing-locale-message-bundles).
 
 ```ts
-import { localizeBundle } from '@dojo/framework/i18n/i18n';
+import { localizeBundle } from '@dojo-ng/framework/i18n/i18n';
 import bundle from 'nls/main';
 
 // 1. Load the messages for the locale.
@@ -602,14 +602,14 @@ localizeBundle(bundle, { locale: 'en' }).then(({ format }) => {
 
 ## Date and number formatting.
 
-As with the message formatting capabilities, `@dojo/framework/i18n` relies on Globalize.js to provide locale-specific formatting for dates, times, currencies, numbers, and units. The formatters themselves are essentially light wrappers around their Globalize.js counterparts, which helps maintain consistency with the Dojo ecosystem and prevents the need to work with the `Globalize` object directly. Unlike the message formatters, the date, number, and unit formatters are not cached, as they have a more complex set of options. As such, executing the various "get formatter" methods multiple times with the same inputs does not return the exact same function object.
+As with the message formatting capabilities, `@dojo-ng/framework/i18n` relies on Globalize.js to provide locale-specific formatting for dates, times, currencies, numbers, and units. The formatters themselves are essentially light wrappers around their Globalize.js counterparts, which helps maintain consistency with the Dojo ecosystem and prevents the need to work with the `Globalize` object directly. Unlike the message formatters, the date, number, and unit formatters are not cached, as they have a more complex set of options. As such, executing the various "get formatter" methods multiple times with the same inputs does not return the exact same function object.
 
-`@dojo/framework/i18n` groups the various formatters accordingly: date and time formatters (`@dojo/framework/i18n/date`); number, currency, and pluralization formatters (`@dojo/framework/i18n/number`); and unit formatters (`@dojo/framework/i18n/unit`). Each method corresponds to a Globalize.js method (see below), and each method follows the same basic format: the last argument is an optional locale, and the penultimate argument is the method options. If specifying a locale but no options, pass `null` as the `options` argument. If no locale is provided, then the current (`i18n.locale`) is assumed.
+`@dojo-ng/framework/i18n` groups the various formatters accordingly: date and time formatters (`@dojo-ng/framework/i18n/date`); number, currency, and pluralization formatters (`@dojo-ng/framework/i18n/number`); and unit formatters (`@dojo-ng/framework/i18n/unit`). Each method corresponds to a Globalize.js method (see below), and each method follows the same basic format: the last argument is an optional locale, and the penultimate argument is the method options. If specifying a locale but no options, pass `null` as the `options` argument. If no locale is provided, then the current (`i18n.locale`) is assumed.
 
 ```ts
-import { formatDate, getDateFormatter, formatRelativeTime } from '@dojo/framework/i18n/date';
-import { formatCurrency, getCurrencyFormatter } from '@dojo/framework/i18n/number';
-import { formatUnit, getUnitFormatter } from '@dojo/framework/i18n/unit';
+import { formatDate, getDateFormatter, formatRelativeTime } from '@dojo-ng/framework/i18n/date';
+import { formatCurrency, getCurrencyFormatter } from '@dojo-ng/framework/i18n/number';
+import { formatUnit, getUnitFormatter } from '@dojo-ng/framework/i18n/unit';
 
 const date = new Date(1815, 11, 10, 11, 27);
 
@@ -644,7 +644,7 @@ frUnitFormatter(1000); // 1 000 mètres'
 formatUnit(1000, 'meter', null, 'fr); // 1 000 mètres'
 ```
 
-**`@dojo/framework/i18n/date` methods:**
+**`@dojo-ng/framework/i18n/date` methods:**
 
 -   `formatDate` => [`Globalize.formatDate`](https://github.com/globalizejs/globalize/blob/master/doc/api/date/date-formatter.md)
 -   `formatRelativeTime` => [`Globalize.formatRelativeTime`](https://github.com/globalizejs/globalize/blob/master/doc/api/relative-time/relative-time-formatter.md)
@@ -653,7 +653,7 @@ formatUnit(1000, 'meter', null, 'fr); // 1 000 mètres'
 -   `getRelativeTimeFormatter` => [`Globalize.relativeTimeFormatter`](https://github.com/globalizejs/globalize/blob/master/doc/api/relative-time/relative-time-formatter.md)
 -   `parseDate` => [`Globalize.parseDate`](https://github.com/globalizejs/globalize/blob/master/doc/api/date/date-parser.md)
 
-**`@dojo/framework/i18n/number` methods:**
+**`@dojo-ng/framework/i18n/number` methods:**
 
 -   `formatCurrency` => [`Globalize.formatCurrency`](https://github.com/globalizejs/globalize/blob/master/doc/api/currency/currency-formatter.md)
 -   `formatNumber` => [`Globalize.formatNumber`](https://github.com/globalizejs/globalize/blob/master/doc/api/number/number-formatter.md)
@@ -664,7 +664,7 @@ formatUnit(1000, 'meter', null, 'fr); // 1 000 mètres'
 -   `parseNumber` => [`Globalize.parseNumber`](https://github.com/globalizejs/globalize/blob/master/doc/api/number/number-parser.md)
 -   `pluralize` => [`Globalize.plural`](https://github.com/globalizejs/globalize/blob/master/doc/api/plural/plural-generator.md)
 
-**`@dojo/framework/i18n/unit` methods:**
+**`@dojo-ng/framework/i18n/unit` methods:**
 
 -   `formatUnit` => [`Globalize.formatUnit`](https://github.com/globalizejs/globalize/blob/master/doc/api/unit/unit-formatter.md)
 -   `getUnitFormatter` => [`Globalize.unitFormatter`](https://github.com/globalizejs/globalize/blob/master/doc/api/unit/unit-formatter.md)
@@ -678,7 +678,7 @@ Once a [default language bundle](/learn/i18n/working-with-message-bundles#defaul
 For example:
 
 ```ts
-import { localizeBundle } from '@dojo/framework/i18n/i18n';
+import { localizeBundle } from '@dojo-ng/framework/i18n/i18n';
 import bundle from 'nls/main';
 
 localizeBundle(bundle, { locale: 'fr' }).then(({ messages }) => {
@@ -691,7 +691,7 @@ If an unsupported locale is passed to `i18n`, then the default messages are retu
 
 ## Determining the current locale
 
-`@dojo/framework/i18n/i18n` exposes two related methods for determining the current locale:
+`@dojo-ng/framework/i18n/i18n` exposes two related methods for determining the current locale:
 
 -   `getCurrentLocale`, which represents the application's current, top-level locale.
 -   `getComputedLocale`, which will be either the user's system locale if it is listed among the supported locales specified in the `.dojorc`, or the default locale specified in the `.dojorc` if the user's system locale is not supported.

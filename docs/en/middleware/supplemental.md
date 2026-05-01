@@ -20,14 +20,14 @@ Sensible defaults get returned if a widget accesses certain middleware propertie
 
 ## Creating middleware
 
-Middleware is defined using the `create()` factory method from the `@dojo/framework/core/vdom` module. This process is similar to creating functional widgets, however, instead of returning VDOM nodes, middleware factories return an object with an appropriate API that allows access to the middleware's feature set. Simple middleware that only need a single function call to implement their requirements can also return a function directly, without needing to wrap the middleware in an object.
+Middleware is defined using the `create()` factory method from the `@dojo-ng/framework/core/vdom` module. This process is similar to creating functional widgets, however, instead of returning VDOM nodes, middleware factories return an object with an appropriate API that allows access to the middleware's feature set. Simple middleware that only need a single function call to implement their requirements can also return a function directly, without needing to wrap the middleware in an object.
 
 The following illustrates a middleware component with a trivial `get()`/`set()` API:
 
 > src/middleware/myMiddleware.ts
 
 ```ts
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 
 const factory = create();
 
@@ -50,7 +50,7 @@ For example, the above `myMiddleware` can be used within a widget:
 > src/widgets/MiddlewareConsumerWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 import myMiddleware from '../middleware/myMiddleware';
 
 const render = create({ myMiddleware });
@@ -74,8 +74,8 @@ The following example shows middleware composing other middleware to implement m
 > src/middleware/ValueCachingMiddleware.ts
 
 ```ts
-import { create, defer } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, defer } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 const factory = create({ defer, icache });
 
@@ -111,7 +111,7 @@ The following is an example of middleware with a properties interface:
 > src/middleware/middlewareWithProperties.tsx
 
 ```ts
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 
 const factory = create().properties<{ conditional?: boolean }>();
 
@@ -131,7 +131,7 @@ This middleware and its property can get used in a widget:
 > src/widgets/MiddlewarePropertiesWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 import middlewareWithProperties from '../middleware/middlewareWithProperties';
 
 const render = create({ middlewareWithProperties });
@@ -152,7 +152,7 @@ The value for the middleware `conditional` property is then specified when creat
 > src/main.tsx
 
 ```tsx
-import renderer, { tsx } from '@dojo/framework/core/vdom';
+import renderer, { tsx } from '@dojo-ng/framework/core/vdom';
 import MiddlewarePropertiesWidget from './widgets/MiddlewarePropertiesWidget';
 
 const r = renderer(() => <MiddlewarePropertiesWidget conditional={true} />);
@@ -170,7 +170,7 @@ A middleware that uses the [`invalidator`](/learn/middleware/core-render-middlew
 **API:**
 
 ```ts
-import icache from '@dojo/framework/core/middleware/icache';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 ```
 
 -   `icache.getOrSet<T = any>(key: any, value: any, invalidate: boolean = true): T | undefined`
@@ -202,8 +202,8 @@ icache.set('key', (current) => {
 `icache` can be typed in two different ways. One approach uses generics to enable the return type to get specified at the call-site, and for `getOrSet`, the return type can get inferred from the value type. If the `value` for `getOrSet` is a function then the type will get inferred from the functions return type.
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 const factory = create({ icache });
 
@@ -226,8 +226,8 @@ const MyIcacheWidget = factory(function MyIcacheWidget({ middleware: { icache } 
 However this approach doesn't provide any typing for the cache keys. The preferred way to type `icache` is to create a pre-typed middleware using `createICacheMiddleware`. This allows for passing an interface which will create an `icache` middleware typed specifically for the passed interface and provides type safety for the cache keys.
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createICacheMiddleware } from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createICacheMiddleware } from '@dojo-ng/framework/core/middleware/icache';
 
 interface FetchResult {
 	foo: string;
@@ -261,7 +261,7 @@ Described in detail in the [Dojo Styling and Theming reference guide](/learn/sty
 **API:**
 
 ```ts
-import theme from '@dojo/framework/core/middleware/theme';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 ```
 
 -   `theme.classes<T extends ClassNames>(css: T): T`
@@ -280,7 +280,7 @@ Described in detail in the [Dojo Internationalization reference guide](/learn/i1
 **API:**
 
 ```ts
-import i18n from '@dojo/framework/core/middleware/i18n';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 ```
 
 -   `i18n.localize<T extends Messages>(bundle: Bundle<T>, useDefaults = false): LocalizedMessages<T>`
@@ -297,7 +297,7 @@ Provides various size and position information about a widget's underlying nodes
 **API:**
 
 ```ts
-import dimensions from '@dojo/framework/core/middleware/dimensions';
+import dimensions from '@dojo-ng/framework/core/middleware/dimensions';
 ```
 
 -   `dimensions.get(key: string | number): Readonly<DimensionResults>`
@@ -335,7 +335,7 @@ As the Intersection Observer API is still an emerging web standard, the framewor
 **API:**
 
 ```ts
-import intersection from '@dojo/framework/core/middleware/intersection';
+import intersection from '@dojo-ng/framework/core/middleware/intersection';
 ```
 
 -   `intersection.get(key: string | number, options: IntersectionGetOptions = {}): IntersectionResult`
@@ -359,7 +359,7 @@ As Resize Observer is still an emerging web standard, the framework automaticall
 **API:**
 
 ```ts
-import resize from '@dojo/framework/core/middleware/resize';
+import resize from '@dojo-ng/framework/core/middleware/resize';
 ```
 
 -   `resize.get(key: string | number): DOMRectReadOnly | null`
@@ -381,7 +381,7 @@ Composes the [`resize`](/learn/middleware/available-middleware#resize) middlewar
 **API:**
 
 ```ts
-import breakpoint from '@dojo/framework/core/middleware/breakpoint';
+import breakpoint from '@dojo-ng/framework/core/middleware/breakpoint';
 ```
 
 ```ts
@@ -398,7 +398,7 @@ When using the same set of breakpoints in many locations, it is easier to define
 > src/middleware/myCustomBreakpoint.ts
 
 ```ts
-import { createBreakpointMiddleware } from '@dojo/framework/core/middleware/breakpoint';
+import { createBreakpointMiddleware } from '@dojo-ng/framework/core/middleware/breakpoint';
 
 const myCustomBreakpoint = createBreakpointMiddleware({ Narrow: 0, Wide: 500 });
 
@@ -412,7 +412,7 @@ Enables setting the [`inert`](https://html.spec.whatwg.org/multipage/interaction
 **API:**
 
 ```ts
-import inert from '@dojo/framework/core/middleware/inert';
+import inert from '@dojo-ng/framework/core/middleware/inert';
 ```
 
 -   `inert.set(key: string | number, enable: boolean, invert: boolean = false): void;`
@@ -421,9 +421,9 @@ import inert from '@dojo/framework/core/middleware/inert';
 > src/widgets/Dialog.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import inert from '@dojo/framework/core/middleware/inert';
-import icache from '@dojo/framework/core/middleware/icache';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import inert from '@dojo-ng/framework/core/middleware/inert';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 import * as css from './App.m.css';
 
@@ -509,7 +509,7 @@ Described in detail in the [Dojo Stores reference guide](/learn/stores/introduct
 **API:**
 
 ```ts
-import store from '@dojo/framework/core/middleware/store';
+import store from '@dojo-ng/framework/core/middleware/store';
 ```
 
 -   `store.get<U = any>(path: Path<S, U>): U`
@@ -528,7 +528,7 @@ Allows widgets to inspect and control focus amongst their resulting DOM output w
 **API:**
 
 ```ts
-import focus from '@dojo/framework/core/middleware/focus';
+import focus from '@dojo-ng/framework/core/middleware/focus';
 ```
 
 -   `focus.shouldFocus(): boolean`
@@ -545,9 +545,9 @@ The following shows an example of delegating and controlling focus across a widg
 > src/widgets/FocusableWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import focus from '@dojo/framework/core/middleware/focus';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import focus from '@dojo-ng/framework/core/middleware/focus';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 /*
 	The input's `onfocus()` event handler is assigned to a method passed in
@@ -629,7 +629,7 @@ Allows retrieving information specifically about a node's [validity state](https
 **API:**
 
 ```ts
-import validity from '@dojo/framework/core/middleware/validity';
+import validity from '@dojo-ng/framework/core/middleware/validity';
 ```
 
 -   `validity.get(key: string, value: string)` - Return the validity state for the DOM element, identified by the node's `key` property. Returns `{ valid: undefined, message: '' }` if the specified DOM element does not exist for the current widget. Otherwise, it returns a `ValidityState` object.
@@ -650,7 +650,7 @@ Allows retrieving injectors from the Dojo registry and assigning invalidation ca
 **API:**
 
 ```ts
-import injector from '@dojo/framework/core/middleware/injector';
+import injector from '@dojo-ng/framework/core/middleware/injector';
 ```
 
 -   `injector.subscribe(label: RegistryLabel, callback: Function = invalidator)`
@@ -667,7 +667,7 @@ Described in detail in the [Building reference guide](/learn/building/buildtime-
 **API:**
 
 ```ts
-import block from '@dojo/framework/core/middleware/block';
+import block from '@dojo-ng/framework/core/middleware/block';
 ```
 
 -   `block<T extends (...args: any[]) => any>(module: T)`
@@ -675,7 +675,7 @@ import block from '@dojo/framework/core/middleware/block';
 
 # Core render middleware
 
-The `@dojo/framework/core/vdom` module includes foundational middleware that is useful across the majority of Dojo applications. These are mainly useful when building other custom middleware (they underpin the [additional middleware](/learn/middleware/available-middleware) offered by the framework), but can occasionally be useful in general widget development.
+The `@dojo-ng/framework/core/vdom` module includes foundational middleware that is useful across the majority of Dojo applications. These are mainly useful when building other custom middleware (they underpin the [additional middleware](/learn/middleware/available-middleware) offered by the framework), but can occasionally be useful in general widget development.
 
 ## `invalidator`
 
@@ -684,7 +684,7 @@ The most important middleware which provides a hook into a widget's invalidation
 **API:**
 
 ```ts
-import { invalidator } from '@dojo/framework/core/vdom';
+import { invalidator } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `invalidator()`
@@ -697,7 +697,7 @@ Provides widgets access to their underlying DOM nodes, identified by node `key`s
 **API:**
 
 ```ts
-import { node } from '@dojo/framework/core/vdom';
+import { node } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `node.get(key: string | number): HTMLElement | null`
@@ -716,7 +716,7 @@ An additional use for `diffProperty` is to be able to return a value that will b
 **API:**
 
 ```ts
-import { diffProperty } from '@dojo/framework/core/vdom';
+import { diffProperty } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `diffProperty(propertyName: string, properties: () => WidgetProperties (current: WidgetProperties, next: WidgetProperties) => void | WidgetProperties[propertyName])`
@@ -727,7 +727,7 @@ import { diffProperty } from '@dojo/framework/core/vdom';
 > src/customMiddleware.tsx
 
 ````tsx
-import { create, diffProperty } from '@dojo/framework/core/vdom';
+import { create, diffProperty } from '@dojo-ng/framework/core/vdom';
 
 const factory = create({ diffProperty }).properties<{ foo?: string }>;
 
@@ -749,7 +749,7 @@ Assigns a function that is called on widget destruction, allowing any required r
 **API:**
 
 ```ts
-import { destroy } from '@dojo/framework/core/vdom';
+import { destroy } from '@dojo-ng/framework/core/vdom';
 ````
 
 -   `destroy(destroyFunction: () => void)`
@@ -764,7 +764,7 @@ Provides access to the widget's own `Registry` instance, as well as the root app
 **API:**
 
 ```ts
-import { getRegistry } from '@dojo/framework/core/vdom';
+import { getRegistry } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `getRegistry(): RegistryHandler | null`
@@ -777,7 +777,7 @@ Allows widgets to pause and resume their rendering logic; useful when short-circ
 **API:**
 
 ```ts
-import { defer } from '@dojo/framework/core/vdom';
+import { defer } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `defer.pause()`

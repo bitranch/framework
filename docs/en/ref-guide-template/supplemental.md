@@ -8,8 +8,8 @@ Further subsections describing particular topics for a given feature. Possibly a
 
 ```tsx
 // including fully-working embedded code snippets as further illustration
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { tsx } from '@dojo/framework/core/vdom';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 
 export default class MyWidget extends WidgetBase {
 	protected render() {

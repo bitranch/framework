@@ -1,6 +1,6 @@
 intern.registerLoader((options) => {
 	return intern
-		.loadScript('node_modules/@dojo/loader/loader.js')
+		.loadScript('node_modules/@dojo-ng/loader/loader.js')
 		.then(() => intern.loadScript('./dist/dev/src/util/amd.js'))
 		.then(() => {
 			(<any>require).config(

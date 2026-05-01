@@ -211,7 +211,7 @@ self.addEventListener('message', function (event) {
 	if(event.data.nodeModulesUrl) {
 		var nodeModulesUrl = event.data.nodeModulesUrl;
 		var srcUrl = event.data.srcUrl;
-		importScripts(srcUrl + '/shim/util/amd.js', nodeModulesUrl + '/@dojo/loader/loader.js');
+		importScripts(srcUrl + '/shim/util/amd.js', nodeModulesUrl + '/@dojo-ng/loader/loader.js');
 
 		require.config(shimAmdDependencies({
 			baseUrl: nodeModulesUrl + '/..'

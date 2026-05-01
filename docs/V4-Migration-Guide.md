@@ -2,12 +2,12 @@
 
 Hot on the heels of the 3.0.0 release, 4.0.0 is here with some impressive new features but also some breaking changes of which you should be aware!
 
-As with the previous release, we've updated `@dojo/cli-upgrade-app` CLI command to help you through the upgrade process and automate as much as possible. Where it is not possible to automate the upgrade, you should receive helpful information in the output that indicates what needs to get manually upgraded and in which module.
+As with the previous release, we've updated `@dojo-ng/cli-upgrade-app` CLI command to help you through the upgrade process and automate as much as possible. Where it is not possible to automate the upgrade, you should receive helpful information in the output that indicates what needs to get manually upgraded and in which module.
 
 To install the upgrade command, run the following from the project root:
 
 ```
-npm install @dojo/cli-upgrade-app --no-save
+npm install @dojo-ng/cli-upgrade-app --no-save
 ```
 
 To perform the migration, run the following command from the project root. The migrations tool should automatically detect the necessary migration from your `package.json`.
@@ -18,8 +18,8 @@ dojo upgrade app
 
 If you are upgrading from a version before 3.0.0, please see the [previous migration guide](./V3-Migration-Guide) for more details first.
 
--   The `@dojo/cli` should be updated to version 4.0.0, along with all the commands used by the project.
--   If your project is using @dojo/widgets and @dojo/interop, these packages also require upgrading to version 4.0.0.
+-   The `@dojo-ng/cli` should be updated to version 4.0.0, along with all the commands used by the project.
+-   If your project is using @dojo-ng/widgets and @dojo-ng/interop, these packages also require upgrading to version 4.0.0.
 
 **Note:** The migration tool may create line lengths that violate your projects linting rules, be sure to run your linter and manually fix any linting rule violations.
 
@@ -32,7 +32,7 @@ As part of the new virtual dom implementation, we've removed the `ProjectorMixin
 **v3.0.0**
 
 ```ts
-import ProjectorMixin from '@dojo/framework/widget-core/mixins/Projector';
+import ProjectorMixin from '@dojo-ng/framework/widget-core/mixins/Projector';
 
 import MyApp from './MyApp';
 
@@ -47,8 +47,8 @@ projector.append();
 **v4.0.0**
 
 ```ts
-import renderer from '@dojo/framework/widget-core/vdom';
-import { w } from '@dojo/framework/widget-core/d';
+import renderer from '@dojo-ng/framework/widget-core/vdom';
+import { w } from '@dojo-ng/framework/widget-core/d';
 
 import MyApp from './MyApp';
 
@@ -72,18 +72,18 @@ The local copying of modules means that you won't need to make any significant e
 
 #### [A new home for `has`](https://github.com/dojo/framework/pull/53)
 
-The `has` module from `@dojo/framework/core/has` has been moved to `@dojo/framework/has/preset`.
+The `has` module from `@dojo-ng/framework/core/has` has been moved to `@dojo-ng/framework/has/preset`.
 
 **v3.x**
 
 ```ts
-import has from '@dojo/framework/core/has';
+import has from '@dojo-ng/framework/core/has';
 ```
 
 **v4.x**
 
 ```ts
-import has from '@dojo/framework/has/preset';
+import has from '@dojo-ng/framework/has/preset';
 ```
 
 #### [Routing Outlets](https://github.com/dojo/framework/pull/63)
