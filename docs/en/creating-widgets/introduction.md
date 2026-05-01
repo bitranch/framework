@@ -22,7 +22,7 @@ Widgets describe their intended structural representation by returning virtual n
 > src/widgets/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 const factory = create();
 
@@ -40,8 +40,8 @@ export default factory(function MyWidget() {
 > src/widgets/Greeter.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 const factory = create({ icache }).properties<{
 	name: string;
@@ -86,8 +86,8 @@ export default factory(function Greeter({ middleware: { icache }, properties }) 
 > src/widgets/NameHandler.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 import Greeter from './Greeter';
 
@@ -114,7 +114,7 @@ export default factory(function NameHandler({ middleware: { icache } }) {
 > src/main.tsx
 
 ```tsx
-import renderer, { tsx } from '@dojo/framework/core/vdom';
+import renderer, { tsx } from '@dojo-ng/framework/core/vdom';
 
 import NameHandler from './widgets/NameHandler';
 

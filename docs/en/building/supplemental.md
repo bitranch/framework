@@ -44,7 +44,7 @@ A bundle is a portion of code that represents a slice of functionality. Bundles 
 
 Dojo tries to make intelligent choices by using routes and outlets to automatically split code into smaller bundles. In general these bundles should all have code that is related and relevant. This comes for free as part of the build system and doesn't require any additional thought to use. However, for those with specific bundling needs Dojo also allows for bundles to be explicitly defined in the `.dojorc` configuration file.
 
-By default a Dojo application only creates a single application bundle. However, there are a number of configuration options provided by [@dojo/cli-build-app](https://github.com/dojo/cli-build-app) that will help break down an application into smaller portions that can be progressively loaded.
+By default a Dojo application only creates a single application bundle. However, there are a number of configuration options provided by [@dojo-ng/cli-build-app](https://github.com/dojo/cli-build-app) that will help break down an application into smaller portions that can be progressively loaded.
 
 ## Automatic bundling using routes
 
@@ -96,7 +96,7 @@ export default class App extends WidgetBase {
 
 The output will result in a separate bundle for each of the application's top level routes. In this example, there will be a main application bundle and bundles for `src/Home`, `src/About`, and `src/Profile`.
 
-To see automatic bundling in action create a new application using [@dojo/cli-create-app](https://github.com/dojo/cli-create-app/) and run `npm run build`. Dojo will automatically create bundles along the various routes in the sample application.
+To see automatic bundling in action create a new application using [@dojo-ng/cli-create-app](https://github.com/dojo/cli-create-app/) and run `npm run build`. Dojo will automatically create bundles along the various routes in the sample application.
 
 ## Manually specifying bundles
 
@@ -234,7 +234,7 @@ For instance, we could write a configuration to create a simple service worker t
 
 ### ServiceWorker configuration
 
-Under the hood, the `ServicerWorkerPlugin` from `@dojo/webpack-contrib` is used to generate the service worker, and all of its options are valid `pwa.serviceWorker` properties.
+Under the hood, the `ServicerWorkerPlugin` from `@dojo-ng/webpack-contrib` is used to generate the service worker, and all of its options are valid `pwa.serviceWorker` properties.
 
 | Property       | Type       | Optional | Description                                                                                     |
 | -------------- | ---------- | -------- | ----------------------------------------------------------------------------------------------- |
@@ -343,7 +343,7 @@ BTR generates a screenshot for each of the paths rendered during build in the `.
 
 ### History manager
 
-Build time rendering supports applications that use either the `@dojo/framework/routing/history/HashHistory` or `@dojo/framework/routing/history/StateHistory` history managers. When using `HashHistory`, ensure that all paths are prefixed with a `#` character.
+Build time rendering supports applications that use either the `@dojo-ng/framework/routing/history/HashHistory` or `@dojo-ng/framework/routing/history/StateHistory` history managers. When using `HashHistory`, ensure that all paths are prefixed with a `#` character.
 
 ## `build-time-render` feature flag
 
@@ -391,8 +391,8 @@ export default (path: string) => {
 > src/widgets/MyBlockWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import block from '@dojo/framework/core/middleware/block';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import block from '@dojo-ng/framework/core/middleware/block';
 
 import readFile from '../readFile.block';
 
@@ -413,7 +413,7 @@ The build tool's static code analyzer is capable of removing dead code branches 
 > main.ts
 
 ```ts
-import has from '@dojo/framework/has';
+import has from '@dojo-ng/framework/has';
 
 if (has('production')) {
 	console.log('Starting in production');
@@ -436,14 +436,14 @@ export const mode = has('production') ? 'dist' : 'dev';
 }
 ```
 
-The above `production` feature will be set `true` for **production builds** (`dist` mode). The build system uses `@dojo/framework/has` to identify code as unreachable and remove those dead code branches from the build.
+The above `production` feature will be set `true` for **production builds** (`dist` mode). The build system uses `@dojo-ng/framework/has` to identify code as unreachable and remove those dead code branches from the build.
 
 For example, the above code would be rewritten as:
 
 > static-build-loader output
 
 ```js
-import has from '@dojo/framework/has';
+import has from '@dojo-ng/framework/has';
 
 if (true) {
 	console.log('Starting in production');

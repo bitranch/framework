@@ -25,14 +25,14 @@ Dojo 提供了渲染中间件的概念，以帮助衔接响应式、函数部件
 
 ## 创建中间件
 
-中间件是使用 `@dojo/framework/core/vdom` 中的 `create()` 工厂方法定义的。这与创建函数部件的过程类似，但是中间件工厂返回的并不是 VDOM 节点，而是允许访问中间件功能集的 API。简单的中间件只需要一个函数调用来实现它们的需求，也可以直接返回一个函数，而不需要将中间件包装在一个对象中。
+中间件是使用 `@dojo-ng/framework/core/vdom` 中的 `create()` 工厂方法定义的。这与创建函数部件的过程类似，但是中间件工厂返回的并不是 VDOM 节点，而是允许访问中间件功能集的 API。简单的中间件只需要一个函数调用来实现它们的需求，也可以直接返回一个函数，而不需要将中间件包装在一个对象中。
 
 下面介绍一个中间件组件，它有一个简单的 `get()` 和 `set()` API：
 
 > src/middleware/myMiddleware.ts
 
 ```ts
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 
 const factory = create();
 
@@ -55,7 +55,7 @@ export default myMiddleware;
 > src/widgets/MiddlewareConsumerWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 import myMiddleware from '../middleware/myMiddleware';
 
 const render = create({ myMiddleware });
@@ -79,8 +79,8 @@ export default MiddlewareConsumerWidget;
 > src/middleware/ValueCachingMiddleware.ts
 
 ```ts
-import { create, defer } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, defer } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 const factory = create({ defer, icache });
 
@@ -116,7 +116,7 @@ export default ValueCachingMiddleware;
 > src/middleware/middlewareWithProperties.tsx
 
 ```ts
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 
 const factory = create().properties<{ conditional?: boolean }>();
 
@@ -136,7 +136,7 @@ export default middlewareWithProperties;
 > src/widgets/MiddlewarePropertiesWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 import middlewareWithProperties from '../middleware/middlewareWithProperties';
 
 const render = create({ middlewareWithProperties });
@@ -157,7 +157,7 @@ export default MiddlewarePropertiesWidget;
 > src/main.tsx
 
 ```tsx
-import renderer, { tsx } from '@dojo/framework/core/vdom';
+import renderer, { tsx } from '@dojo-ng/framework/core/vdom';
 import MiddlewarePropertiesWidget from './widgets/MiddlewarePropertiesWidget';
 
 const r = renderer(() => <MiddlewarePropertiesWidget conditional={true} />);
@@ -175,7 +175,7 @@ Dojo 提供了多种可选的中间件，当部件需要实现特定需求时，
 **API:**
 
 ```ts
-import icache from '@dojo/framework/core/middleware/icache';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 ```
 
 -   `icache.getOrSet<T = any>(key: any, value: any, invalidate: boolean = true): T | undefined`
@@ -205,8 +205,8 @@ icache.set('key', (current) => {
 可以使用两种方式为 `icache` 设置类型。一种方式是使用泛型来在调用的地方指定返回类型，对于 `getOrSet`，可以根据值类型推断出返回的类型，如果 `getOrSet` 的 `value` 是一个函数，则使用函数返回的类型推断出值类型。
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 const factory = create({ icache });
 
@@ -229,8 +229,8 @@ const MyIcacheWidget = factory(function MyIcacheWidget({ middleware: { icache } 
 但是，这种方式没有为缓存的 key 提供任何类型信息。为 `icache` 设置类型的首选方式是使用 `createICacheMiddleware` 创建一个预先设置了类型的中间件。这样就允许传入一个接口来创建一个明确指定了类型的 `icache` 中间件，并为缓存的 key 提供了类型安全。
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createICacheMiddleware } from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createICacheMiddleware } from '@dojo-ng/framework/core/middleware/icache';
 
 interface FetchResult {
 	foo: string;
@@ -264,7 +264,7 @@ const MyIcacheWidget = factory(function MyIcacheWidget({ middleware: { icache } 
 **API:**
 
 ```ts
-import theme from '@dojo/framework/core/middleware/theme';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 ```
 
 -   `theme.classes<T extends ClassNames>(css: T): T`
@@ -283,7 +283,7 @@ import theme from '@dojo/framework/core/middleware/theme';
 **API:**
 
 ```ts
-import i18n from '@dojo/framework/core/middleware/i18n';
+import i18n from '@dojo-ng/framework/core/middleware/i18n';
 ```
 
 -   `i18n.localize<T extends Messages>(bundle: Bundle<T>, useDefaults = false): LocalizedMessages<T>`
@@ -300,7 +300,7 @@ import i18n from '@dojo/framework/core/middleware/i18n';
 **API:**
 
 ```ts
-import dimensions from '@dojo/framework/core/middleware/dimensions';
+import dimensions from '@dojo-ng/framework/core/middleware/dimensions';
 ```
 
 -   `dimensions.get(key: string | number): Readonly<DimensionResults>`
@@ -338,7 +338,7 @@ import dimensions from '@dojo/framework/core/middleware/dimensions';
 **API:**
 
 ```ts
-import intersection from '@dojo/framework/core/middleware/intersection';
+import intersection from '@dojo-ng/framework/core/middleware/intersection';
 ```
 
 -   `intersection.get(key: string | number, options: IntersectionGetOptions = {}): IntersectionResult`
@@ -362,7 +362,7 @@ import intersection from '@dojo/framework/core/middleware/intersection';
 **API:**
 
 ```ts
-import resize from '@dojo/framework/core/middleware/resize';
+import resize from '@dojo-ng/framework/core/middleware/resize';
 ```
 
 -   `resize.get(key: string | number): DOMRectReadOnly | null`
@@ -384,7 +384,7 @@ import resize from '@dojo/framework/core/middleware/resize';
 **API:**
 
 ```ts
-import breakpoint from '@dojo/framework/core/middleware/breakpoint';
+import breakpoint from '@dojo-ng/framework/core/middleware/breakpoint';
 ```
 
 ```ts
@@ -401,7 +401,7 @@ interface Breakpoints {
 > src/middleware/myCustomBreakpoint.ts
 
 ```ts
-import { createBreakpointMiddleware } from '@dojo/framework/core/middleware/breakpoint';
+import { createBreakpointMiddleware } from '@dojo-ng/framework/core/middleware/breakpoint';
 
 const myCustomBreakpoint = createBreakpointMiddleware({ Narrow: 0, Wide: 500 });
 
@@ -415,7 +415,7 @@ export default myCustomBreakpoint;
 **API:**
 
 ```ts
-import inert from '@dojo/framework/core/middleware/inert';
+import inert from '@dojo-ng/framework/core/middleware/inert';
 ```
 
 -   `inert.set(key: string | number, enable: boolean, invert: boolean = false): void;`
@@ -424,9 +424,9 @@ import inert from '@dojo/framework/core/middleware/inert';
 > src/widgets/Dialog.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import inert from '@dojo/framework/core/middleware/inert';
-import icache from '@dojo/framework/core/middleware/icache';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import inert from '@dojo-ng/framework/core/middleware/inert';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 import * as css from './App.m.css';
 
@@ -512,7 +512,7 @@ export default factory(function App({ middleware: { icache } }) {
 **API:**
 
 ```ts
-import store from '@dojo/framework/core/middleware/store';
+import store from '@dojo-ng/framework/core/middleware/store';
 ```
 
 -   `store.get<U = any>(path: Path<S, U>): U`
@@ -531,7 +531,7 @@ import store from '@dojo/framework/core/middleware/store';
 **API:**
 
 ```ts
-import focus from '@dojo/framework/core/middleware/focus';
+import focus from '@dojo-ng/framework/core/middleware/focus';
 ```
 
 -   `focus.shouldFocus(): boolean`
@@ -548,9 +548,9 @@ import focus from '@dojo/framework/core/middleware/focus';
 > src/widgets/FocusableWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import focus from '@dojo/framework/core/middleware/focus';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import focus from '@dojo-ng/framework/core/middleware/focus';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 /*
 	The input's `onfocus()` event handler is assigned to a method passed in
@@ -632,7 +632,7 @@ export default factory(function FocusableWidget({ middleware: { focus, icache } 
 **API:**
 
 ```ts
-import validity from '@dojo/framework/core/middleware/validity';
+import validity from '@dojo-ng/framework/core/middleware/validity';
 ```
 
 -   `validity.get(key: string, value: string)` - 返回由节点的 `key` 属性确定的 DOM 元素的有效性状态。如果当前部件中不存在指定的 DOM 元素，则返回 `{ valid: undefined, message: '' }`；否则返回一个 `ValidityState` 对象。
@@ -653,7 +653,7 @@ import validity from '@dojo/framework/core/middleware/validity';
 **API:**
 
 ```ts
-import injector from '@dojo/framework/core/middleware/injector';
+import injector from '@dojo-ng/framework/core/middleware/injector';
 ```
 
 -   `injector.subscribe(label: RegistryLabel, callback: Function = invalidator)`
@@ -670,7 +670,7 @@ import injector from '@dojo/framework/core/middleware/injector';
 **API:**
 
 ```ts
-import block from '@dojo/framework/core/middleware/block';
+import block from '@dojo-ng/framework/core/middleware/block';
 ```
 
 -   `block<T extends (...args: any[]) => any>(module: T)`
@@ -678,7 +678,7 @@ import block from '@dojo/framework/core/middleware/block';
 
 # 核心渲染中间件
 
-`@dojo/framework/core/vdom` 模块中包含基础中间件，大多数 Dojo 应用程序都会用到。这些主要用于构建其他自定义中间件（框架提供的[附加中间件](/learn/middleware/可用的中间件)就是由他们构成的），但在一般的部件开发中也偶尔会用到。
+`@dojo-ng/framework/core/vdom` 模块中包含基础中间件，大多数 Dojo 应用程序都会用到。这些主要用于构建其他自定义中间件（框架提供的[附加中间件](/learn/middleware/可用的中间件)就是由他们构成的），但在一般的部件开发中也偶尔会用到。
 
 ## `invalidator`
 
@@ -687,7 +687,7 @@ import block from '@dojo/framework/core/middleware/block';
 **API:**
 
 ```ts
-import { invalidator } from '@dojo/framework/core/vdom';
+import { invalidator } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `invalidator()`
@@ -700,7 +700,7 @@ import { invalidator } from '@dojo/framework/core/vdom';
 **API:**
 
 ```ts
-import { node } from '@dojo/framework/core/vdom';
+import { node } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `node.get(key: string | number): HTMLElement | null`
@@ -719,7 +719,7 @@ import { node } from '@dojo/framework/core/vdom';
 **API:**
 
 ```ts
-import { diffProperty } from '@dojo/framework/core/vdom';
+import { diffProperty } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `diffProperty(propertyName: string, properties: () => WidgetProperties, diff: (current: WidgetProperties, next: WidgetProperties) => void | WidgetProperties[propertyName])`
@@ -730,7 +730,7 @@ import { diffProperty } from '@dojo/framework/core/vdom';
 > src/customMiddleware.tsx
 
 ```tsx
-import { create, diffProperty } from '@dojo/framework/core/vdom';
+import { create, diffProperty } from '@dojo-ng/framework/core/vdom';
 
 const factory = create({ diffProperty }).properties<{ foo?: string }>;
 
@@ -753,7 +753,7 @@ export const customMiddleware = factory(({ properties, middleware: { diffPropert
 **API:**
 
 ```ts
-import { destroy } from '@dojo/framework/core/vdom';
+import { destroy } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `destroy(destroyFunction: () => void)`
@@ -768,7 +768,7 @@ import { destroy } from '@dojo/framework/core/vdom';
 **API:**
 
 ```ts
-import { getRegistry } from '@dojo/framework/core/vdom';
+import { getRegistry } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `getRegistry(): RegistryHandler | null`
@@ -781,7 +781,7 @@ import { getRegistry } from '@dojo/framework/core/vdom';
 **API:**
 
 ```ts
-import { defer } from '@dojo/framework/core/vdom';
+import { defer } from '@dojo-ng/framework/core/vdom';
 ```
 
 -   `defer.pause()`

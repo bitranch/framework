@@ -6,7 +6,7 @@ Dojo's Routing package provides a first class declarative routing solution for w
 | ---------------------------------- | ---------------------------------------------------------------------------------------------- |
 | **Multiple History Managers**      | Routing comes with a collection of history managers depending on the needs of your application |
 | **Out-of-the-box Routing Widgets** | There are a selection of out the box routing widgets, such as `Link` and `ActiveLink`          |
-| **Automatic Code Splitting**       | Combined with `@dojo/cli-build-app`, top level routes are automatically code split             |
+| **Automatic Code Splitting**       | Combined with `@dojo-ng/cli-build-app`, top level routes are automatically code split             |
 
 ## Basic usage
 
@@ -41,9 +41,9 @@ export default [
 > src/main.tsx
 
 ```tsx
-import renderer, { tsx } from '@dojo/framework/core/vdom';
-import Registry from '@dojo/framework/core/Registry';
-import { registerRouterInjector } from '@dojo/framework/routing/RouterInjector';
+import renderer, { tsx } from '@dojo-ng/framework/core/vdom';
+import Registry from '@dojo-ng/framework/core/Registry';
+import { registerRouterInjector } from '@dojo-ng/framework/routing/RouterInjector';
 
 import routes from './routes';
 import App from './App';
@@ -61,8 +61,8 @@ r.mount({ registry });
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 
@@ -80,8 +80,8 @@ export default factory(function App() {
 or using outlets and the `Outlet` widget, check out the [`Outlet` documentation](/learn/routing/outlets) for more information:
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Outlet from '@dojo/framework/routing/Outlet';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Outlet from '@dojo-ng/framework/routing/Outlet';
 
 const factory = create();
 
@@ -124,8 +124,8 @@ The parameter values are injected into the matching `Route`'s `renderer` propert
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 
@@ -155,8 +155,8 @@ export default [
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 
@@ -259,8 +259,8 @@ All segments after and including the matched `*` will be injected into the match
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 const factory = create();
 
@@ -292,8 +292,8 @@ In addition to the `Link` specific properties, all the standard `VNodeProperties
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { Link } from '@dojo/framework/routing/Link';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { Link } from '@dojo-ng/framework/routing/Link';
 
 const factory = create();
 
@@ -315,8 +315,8 @@ ActiveLink Properties:
 -   `activeClasses: string[]`: An array of classes to apply when the `Link`'s route is matched.
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { ActiveLink } from '@dojo/framework/routing/ActiveLink';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { ActiveLink } from '@dojo-ng/framework/routing/ActiveLink';
 
 const factory = create();
 
@@ -333,7 +333,7 @@ export default factory(function App() {
 
 ### Code splitting by route
 
-When using `@dojo/cli-build-app`, Dojo supports automatic code splitting by default for all top level routes. This means that all widgets referenced within the `Route`s `renderer` will include a specific bundle for the route that will be loaded lazily when a user accesses the route.
+When using `@dojo-ng/cli-build-app`, Dojo supports automatic code splitting by default for all top level routes. This means that all widgets referenced within the `Route`s `renderer` will include a specific bundle for the route that will be loaded lazily when a user accesses the route.
 
 To take advantage of the code splitting there are 4 rules:
 
@@ -381,8 +381,8 @@ With the routing configuration above the following example will generate 4 separ
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Route from '@dojo/framework/routing/Route';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Route from '@dojo-ng/framework/routing/Route';
 
 import Home from './Home';
 import About from './About';

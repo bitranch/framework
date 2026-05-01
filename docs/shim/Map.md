@@ -7,7 +7,7 @@ An implementation analogous to the Map specification in ES2015, with the excepti
 ### Empty Map
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map();
 ```
@@ -15,7 +15,7 @@ var map = new Map();
 ### With Initial Values
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map([['age', 2], ['height', 1.5]]);
 ```
@@ -23,7 +23,7 @@ var map = new Map([['age', 2], ['height', 1.5]]);
 ## Adding a key/value pair
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map([['age', 2], ['height', 1.5]]);
 
@@ -36,7 +36,7 @@ map.set(key, value);
 ## Getting the amount of key/value pairs
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map([['age', 2], ['height', 1.5]]);
 
@@ -46,7 +46,7 @@ map.size() === 2; // true
 ## Clearing the key/value pairs
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map([['age', 2], ['height', 1.5]]);
 
@@ -58,7 +58,7 @@ map.size() === 0; // true
 ## Deleting a pair
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map([['age', 2], ['height', 1.5]]);
 
@@ -72,7 +72,7 @@ map.size() === 1; // true
 ## Loop over the key/value pairs
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map([
 	['age', 2],
@@ -87,7 +87,7 @@ map.forEach((value, key, map) -> {
 ## Retrieving a value
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map([['age', 2], ['height', 1.5]]);
 
@@ -99,7 +99,7 @@ map.get(key) === 2; // true
 ## Determine whether the map has a key
 
 ```ts
-import { Map } from '@dojo/framework/shim/Map';
+import { Map } from '@dojo-ng/framework/shim/Map';
 
 var map = new Map([['age', 2], ['height', 1.5]]);
 

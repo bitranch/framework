@@ -13,7 +13,7 @@ Dojo Resources is designed to provide a consistent pattern to make widgets "reso
 
 ## Basic Usage
 
-In order to work with Dojo resources, widgets need to use the `resource` middleware created with the `createResourceMiddleware` factory from `@dojo/framework/middleware/resources`. There are two types of "resource-aware" widgets: widgets that expose a `resource` on their property API and widgets that need to use a resource internally. The same factory is used to create both types of middleware, but the main difference is for widgets that require resources to be passed via properties, a resource type is needed on creation.
+In order to work with Dojo resources, widgets need to use the `resource` middleware created with the `createResourceMiddleware` factory from `@dojo-ng/framework/middleware/resources`. There are two types of "resource-aware" widgets: widgets that expose a `resource` on their property API and widgets that need to use a resource internally. The same factory is used to create both types of middleware, but the main difference is for widgets that require resources to be passed via properties, a resource type is needed on creation.
 
 ```tsx
 interface ResourceData {
@@ -29,7 +29,7 @@ const resource = createResourceMiddleware<ResourceData>();
 const resource = createResourceMiddleware();
 ```
 
-Using the `resource` middleware enables working with resource templates in your widget. Resources templates are created using the `createResourceTemplate` factory from `@dojo/framework/middleware/resources`. If a custom template is not passed to the `createResourceTemplate` factory the default resources template will be used.
+Using the `resource` middleware enables working with resource templates in your widget. Resources templates are created using the `createResourceTemplate` factory from `@dojo-ng/framework/middleware/resources`. If a custom template is not passed to the `createResourceTemplate` factory the default resources template will be used.
 
 To create a default template requires a generic to define the type of the resource data and the `idKey` of the resource data, this means the property that resources will treat as the unique id of the data.
 
@@ -53,8 +53,8 @@ For the basic usage scenario to passing a template does not require importing an
 > App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceTemplate } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceTemplate } from '@dojo-ng/framework/core/middleware/resources';
 import ResourceAwareWidget from './ResourceAwareWidget';
 
 interface ResourceData {
@@ -81,7 +81,7 @@ Dojo resources can be configured for a user-defined data source, such as a RESTf
 > userResourceTemplate.tsx
 
 ```tsx
-import { createResourceTemplate } from '@dojo/framework/core/middleware/resources';
+import { createResourceTemplate } from '@dojo-ng/framework/core/middleware/resources';
 
 interface RemoteResourceData {
 	id: string;
@@ -105,7 +105,7 @@ export default createResourceTemplate<RemoteResourceData>({
 
 ## Accessing data within a widget
 
-A "resource aware" widget needs to use the `resource` middleware which provides an API to work with the resource template. The `resource` middleware needs to be created using the `createResourceMiddleware` factory from `@dojo/framework/core/middleware/resources`, passing an interface that defines the expected `resource` data structure for the widget.
+A "resource aware" widget needs to use the `resource` middleware which provides an API to work with the resource template. The `resource` middleware needs to be created using the `createResourceMiddleware` factory from `@dojo-ng/framework/core/middleware/resources`, passing an interface that defines the expected `resource` data structure for the widget.
 
 Accessing data in the widget is performed using the `get` function from the return from by passing the template to the `resource.template` factory. The `get` function requires the standard options, `offset`, `size` and `query`. Dojo resources provides a standard mechanism, `createOptions` from the resource middleware, for creating and managing options, including ensuring that widgets are invalidated when "shared" options are updated. The `createOptions` factory accepts a function that is called when the options are updated allow the owner of the options to control the changes, with the current and next options are passed to the setter.
 
@@ -143,8 +143,8 @@ If the `read` function on the resource template is asynchronous the result could
 > ResourceAwareWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { createResourceMiddleware } from '@dojo/framework/core/middleware/resources';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { createResourceMiddleware } from '@dojo-ng/framework/core/middleware/resources';
 
 interface ResourceData {
 	value: string;

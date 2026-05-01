@@ -5,9 +5,9 @@
 In modern browsers a `state` object is passed as part of the `CommandRequest`. Any modification to this `state` object gets translated to the appropriate patch operations and applied against the store.
 
 ```ts
-import { createCommandFactory } from '@dojo/framework/stores/process';
+import { createCommandFactory } from '@dojo-ng/framework/stores/process';
 import { State } from './interfaces';
-import { remove, replace } from '@dojo/framework/stores/state/operations';
+import { remove, replace } from '@dojo-ng/framework/stores/state/operations';
 
 const createCommand = createCommandFactory<State>();
 
@@ -308,9 +308,9 @@ Dojo Stores provide an implementation of the MutableState interface that leverag
 
 ```ts
 import State from './interfaces';
-import Store from '@dojo/framework/stores/Store';
-import Registry from '@dojo/framework/widget-core/Registry';
-import ImmutableState from '@dojo/framework/stores/state/ImmutableState';
+import Store from '@dojo-ng/framework/stores/Store';
+import Registry from '@dojo-ng/framework/widget-core/Registry';
+import ImmutableState from '@dojo-ng/framework/stores/state/ImmutableState';
 
 const registry = new Registry();
 const customStore = new ImmutableState<State>();
@@ -340,8 +340,8 @@ The `load` function hydrates a store from `LocalStorage`
 To hydrate state:
 
 ```ts
-import { load } from '@dojo/framework/stores/middleware/localStorage';
-import { Store } from '@dojo/framework/stores/Store';
+import { load } from '@dojo-ng/framework/stores/middleware/localStorage';
+import { Store } from '@dojo-ng/framework/stores/Store';
 
 const store = new Store();
 load('my-process', store);
@@ -356,8 +356,8 @@ Dojo Stores use operations to make changes to the underlying state of an applica
 To perform a deep `add` in an uninitialized store:
 
 ```ts
-import Store from '@dojo/framework/stores/Store';
-import { add } from '@dojo/framework/stores/state/operations';
+import Store from '@dojo-ng/framework/stores/Store';
+import { add } from '@dojo-ng/framework/stores/state/operations';
 
 const store = new Store<State>();
 const { at, path, apply } = store;
@@ -388,8 +388,8 @@ When an explicit state is required, that information can get asserted by using a
 This example ensures that `user` always gets added to the end of the list as the last element by using a `test` operation to ensure initialization:
 
 ```ts
-import Store from '@dojo/framework/stores/Store';
-import { test } from '@dojo/framework/stores/state/operations';
+import Store from '@dojo-ng/framework/stores/Store';
+import { test } from '@dojo-ng/framework/stores/state/operations';
 
 const store = new Store<State>();
 const { at, path, apply } = store;
@@ -400,8 +400,8 @@ apply([test(at(path('users', 'list', 'length'), 0))]);
 This example ensures that `user` is always added to the end of the list as the last element by programmatic introspection:
 
 ```ts
-import Store from '@dojo/framework/stores/Store';
-import { add, test } from '@dojo/framework/stores/state/operations';
+import Store from '@dojo-ng/framework/stores/Store';
+import { add, test } from '@dojo-ng/framework/stores/state/operations';
 
 const store = new Store<State>();
 const { get, at, path, apply } = store;
@@ -414,4 +414,4 @@ apply([
 ]);
 ```
 
-Access to state root is not permitted and will throw an error, for example when trying to perform `get(path('/'))`. This restriction also applies to operations; it is not possible to create an operation that will update the state root. Best practices with `@dojo/framework/stores` encourage accessing the smallest necessary part of the store.
+Access to state root is not permitted and will throw an error, for example when trying to perform `get(path('/'))`. This restriction also applies to operations; it is not possible to create an operation that will update the state root. Best practices with `@dojo-ng/framework/stores` encourage accessing the smallest necessary part of the store.

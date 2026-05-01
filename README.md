@@ -1,4 +1,4 @@
-# @dojo/framework
+# @dojo-ng/framework
 
 [![Build Status](https://travis-ci.org/dojo/framework.svg?branch=master)](https://travis-ci.org/dojo/framework)
 [![codecov](https://codecov.io/gh/dojo/framework/branch/master/graph/badge.svg)](https://codecov.io/gh/dojo/framework)
@@ -9,7 +9,7 @@ Dojo is a progressive framework for modern web applications built with TypeScrip
 
 Visit us at [dojo.io](https://dojo.io/) for documentation, tutorials, cookbooks, and other materials. This repository contains detailed information on the structure of Dojo, while `dojo.io` is focused on getting started with and learning Dojo.
 
-## Sub-packages within `@dojo/framework`
+## Sub-packages within `@dojo-ng/framework`
 
 There are seven sub-packages that form the framework for building a Dojo application:
 

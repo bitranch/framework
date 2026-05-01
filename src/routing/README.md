@@ -34,7 +34,7 @@ Application routes are registered using a `RouteConfig`, which defines a route's
 Example routing configuration:
 
 ```ts
-import { RouteConfig } from '@dojo/framework/routing/interfaces';
+import { RouteConfig } from '@dojo-ng/framework/routing/interfaces';
 
 const config: RouteConfig[] = [
 	{
@@ -119,16 +119,16 @@ const router = new Router(config);
 The router will automatically be registered with a `HashHistory` history manager. This can be overridden by passing a different history manager as the second parameter.
 
 ```ts
-import { MemoryHistory } from '@dojo/framework/routing/MemoryHistory';
+import { MemoryHistory } from '@dojo-ng/framework/routing/MemoryHistory';
 
 const router = new Router(config, { HistoryManager: MemoryHistory });
 ```
 
-Once the router has been created with the application route configuration, it needs to be made available to all the components within your application. This is done using a `Registry` from `@dojo/framework/core/Registry` and defining an injector that wires the `invalidator` to the router's `nav` event and returns the `router` instance. This injector is defined using a key, the default key for routing is `router`.
+Once the router has been created with the application route configuration, it needs to be made available to all the components within your application. This is done using a `Registry` from `@dojo-ng/framework/core/Registry` and defining an injector that wires the `invalidator` to the router's `nav` event and returns the `router` instance. This injector is defined using a key, the default key for routing is `router`.
 
 ```ts
-import { Registry } from '@dojo/framework/core/Registry';
-import { Injector } from '@dojo/framework/core/Injector';
+import { Registry } from '@dojo-ng/framework/core/Registry';
+import { Injector } from '@dojo-ng/framework/core/Injector';
 
 const registry = new Registry();
 
@@ -158,11 +158,11 @@ const router = new Router(config, { HistoryManager: MemoryHistory });
 
 ##### Hash History
 
-The hash-based manager uses the fragment identifier to store navigation state and is the default manager used within `@dojo/framework/routing`.
+The hash-based manager uses the fragment identifier to store navigation state and is the default manager used within `@dojo-ng/framework/routing`.
 
 ```ts
-import { Router } from '@dojo/framework/routing/Router';
-import { HashHistory } from '@dojo/framework/routing/history/HashHistory';
+import { Router } from '@dojo-ng/framework/routing/Router';
+import { HashHistory } from '@dojo-ng/framework/routing/history/HashHistory';
 
 const router = new Router(config, { HistoryManager: HashHistory });
 ```
@@ -178,8 +178,8 @@ The state history uses the browser's history API, `pushState()` and `replaceStat
 The `MemoryHistory` does not rely on any browser API but keeps its own internal path state. It should not be used in production applications but is useful for testing routing.
 
 ```ts
-import { Router } from '@dojo/framework/routing/Router';
-import { MemoryHistory } from '@dojo/framework/routing/history/MemoryHistory';
+import { Router } from '@dojo-ng/framework/routing/Router';
+import { MemoryHistory } from '@dojo-ng/framework/routing/history/MemoryHistory';
 
 const router = new Router(config, { HistoryManager: MemoryHistory });
 ```
@@ -203,8 +203,8 @@ router.on('outlet', ({ outlet, action }) => {
 The `RouterInjector` module exports a helper function, `registerRouterInjector`, that combines the instantiation of a `Router` instance, registering route configuration and defining injector in the provided registry. The `router` instance is returned.
 
 ```ts
-import { Registry } from '@dojo/framework/core/Registry';
-import { registerRouterInjector } from '@dojo/framework/routing/RoutingInjector';
+import { Registry } from '@dojo-ng/framework/core/Registry';
+import { registerRouterInjector } from '@dojo-ng/framework/routing/RoutingInjector';
 
 const registry = new Registry();
 const router = registerRouterInjector(config, registry);
@@ -213,8 +213,8 @@ const router = registerRouterInjector(config, registry);
 The defaults can be overridden using `RouterInjectorOptions`:
 
 ```ts
-import { Registry } from '@dojo/framework/core/Registry';
-import { registerRouterInjector } from '@dojo/framework/routing/RoutingInjector';
+import { Registry } from '@dojo-ng/framework/core/Registry';
+import { registerRouterInjector } from '@dojo-ng/framework/routing/RoutingInjector';
 import { MemoryHistory } from './history/MemoryHistory';
 
 const registry = new Registry();
@@ -317,7 +317,7 @@ The `Link` component is a wrapper around an `a` DOM element that enables consume
 If the generated link requires specific path or query parameters that are not in the route, they can be passed via the `params` property.
 
 ```ts
-import { Link } from '@dojo/framework/routing/Link';
+import { Link } from '@dojo-ng/framework/routing/Link';
 
 render() {
 	return v('div', [
@@ -327,14 +327,14 @@ render() {
 }
 ```
 
-All the standard `VNodeProperties` are available for the `Link` component as they would be creating an `a` DOM Element using `v()` with `@dojo/framework/core`.
+All the standard `VNodeProperties` are available for the `Link` component as they would be creating an `a` DOM Element using `v()` with `@dojo-ng/framework/core`.
 
 ### ActiveLink
 
 The `ActiveLink` component is a wrapper around the `Link` component that conditionally sets classes on the `a` node if the link is currently active
 
 ```ts
-import { ActiveLink } from '@dojo/framework/routing/ActiveLink';
+import { ActiveLink } from '@dojo-ng/framework/routing/ActiveLink';
 
 render() {
 	return v('div', [

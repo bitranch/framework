@@ -7,7 +7,7 @@ commit 3e723153b8504dd5284116eb80ec0a17e029bd9a
 
 Dojo 是基于 HTML 的技术，使用 CSS 为框架中的元素和用它开发的应用程序设置样式。
 
-Dojo 鼓励将结构样式封装在各部件中，以便最大限度复用；同时将外观主题设置到应用程序所有部件上。用户为他们的应用程序设置样式和主题时，这种模式提供了固定的套路，即使混合使用 [Dojo 的 `@dojo/widgets` 库](https://github.com/dojo/widgets)中的部件、由第三方提供的部件或者为特定应用程序开发的内部使用的部件时也是如此。
+Dojo 鼓励将结构样式封装在各部件中，以便最大限度复用；同时将外观主题设置到应用程序所有部件上。用户为他们的应用程序设置样式和主题时，这种模式提供了固定的套路，即使混合使用 [Dojo 的 `@dojo-ng/widgets` 库](https://github.com/dojo/widgets)中的部件、由第三方提供的部件或者为特定应用程序开发的内部使用的部件时也是如此。
 
 | 功能                         | 描述                                                                                                                                                                                                                                                                         |
 | ---------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -49,7 +49,7 @@ Dojo 鼓励将结构样式封装在各部件中，以便最大限度复用；同
 > src/widgets/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 import * as css from '../styles/MyWidget.m.css';
 
@@ -68,8 +68,8 @@ export default factory(function MyWidget() {
 > src/widgets/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import * as css from '../styles/MyWidget.m.css';
 
@@ -89,8 +89,8 @@ export default factory(function MyWidget({ middleware: { theme } }) {
 > src/widgets/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import * as css from '../styles/MyWidget.m.css';
 
@@ -175,8 +175,8 @@ export default {
 > src/App.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import myTheme from '../themes/MyTheme/theme';
 
@@ -193,15 +193,15 @@ export default factory(function App({ middleware: { theme }}) {
 });
 ```
 
-**注意：** 当同时使用基于函数的部件和基于类的部件时，应该使用应用程序注册器来注册主题。当使用基于类的部件时（如 `@dojo/widgets`） 也是如此。详情参考[基于类部件的主题]()。
+**注意：** 当同时使用基于函数的部件和基于类的部件时，应该使用应用程序注册器来注册主题。当使用基于类的部件时（如 `@dojo-ng/widgets`） 也是如此。详情参考[基于类部件的主题]()。
 
 ### 设置主题变体
 
 如果将主题与 `variants` 一起使用，则自动选用 `default` 变体。使用 `theme.set` 函数来设置不同的变体——传入的变体名必须是主题导出的 `variants` 的 key 值。
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import myTheme from '../themes/MyTheme/theme';
 
@@ -225,8 +225,8 @@ export default factory(function App({ middleware: { theme }}) {
 > src/widgets/ThemeSwitcher.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import theme from '@dojo/framework/core/middleware/theme';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import theme from '@dojo-ng/framework/core/middleware/theme';
 
 import myTheme from '../themes/MyTheme/theme';
 import alternativeTheme from '../themes/MyAlternativeTheme/theme';

@@ -14,8 +14,8 @@ Dojo 提供了一个简单且类型安全的测试渲染器(test renderer)，以
 > src/MyWidget.spec.tsx
 
 ```tsx
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -36,12 +36,12 @@ r.expect(baseAssertion);
 
 为了让测试渲染器和断言能在期望和实际的节点结构中标识节点，需要使用指定的包装节点。在期望的断言结构中，可使用包装的节点代替实际节点，从而保持所有正确的属性和子类型。
 
-使用 `@dojo/framework/testing/renderer` 中的 `wrap` 函数来创建一个包装的测试节点：
+使用 `@dojo-ng/framework/testing/renderer` 中的 `wrap` 函数来创建一个包装的测试节点：
 
 > src/MyWidget.spec.tsx
 
 ```tsx
-import { wrap } from '@dojo/framework/testing/renderer';
+import { wrap } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -65,7 +65,7 @@ const WrappedDiv = wrap('div');
 > src/Profile.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 import * as css from './Profile.m.css';
 
@@ -83,14 +83,14 @@ const Profile = factory(function Profile({ properties }) {
 export default Profile;
 ```
 
-使用 `@dojo/framework/testing/renderer#assertion` 创建一个断言：
+使用 `@dojo-ng/framework/testing/renderer#assertion` 创建一个断言：
 
 > src/Profile.spec.tsx
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import Profile from '../../../src/widgets/Profile';
 import * as css from '../../../src/widgets/Profile.m.css';
@@ -119,8 +119,8 @@ describe('Profile', () => {
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import Profile from '../../../src/widgets/Profile';
 import * as css from '../../../src/widgets/Profile.m.css';
@@ -267,9 +267,9 @@ R 返回一个新节点，将传入的子节点插入到已存在子节点之后
 > src/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
-import { RenderResult } from '@dojo/framework/core/interfaces';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
+import { RenderResult } from '@dojo-ng/framework/core/interfaces';
 
 import MyWidgetWithChildren from './MyWidgetWithChildren';
 
@@ -298,8 +298,8 @@ export const MyWidget = factory(function MyWidget({ properties, middleware: { ic
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 import * as sinon from 'sinon';
 
 import MyWidget from './MyWidget';
@@ -358,8 +358,8 @@ describe('MyWidget', () => {
 > src/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import { RenderResult } from '@dojo/framework/core/interfaces';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import { RenderResult } from '@dojo-ng/framework/core/interfaces';
 
 import MyWidgetWithChildren from './MyWidgetWithChildren';
 
@@ -379,8 +379,8 @@ export const MyWidget = factory(function MyWidget() {
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidgetWithChildren from './MyWidgetWithChildren';
 import MyWidget from './MyWidget';
@@ -410,14 +410,14 @@ describe('MyWidget', () => {
 
 ## 自定义属性比较器
 
-在某些情况下，测试期间无法得知属性的确切值，所以需要使用自定义比较器。自定义比较器用于包装的部件，结合 `@dojo/framework/testing/renderer#compare` 函数可替换部件或节点属性。
+在某些情况下，测试期间无法得知属性的确切值，所以需要使用自定义比较器。自定义比较器用于包装的部件，结合 `@dojo-ng/framework/testing/renderer#compare` 函数可替换部件或节点属性。
 
 ```tsx
 compare(comparator: (actual) => boolean)
 ```
 
 ```tsx
-import { assertion, wrap, compare } from '@dojo/framework/testing/renderer';
+import { assertion, wrap, compare } from '@dojo-ng/framework/testing/renderer';
 
 // create a wrapped node the `h1`
 const WrappedHeader = wrap('h1');
@@ -434,8 +434,8 @@ const baseAssertion = assertion(() => (
 当处理渲染多个项的部件时，例如一个列表，可能需要让测试渲染器忽略输出中的一些内容。比如只断言第一个和最后一项是有效的，然后忽略这两项中间的所有项的详细信息，只是简单断言期望的类型。要让测试渲染器做到这一点，需使用 `ignore` 函数让测试渲染器忽略节点，只检查节点类型是否相同即可，即匹配标签名或部件的工厂或构造器。
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, ignore } from '@dojo/framework/testing/renderer';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, ignore } from '@dojo-ng/framework/testing/renderer';
 
 const factory = create().properties<{ items: string[] }>();
 
@@ -470,7 +470,7 @@ r.expect(listAssertion);
 ```tsx
 import myMiddleware from './myMiddleware';
 import myMockMiddleware from './myMockMiddleware';
-import renderer from '@dojo/framework/testing/renderer';
+import renderer from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -501,8 +501,8 @@ describe('MyWidget', () => {
 > src/widgets/Action.tsx
 
 ```ts
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Button from '@dojo/widgets/button';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Button from '@dojo-ng/widgets/button';
 
 import * as css from './Action.m.css';
 
@@ -527,13 +527,13 @@ export default Action;
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import Action from '../../../src/widgets/Action';
 import * as css from '../../../src/widgets/Action.m.css';
 
-import Button from '@dojo/widgets/button';
+import Button from '@dojo-ng/widgets/button';
 
 import { stub } from 'sinon';
 import { assert } from 'chai';
@@ -568,15 +568,15 @@ describe('Action', () => {
 
 ### Mock `breakpoint` 中间件
 
-使用 `@dojo/framework/testing/mocks/middleware/breakpoint` 中的 `createBreakpointMock` 可手动控制 resize 事件来触发断点测试。
+使用 `@dojo-ng/framework/testing/mocks/middleware/breakpoint` 中的 `createBreakpointMock` 可手动控制 resize 事件来触发断点测试。
 
 考虑下面的部件，当激活 `LG` 断点时，它会显示附加 `h2`：
 
 > src/Breakpoint.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import breakpoint from '@dojo/framework/core/middleware/breakpoint';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import breakpoint from '@dojo-ng/framework/core/middleware/breakpoint';
 
 const factory = create({ breakpoint });
 
@@ -600,10 +600,10 @@ export default factory(function Breakpoint({ middleware: { breakpoint } }) {
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
-import breakpoint from '@dojo/framework/core/middleware/breakpoint';
-import createBreakpointMock from '@dojo/framework/testing/mocks/middleware/breakpoint';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
+import breakpoint from '@dojo-ng/framework/core/middleware/breakpoint';
+import createBreakpointMock from '@dojo-ng/framework/testing/mocks/middleware/breakpoint';
 import Breakpoint from '../../src/Breakpoint';
 
 describe('Breakpoint', () => {
@@ -630,15 +630,15 @@ describe('Breakpoint', () => {
 
 ### Mock `focus` 中间件
 
-使用 `@dojo/framework/testing/middleware/focus` 中的 `createFocusMock` 可手动控制 `focus` 中间件何时报告指定 key 的节点获取了焦点。
+使用 `@dojo-ng/framework/testing/middleware/focus` 中的 `createFocusMock` 可手动控制 `focus` 中间件何时报告指定 key 的节点获取了焦点。
 
 考虑下面的部件：
 
 > src/FormWidget.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import focus, { FocusProperties } from '@dojo/framework/core/middleware/focus';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import focus, { FocusProperties } from '@dojo-ng/framework/core/middleware/focus';
 import * as css from './FormWidget.m.css';
 
 export interface FormWidgetProperties extends FocusProperties {}
@@ -660,10 +660,10 @@ export const FormWidget = factory(function FormWidget({ middleware: { focus } })
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
-import focus from '@dojo/framework/core/middleware/focus';
-import createFocusMock from '@dojo/framework/testing/mocks/middleware/focus';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
+import focus from '@dojo-ng/framework/core/middleware/focus';
+import createFocusMock from '@dojo-ng/framework/testing/mocks/middleware/focus';
 import * as css from './FormWidget.m.css';
 
 describe('Focus', () => {
@@ -690,16 +690,16 @@ describe('Focus', () => {
 
 ### Mock `iCache` 中间件
 
-使用 `@dojo/framework/testing/mocks/middleware/icache` 中的 `createICacheMiddleware`，能让测试代码直接访问缓存中的项，而此 mock 为被测的小部件提供了足够的 icache 功能。当使用 `icache` 异步获取数据时特别有用。直接访问缓存让测试可以 `await` 部件，就如 `await` promise 一样。
+使用 `@dojo-ng/framework/testing/mocks/middleware/icache` 中的 `createICacheMiddleware`，能让测试代码直接访问缓存中的项，而此 mock 为被测的小部件提供了足够的 icache 功能。当使用 `icache` 异步获取数据时特别有用。直接访问缓存让测试可以 `await` 部件，就如 `await` promise 一样。
 
 考虑以下部件，从一个 API 获取数据：
 
 > src/MyWidget.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import { icache } from '@dojo/framework/core/middleware/icache';
-import fetch from '@dojo/framework/shim/fetch';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import { icache } from '@dojo-ng/framework/core/middleware/icache';
+import fetch from '@dojo-ng/framework/shim/fetch';
 
 const factory = create({ icache });
 
@@ -719,12 +719,12 @@ export default factory(function MyWidget({ middleware: { icache } }) {
 
 ```tsx
 const { describe, it, afterEach } = intern.getInterface('bdd');
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
-import { tsx } from '@dojo/framework/core/vdom';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 import * as sinon from 'sinon';
-import global from '@dojo/framework/shim/global';
-import icache from '@dojo/framework/core/middleware/icache';
-import createICacheMock from '@dojo/framework/testing/mocks/middleware/icache';
+import global from '@dojo-ng/framework/shim/global';
+import icache from '@dojo-ng/framework/core/middleware/icache';
+import createICacheMock from '@dojo-ng/framework/testing/mocks/middleware/icache';
 import MyWidget from '../../src/MyWidget';
 
 describe('MyWidget', () => {
@@ -751,13 +751,13 @@ describe('MyWidget', () => {
 
 ### Mock `intersection` 中间件
 
-使用 `@dojo/framework/testing/mocks/middleware/intersection` 中的 `createIntersectionMock` 可 mock 一个 intersection 中间件。要设置从 intersection mock 中返回的期望值，需要调用创建的 mock intersection 中间件，并传入 `key` 和期望的 intersection 详情。
+使用 `@dojo-ng/framework/testing/mocks/middleware/intersection` 中的 `createIntersectionMock` 可 mock 一个 intersection 中间件。要设置从 intersection mock 中返回的期望值，需要调用创建的 mock intersection 中间件，并传入 `key` 和期望的 intersection 详情。
 
 考虑以下部件：
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import intersection from '@dojo/framework/core/middleware/intersection';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import intersection from '@dojo-ng/framework/core/middleware/intersection';
 
 const factory = create({ intersection });
 
@@ -770,10 +770,10 @@ const App = factory(({ middleware: { intersection } }) => {
 使用 mock 的 `intersection` 中间件：
 
 ```tsx
-import { tsx } from '@dojo/framework/core/vdom';
-import createIntersectionMock from '@dojo/framework/testing/mocks/middleware/intersection';
-import intersection from '@dojo/framework/core/middleware/intersection';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import createIntersectionMock from '@dojo-ng/framework/testing/mocks/middleware/intersection';
+import intersection from '@dojo-ng/framework/core/middleware/intersection';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -803,10 +803,10 @@ describe('MyWidget', () => {
 
 ### Mock `node` 中间件
 
-使用 `@dojo/framework/testing/mocks/middleware/node` 中的 `createNodeMock` 可 mock 一个 node 中间件。要设置从 node mock 中返回的期望值，需要调用创建的 mock node 中间件，并传入 `key` 和期望的 DOM node。
+使用 `@dojo-ng/framework/testing/mocks/middleware/node` 中的 `createNodeMock` 可 mock 一个 node 中间件。要设置从 node mock 中返回的期望值，需要调用创建的 mock node 中间件，并传入 `key` 和期望的 DOM node。
 
 ```ts
-import createNodeMock from '@dojo/framework/testing/mocks/middleware/node';
+import createNodeMock from '@dojo-ng/framework/testing/mocks/middleware/node';
 
 // 创建一个 mock node 的中间件
 const mockNode = createNodeMock();
@@ -820,7 +820,7 @@ mockNode('key', domNode);
 
 ### Mock `resize` 中间件
 
-使用 `@dojo/framework/testing/mocks/middleware/resize` 中的 `createResizeMock` 可 mock 一个 resize 中间件。要设置从 resize mock 中返回的期望值，需要调用创建的 mock resize 中间件，并传入 `key` 和期望的容纳内容的矩形区域。
+使用 `@dojo-ng/framework/testing/mocks/middleware/resize` 中的 `createResizeMock` 可 mock 一个 resize 中间件。要设置从 resize mock 中返回的期望值，需要调用创建的 mock resize 中间件，并传入 `key` 和期望的容纳内容的矩形区域。
 
 ```ts
 const mockResize = createResizeMock();
@@ -830,8 +830,8 @@ mockResize('key', { width: 100 });
 考虑以下部件：
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom'
-import resize from '@dojo/framework/core/middleware/resize'
+import { create, tsx } from '@dojo-ng/framework/core/vdom'
+import resize from '@dojo-ng/framework/core/middleware/resize'
 
 const factory = create({ resize });
 
@@ -845,10 +845,10 @@ export const MyWidget = factory(function MyWidget({ middleware }) => {
 使用 mock 的 `resize` 中间件：
 
 ```tsx
-import { tsx } from '@dojo/framework/core/vdom';
-import createResizeMock from '@dojo/framework/testing/mocks/middleware/resize';
-import resize from '@dojo/framework/core/middleware/resize';
-import renderer, { assertion, wrap } from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import createResizeMock from '@dojo-ng/framework/testing/mocks/middleware/resize';
+import resize from '@dojo-ng/framework/core/middleware/resize';
+import renderer, { assertion, wrap } from '@dojo-ng/framework/testing/renderer';
 
 import MyWidget from './MyWidget';
 
@@ -878,7 +878,7 @@ describe('MyWidget', () => {
 
 ### Mock `Store` 中间件
 
-使用 `@dojo/framework/testing/mocks/middleware/store` 中的 `createMockStoreMiddleware` 可 mock 一个强类型的 store 中间件，也支持 mock process。为了 mock 一个 store 的 process，可传入一个由原始 store process 和 stub process 组成的元组。中间件会改为调用 stub，而不是调用原始的 process。如果没有传入 stub，中间件将不会调用所有的 process。
+使用 `@dojo-ng/framework/testing/mocks/middleware/store` 中的 `createMockStoreMiddleware` 可 mock 一个强类型的 store 中间件，也支持 mock process。为了 mock 一个 store 的 process，可传入一个由原始 store process 和 stub process 组成的元组。中间件会改为调用 stub，而不是调用原始的 process。如果没有传入 stub，中间件将不会调用所有的 process。
 
 要修改 mock store 中的值，需要调用 `mockStore`，并传入一个返回一组 store 操作的函数。这将注入 store 的 `path` 函数，以创建指向需要修改的状态的指针。
 
@@ -891,7 +891,7 @@ mockStore((path) => [replace(path('details', { id: 'id' })]);
 > src/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom'
+import { create, tsx } from '@dojo-ng/framework/core/vdom'
 import { myProcess } from './processes';
 import MyState from './interfaces';
 // 应用程序的 store 中间件通过 state 接口来指定类型
@@ -924,9 +924,9 @@ export default factory(function MyWidget({ properties, middleware: store }) {
 > tests/unit/MyWidget.tsx
 
 ```tsx
-import { tsx } from '@dojo/framework/core/vdom'
-import createMockStoreMiddleware from '@dojo/framework/testing/mocks/middleware/store';
-import renderer from '@dojo/framework/testing/renderer';
+import { tsx } from '@dojo-ng/framework/core/vdom'
+import createMockStoreMiddleware from '@dojo-ng/framework/testing/mocks/middleware/store';
+import renderer from '@dojo-ng/framework/testing/renderer';
 
 import { myProcess } from './processes';
 import MyWidget from './MyWidget';
@@ -976,16 +976,16 @@ describe('MyWidget', () => {
 
 ### Mock `validity` 中间件
 
-使用 `@dojo/framework/testing/mocks/middleware/validity` 中的 `createValidityMock` 可 mock 一个 validity 中间件，可以在测试用控制 `get` 方法的返回值。
+使用 `@dojo-ng/framework/testing/mocks/middleware/validity` 中的 `createValidityMock` 可 mock 一个 validity 中间件，可以在测试用控制 `get` 方法的返回值。
 
 考虑以下示例：
 
 > src/FormWidget.tsx
 
 ```tsx
-import { tsx, create } from '@dojo/framework/core/vdom';
-import validity from '@dojo/framework/core/middleware/validity';
-import icache from '@dojo/framework/core/middleware/icache';
+import { tsx, create } from '@dojo-ng/framework/core/vdom';
+import validity from '@dojo-ng/framework/core/middleware/validity';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 import * as css from './FormWidget.m.css';
 
 const factory = create({ validity, icache });
@@ -1009,10 +1009,10 @@ export const FormWidget = factory(function FormWidget({ middleware: { validity, 
 
 ```tsx
 const { describe, it } = intern.getInterface('bdd');
-import { tsx } from '@dojo/framework/core/vdom';
-import renderer, { assertion } from '@dojo/framework/testing/renderer';
-import validity from '@dojo/framework/core/middleware/validity';
-import createValidityMock from '@dojo/framework/testing/mocks/middleware/validity';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import renderer, { assertion } from '@dojo-ng/framework/testing/renderer';
+import validity from '@dojo-ng/framework/core/middleware/validity';
+import createValidityMock from '@dojo-ng/framework/testing/mocks/middleware/validity';
 import * as css from './FormWidget.m.css';
 
 describe('Validity', () => {
@@ -1094,9 +1094,9 @@ export function createMockMiddleware() {
 > src/widgets/Menu.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import Link from '@dojo/framework/routing/ActiveLink';
-import Toolbar from '@dojo/widgets/toolbar';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import Link from '@dojo-ng/framework/routing/ActiveLink';
+import Toolbar from '@dojo-ng/widgets/toolbar';
 
 import * as css from './Menu.m.css';
 

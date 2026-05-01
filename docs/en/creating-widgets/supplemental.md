@@ -22,9 +22,9 @@ At their heart, widgets are simply render functions which return VDOM nodes that
 
 Widgets are typically housed within their own self-named TypeScript modules, with the widget definition as the default export from each module.
 
-The simplest way of representing widgets is based on plain functions, starting from a render function factory definition. Dojo provides a `create()` primitive in the `@dojo/framework/core/vdom` module that allows authors to define their widget render function factories. Named render functions are preferred as they can help with debugging, but this is not a requirement; widgets can also by identified via an exported variable holding their factory definition.
+The simplest way of representing widgets is based on plain functions, starting from a render function factory definition. Dojo provides a `create()` primitive in the `@dojo-ng/framework/core/vdom` module that allows authors to define their widget render function factories. Named render functions are preferred as they can help with debugging, but this is not a requirement; widgets can also by identified via an exported variable holding their factory definition.
 
-Dojo optionally supports class-based widgets for applications that prefer the structure of classes over functions. Such widgets inherit from `WidgetBase`, provided by the `@dojo/framework/core/WidgetBase` module, and are required to implement a `render()` method.
+Dojo optionally supports class-based widgets for applications that prefer the structure of classes over functions. Such widgets inherit from `WidgetBase`, provided by the `@dojo-ng/framework/core/WidgetBase` module, and are required to implement a `render()` method.
 
 The following example shows a trivial yet complete widget within a Dojo application:
 
@@ -33,7 +33,7 @@ The following example shows a trivial yet complete widget within a Dojo applicat
 **Function-based Dojo widget variant:**
 
 ```ts
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 
 const factory = create();
 
@@ -45,7 +45,7 @@ export default factory(function MyWidget() {
 **Class-based Dojo widget variant:**
 
 ```ts
-import WidgetBase from '@dojo/framework/core/WidgetBase';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
 
 export default class MyWidget extends WidgetBase {
 	protected render() {
@@ -96,14 +96,14 @@ For Dojo projects that were not scaffolded in this way, TSX can be enabled with 
 
 ### TSX widget example
 
-Widgets with a `.tsx` file extension can output TSX from their render function by simply importing the `tsx` function from the `@dojo/framework/core/vdom` module:
+Widgets with a `.tsx` file extension can output TSX from their render function by simply importing the `tsx` function from the `@dojo-ng/framework/core/vdom` module:
 
 > src/widgets/MyTsxWidget.tsx
 
 **Function-based variant:**
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 const factory = create();
 
@@ -115,8 +115,8 @@ export default factory(function MyTsxWidget() {
 **Class-based variant:**
 
 ```tsx
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { tsx } from '@dojo/framework/core/vdom';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 
 export default class MyTsxWidget extends WidgetBase {
 	protected render() {
@@ -132,7 +132,7 @@ Widgets that need to return multiple top-level TSX nodes can wrap them in a `<vi
 **Function-based variant:**
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 const factory = create();
 
@@ -159,7 +159,7 @@ Both `VNode`s and `WNode`s are considered subtypes of `DNode`s within Dojo's vir
 
 ### Instantiating VDOM nodes
 
-If TSX output is not desired, widgets can import one or both of the `v()` and `w()` primitives provided by the `@dojo/framework/core/vdom` module. These create `VNode`s and `WNode`s, respectively, and can be used as part of the return value from a [widget's render function](/learn/creating-widgets/widget-fundamentals#basic-widget-structure). Their signatures, in abstract terms, are:
+If TSX output is not desired, widgets can import one or both of the `v()` and `w()` primitives provided by the `@dojo-ng/framework/core/vdom` module. These create `VNode`s and `WNode`s, respectively, and can be used as part of the return value from a [widget's render function](/learn/creating-widgets/widget-fundamentals#basic-widget-structure). Their signatures, in abstract terms, are:
 
 -   `v(tagName | VNode, properties?, children?)`:
 -   `w(Widget | constructor, properties, children?)`
@@ -180,7 +180,7 @@ The following sample widget includes a more typical render function that returns
 **Function-based variant:**
 
 ```ts
-import { create, v } from '@dojo/framework/core/vdom';
+import { create, v } from '@dojo-ng/framework/core/vdom';
 
 const factory = create();
 
@@ -192,8 +192,8 @@ export default factory(function MyWidget() {
 **Class-based variant:**
 
 ```ts
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { v } from '@dojo/framework/core/vdom';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { v } from '@dojo-ng/framework/core/vdom';
 
 export default class MyWidget extends WidgetBase {
 	protected render() {
@@ -211,7 +211,7 @@ Similarly, widgets can compose one another using the `w()` method, and also outp
 **Function-based variant:**
 
 ```ts
-import { create, v, w } from '@dojo/framework/core/vdom';
+import { create, v, w } from '@dojo-ng/framework/core/vdom';
 
 const factory = create();
 
@@ -225,8 +225,8 @@ export default factory(function MyComposingWidget() {
 **Class-based variant:**
 
 ```ts
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { v, w } from '@dojo/framework/core/vdom';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { v, w } from '@dojo-ng/framework/core/vdom';
 
 import MyWidget from './MyWidget';
 
@@ -239,7 +239,7 @@ export default class MyComposingWidget extends WidgetBase {
 
 ## Rendering to the DOM
 
-Applications provide a render factory function to Dojo's `renderer()` primitive, available as the default export from the `@dojo/framework/core/vdom` module. The provided factory defines the root of an application's intended VDOM structural output.
+Applications provide a render factory function to Dojo's `renderer()` primitive, available as the default export from the `@dojo-ng/framework/core/vdom` module. The provided factory defines the root of an application's intended VDOM structural output.
 
 Applications typically call `renderer()` in their main entry point (`main.tsx`/`main.ts`), then mount the returned `Renderer` object to a specific DOM element within the application's HTML container. If no element is specified when mounting an application, `document.body` is used by default.
 
@@ -248,7 +248,7 @@ For example:
 > src/main.tsx
 
 ```tsx
-import renderer, { tsx } from '@dojo/framework/core/vdom';
+import renderer, { tsx } from '@dojo-ng/framework/core/vdom';
 
 import MyComposingWidget from './widgets/MyComposingWidget';
 
@@ -283,7 +283,7 @@ For example, to mount a Dojo application within a specific DOM element other tha
 > src/main.tsx
 
 ```tsx
-import renderer, { tsx } from '@dojo/framework/core/vdom';
+import renderer, { tsx } from '@dojo-ng/framework/core/vdom';
 
 import MyComposingWidget from './widgets/MyComposingWidget';
 
@@ -306,7 +306,7 @@ r.unmount();
 
 ## Adding external DOM nodes into the VDOM
 
-Dojo can wrap external DOM elements, effectively bringing them into the application's VDOM and using them as part of the render output. This is accomplished with the `dom()` utility method from the `@dojo/framework/core/vdom` module. It works similarly to [`v()`](/learn/creating-widgets/rendering-widgets#instantiating-vdom-nodes), but takes an existing DOM node rather than an element tag string as its primary argument. It returns a `VNode` which references the DOM node passed into it, rather than a newly created element when using `v()`.
+Dojo can wrap external DOM elements, effectively bringing them into the application's VDOM and using them as part of the render output. This is accomplished with the `dom()` utility method from the `@dojo-ng/framework/core/vdom` module. It works similarly to [`v()`](/learn/creating-widgets/rendering-widgets#instantiating-vdom-nodes), but takes an existing DOM node rather than an element tag string as its primary argument. It returns a `VNode` which references the DOM node passed into it, rather than a newly created element when using `v()`.
 
 The Dojo application effectively takes ownership of the wrapped DOM node once the `VNode` returned by `dom()` has been added to the application's VDOM. Note that this process only works for nodes external to the Dojo application - either siblings of the element containing the mounted application, or newly-created nodes that are disconnected from the main webpage's DOM. Wrapping a node that is an ancestor or descendant of the application mount target element will not work.
 
@@ -362,7 +362,7 @@ Traditionally the widget's `key` property is used by the Dojo rendering engine t
 Dojo provides a mechanism for widget authors to associate a widget property to the widget's identity by using the `.key()` chained method from the `create()` factory.
 
 ```tsx
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 
 interface MyWidgetProperties {
 	id: string;
@@ -376,8 +376,8 @@ const factory = create()
 Using this factory Dojo will recreate the widget instance if the `id` property changes. This powerful feature provides widget authors assurance their widget will get recreated when the defined property changes, therefore not having to deal with complicated logic to refresh data based on the property.
 
 ```tsx
-import { create } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 interface MyWidgetProperties {
 	id: string;
@@ -456,7 +456,7 @@ Given element ordering, the following 'firstFocus' input will receive focus on t
 **Function-based variant:**
 
 ```tsx
-import { create, tsx, invalidator } from '@dojo/framework/core/vdom';
+import { create, tsx, invalidator } from '@dojo-ng/framework/core/vdom';
 
 const factory = create({ invalidator });
 
@@ -474,8 +474,8 @@ export default factory(function FocusExample({ middleware: { invalidator } }) {
 **Class-based variant:**
 
 ```tsx
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { tsx } from '@dojo/framework/core/vdom';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 
 export default class FocusExample extends WidgetBase {
 	protected render() {
@@ -492,7 +492,7 @@ export default class FocusExample extends WidgetBase {
 
 ### Delegating focus
 
-Function-based widgets can use the [`focus` middleware](/learn/middleware/available-middleware#focus) to provide focus to their children or to accept focus from a parent widget. Class-based widgets can use the `FocusMixin` (from `@dojo/framework/core/mixins/Focus`) to delegate focus in a similar way.
+Function-based widgets can use the [`focus` middleware](/learn/middleware/available-middleware#focus) to provide focus to their children or to accept focus from a parent widget. Class-based widgets can use the `FocusMixin` (from `@dojo-ng/framework/core/mixins/Focus`) to delegate focus in a similar way.
 
 `FocusMixin` adds a `this.shouldFocus()` method to a widget's class, whereas function-based widgets use the `focus.shouldFocus()` middleware method for the same purpose. This method checks if the widget is in a state to perform a focus action and will only return `true` for a single invocation, until the widget's `this.focus()` method has been called again (function-based widgets use the `focus.focus()` middleware equivalent).
 
@@ -505,9 +505,9 @@ The following shows an example of delegating and controlling focus across a clas
 > src/widgets/FocusableWidget.tsx
 
 ```tsx
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { tsx } from '@dojo/framework/core/vdom';
-import Focus from '@dojo/framework/core/mixins/Focus';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import Focus from '@dojo-ng/framework/core/mixins/Focus';
 
 interface FocusInputChildProperties {
 	onFocus: () => void;
@@ -620,8 +620,8 @@ The following example illustrates these patterns:
 **Function-based variant:**
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 const factory = create({ icache });
 
@@ -648,8 +648,8 @@ export default factory(function MyEncapsulatedStateWidget({ middleware: { icache
 **Class-based variant:**
 
 ```tsx
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { tsx } from '@dojo/framework/core/vdom';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 
 export default class MyEncapsulatedStateWidget extends WidgetBase {
 	private myState = 'Hello from a stateful widget!';
@@ -685,7 +685,7 @@ For class-based widgets, there are two ways to invalidate:
 
 1.  Explicitly calling `this.invalidate()` in an appropriate location where state is being changed.
     -   In the `MyEncapsulatedStateWidget` example, this could be done in the 'Change State' button's `onclick` handler.
-2.  Annotating any relevant fields with the `@watch()` decorator (from the `@dojo/framework/core/vdomecorators/watch` module). When `@watch`ed fields are modified, `this.invalidate()` will implicitly be called - this can be useful for state fields that always need to trigger a re-render when updated.
+2.  Annotating any relevant fields with the `@watch()` decorator (from the `@dojo-ng/framework/core/vdomecorators/watch` module). When `@watch`ed fields are modified, `this.invalidate()` will implicitly be called - this can be useful for state fields that always need to trigger a re-render when updated.
 
 **Note:** marking a widget as invalid won't immediately re-render the widget - instead it acts as a notification to Dojo that the widget is in a dirty state and should be updated and re-rendered in the next render cycle. This means invalidating a widget multiple times within the same render frame won't have a negative impact on application performance, although excessive invalidation should be avoided to ensure optimal performance.
 
@@ -694,8 +694,8 @@ The following is an updated `MyEncapsulatedStateWidget` example that will correc
 **Function-based variant:**
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 const factory = create({ icache });
 
@@ -726,9 +726,9 @@ Here, both `myState` and `counter` are updated as part of the same application l
 > src/widgets/MyEncapsulatedStateWidget.tsx
 
 ```tsx
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import watch from '@dojo/framework/core/decorators/watch';
-import { tsx } from '@dojo/framework/core/vdom';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import watch from '@dojo-ng/framework/core/decorators/watch';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 
 export default class MyEncapsulatedStateWidget extends WidgetBase {
 	private myState: string = 'Hello from a stateful widget!';
@@ -770,8 +770,8 @@ For example, a widget supporting state and event handler properties:
 **Function-based variant:**
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 const factory = create().properties<{
 	name: string;
@@ -807,8 +807,8 @@ export default factory(function MyWidget({ middleware: { icache }, properties })
 **Class-based variant:**
 
 ```tsx
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { tsx } from '@dojo/framework/core/vdom';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { tsx } from '@dojo-ng/framework/core/vdom';
 
 export interface MyWidgetProperties {
 	name: string;
@@ -851,8 +851,8 @@ A consumer of this example widget can interact with it by passing in appropriate
 **Function-based variant:**
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import icache from '@dojo/framework/core/middleware/icache';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import icache from '@dojo-ng/framework/core/middleware/icache';
 
 import MyWidget from './MyWidget';
 
@@ -874,9 +874,9 @@ export default factory(function NameHandler({ middleware: { icache } }) {
 **Class-based variant:**
 
 ```tsx
-import WidgetBase from '@dojo/framework/core/WidgetBase';
-import { tsx } from '@dojo/framework/core/vdom';
-import watch from '@dojo/framework/core/decorators/watch';
+import WidgetBase from '@dojo-ng/framework/core/WidgetBase';
+import { tsx } from '@dojo-ng/framework/core/vdom';
+import watch from '@dojo-ng/framework/core/decorators/watch';
 import MyWidget from './MyWidget';
 
 export default class NameHandler extends WidgetBase {

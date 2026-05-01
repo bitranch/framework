@@ -1,8 +1,8 @@
 {
-	"extends": "./node_modules/@dojo/scripts/intern/base.json",
+	"extends": "./node_modules/@dojo-ng/scripts/intern/base.json",
 
 	"capabilities+": {
-		"name": "@dojo/framework",
+		"name": "@dojo-ng/framework",
 		"browserstack.debug": false
 	},
 
@@ -41,7 +41,7 @@
 
 	"browser": {
 		"loader": {
-			"script": "./node_modules/@dojo/scripts/intern/loader.js",
+			"script": "./node_modules/@dojo-ng/scripts/intern/loader.js",
 			"options": {
 				"shimPath": "./dist/dev/src/shim/util/amd.js",
 				"packages": [
@@ -59,7 +59,7 @@
 				],
 				"map": {
 					"*": {
-						"@dojo/framework/shim/main": "./dist/dev/src/shim/main"
+						"@dojo-ng/framework/shim/main": "./dist/dev/src/shim/main"
 					}
 				}
 			}

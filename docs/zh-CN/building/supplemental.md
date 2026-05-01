@@ -49,7 +49,7 @@ dojo build app --dojorc .dojorc.local -m dev
 
 Dojo 尝试使用路由和 outlet 智能地做出选择，自动将代码拆分为更小的包。通常各个包内的代码都是紧密相关的。这是构建系统内置的功能，可直接使用。但是，对于有特殊分包需求的用户，Dojo 还允许在 `.dojorc` 配置文件中显示定义包。
 
-默认情况下，Dojo 应用程序只创建一个应用程序包。但是 [@dojo/cli-build-app](https://github.com/dojo/cli-build-app) 提供了很多配置选项，这些选项可将应用程序拆分为较小的、可逐步加载的包。
+默认情况下，Dojo 应用程序只创建一个应用程序包。但是 [@dojo-ng/cli-build-app](https://github.com/dojo/cli-build-app) 提供了很多配置选项，这些选项可将应用程序拆分为较小的、可逐步加载的包。
 
 ## 使用路由自动分包
 
@@ -100,7 +100,7 @@ export default class App extends WidgetBase {
 
 将会为应用程序的每个顶级路由生成单独的包。在本例中，会生成一个应用程序的主包以及 `src/Home`、`src/About` 和 `src/Profile` 三个包。
 
-使用 [@dojo/cli-create-app](https://github.com/dojo/cli-create-app/) 新建一个应用程序，然后运行 `npm run build`，就可看到自动分包的实际效果。Dojo 将自动为示例应用程序中的所有路由创建包。
+使用 [@dojo-ng/cli-create-app](https://github.com/dojo/cli-create-app/) 新建一个应用程序，然后运行 `npm run build`，就可看到自动分包的实际效果。Dojo 将自动为示例应用程序中的所有路由创建包。
 
 ## 手动分包
 
@@ -227,7 +227,7 @@ Service worder 是一种 web worker，能够拦截网络请求、缓存和提供
 
 ### ServiceWorker 配置
 
-在底层，`@dojo/webpack-contrib` 中的 `ServicerWorkerPlugin` 用于生成 service worker，它的所有选项都是有效的 `pwa.serviceWorker` 属性。
+在底层，`@dojo-ng/webpack-contrib` 中的 `ServicerWorkerPlugin` 用于生成 service worker，它的所有选项都是有效的 `pwa.serviceWorker` 属性。
 
 | 属性           | 类型       | 可选 | 描述                                                          |
 | -------------- | ---------- | ---- | ------------------------------------------------------------- |
@@ -336,7 +336,7 @@ BTR 在构建时为每个渲染路径（path）生成一份屏幕快照，存在
 
 ### History 管理器
 
-构建时渲染支持使用 `@dojo/framework/routing/history/HashHistory` 或 `@dojo/framework/routing/history/StateHistory` history 管理器的应用程序。当使用 `HashHistory` 时，确保所有的路径都是以 `#` 字符开头。
+构建时渲染支持使用 `@dojo-ng/framework/routing/history/HashHistory` 或 `@dojo-ng/framework/routing/history/StateHistory` history 管理器的应用程序。当使用 `HashHistory` 时，确保所有的路径都是以 `#` 字符开头。
 
 ## `build-time-render` 功能标记
 
@@ -384,8 +384,8 @@ export default (path: string) => {
 > src/widgets/MyBlockWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
-import block from '@dojo/framework/core/middleware/block';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
+import block from '@dojo-ng/framework/core/middleware/block';
 
 import readFile from '../readFile.block';
 
@@ -405,7 +405,7 @@ export default factory(function MyBlockWidget({ middleware: { block } }) {
 > main.ts
 
 ```ts
-import has from '@dojo/framework/has';
+import has from '@dojo-ng/framework/has';
 
 if (has('production')) {
 	console.log('Starting in production');
@@ -428,14 +428,14 @@ export const mode = has('production') ? 'dist' : 'dev';
 }
 ```
 
-上述的 `production` 功能将**构建生产版本**（`dist` 模式）设置为 `true`。构建系统使用 `@dojo/framework/has` 将代码标记为无法访问，并在构建时移除这些无用的代码。
+上述的 `production` 功能将**构建生产版本**（`dist` 模式）设置为 `true`。构建系统使用 `@dojo-ng/framework/has` 将代码标记为无法访问，并在构建时移除这些无用的代码。
 
 比如，上述代码将重写为：
 
 > static-build-loader 输出
 
 ```js
-import has from '@dojo/framework/has';
+import has from '@dojo-ng/framework/has';
 
 if (true) {
 	console.log('Starting in production');

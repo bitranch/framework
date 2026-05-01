@@ -5,7 +5,7 @@
 Escapes a string to safely be included in regular expressions.
 
 ```ts
-import { escapeRegExp } from '@dojo/framework/core/string';
+import { escapeRegExp } from '@dojo-ng/framework/core/string';
 
 const str = 'cat file.js | grep -c';
 
@@ -19,7 +19,7 @@ result === 'cat file\\.js \\| grep -c'; // true
 Escapes XML (or HTML) content in a string.
 
 ```ts
-import { escapeXml } from '@dojo/framework/core/string';
+import { escapeXml } from '@dojo-ng/framework/core/string';
 
 const badCode = "<script>alert('hi')</script>";
 

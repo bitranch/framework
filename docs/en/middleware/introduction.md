@@ -22,7 +22,7 @@ Several core and optional middleware are provided by the framework, however, app
 > src/middleware/myMiddleware.ts
 
 ```ts
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 
 const factory = create().properties<{ middlewareProp?: boolean }>();
 
@@ -43,7 +43,7 @@ export default myMiddleware;
 > src/middleware/myComposingMiddleware.ts
 
 ```ts
-import { create, invalidator } from '@dojo/framework/core/vdom';
+import { create, invalidator } from '@dojo-ng/framework/core/vdom';
 import myMiddleware from './myMiddleware';
 
 const factory = create({ myMiddleware, invalidator });
@@ -70,7 +70,7 @@ export default myComposingMiddleware;
 > src/widgets/MyWidget.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 import myComposingMiddleware from '../middleware/myComposingMiddleware';
 
 const factory = create({ myComposingMiddleware });
@@ -88,7 +88,7 @@ export default factory(function MyWidget({ properties, middleware: { myComposing
 > src/main.tsx
 
 ```tsx
-import renderer, { tsx } from '@dojo/framework/core/vdom';
+import renderer, { tsx } from '@dojo-ng/framework/core/vdom';
 import MyWidget from './widgets/MyWidget';
 
 const r = renderer(() => <MyWidget middlewareProp={true} />);

@@ -25,12 +25,12 @@ Each widget is bundled into a JavaScript file and a CSS file, both of which are 
 
 ## Building Custom Elements
 
-Dojo widgets can be built as custom elements using the `@dojo/cli-build-widget` command.
+Dojo widgets can be built as custom elements using the `@dojo-ng/cli-build-widget` command.
 
 > src/widgets/Hero.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 import * as css from './styles/Hero.m.css';
 
 export interface HeroProperties {

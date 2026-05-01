@@ -1511,7 +1511,7 @@ export interface BeforeProperties<P = any> {
 
 export interface LocaleData {
 	/**
-	 * The locale for the widget. If not specified, then the root locale (as determined by `@dojo/i18n`) is assumed.
+	 * The locale for the widget. If not specified, then the root locale (as determined by `@dojo-ng/i18n`) is assumed.
 	 * If specified, the widget's node will have a `lang` property set to the locale.
 	 */
 	locale?: string;

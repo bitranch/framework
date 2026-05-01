@@ -41,17 +41,17 @@ An application store for dojo.
 
 ## Overview
 
-Dojo stores is a predictable, consistent state container for Javascript applications with inspiration from Redux and Flux architectures. However, the `@dojo/framework/stores` package aims to provide more built-in support for common patterns such as asynchronous behaviors, undo support and **more**!
+Dojo stores is a predictable, consistent state container for Javascript applications with inspiration from Redux and Flux architectures. However, the `@dojo-ng/framework/stores` package aims to provide more built-in support for common patterns such as asynchronous behaviors, undo support and **more**!
 
 Managing state can become difficult to coordinate when an application becomes complicated with multiple views, widgets, components, and models. With each of these attempting to update attributes of state at varying points within the application lifecycle things can get **confusing**. When state changes are hard to understand and/or non-deterministic it becomes increasingly difficult to identify and reproduce bugs or add new features.
 
-The `@dojo/framework/stores` package provides a centralized store, designed to be the **single source of truth** for an application. It operates using uni-directional data flow. This means all application data follows the same lifecycle, ensuring the application logic is predictable and easy to understand.
+The `@dojo-ng/framework/stores` package provides a centralized store, designed to be the **single source of truth** for an application. It operates using uni-directional data flow. This means all application data follows the same lifecycle, ensuring the application logic is predictable and easy to understand.
 
 **Note**: Do you need a centralized store? Lifting state up to parent widgets and using local state are likely to be sufficient in less complex applications.
 
 ## Basics
 
-To work with `@dojo/framework/stores` there are three core but simple concepts - Operations, Commands, and Processes.
+To work with `@dojo-ng/framework/stores` there are three core but simple concepts - Operations, Commands, and Processes.
 
 -   `Operation`
     -   Granular instructions to manipulate state based on JSON Patch
@@ -67,8 +67,8 @@ Operations are the raw instructions the store uses to make modifications to the 
 Dojo stores support four of the six JSON Patch operations: "add", "remove", "replace", and "test". The "copy" and "move" operations are not currently supported. Each operation is a simple object which contains instructions with the `OperationType`, `path` and optionally the `value` (depending on operation).
 
 ```ts
-import { OperationType } from '@dojo/framework/stores/State/patch';
-import { Pointer } from '@dojo/framework/stores/state/Pointer';
+import { OperationType } from '@dojo-ng/framework/stores/State/patch';
+import { Pointer } from '@dojo-ng/framework/stores/state/Pointer';
 
 const operations = [
 	{
@@ -88,7 +88,7 @@ const operations = [
 ];
 ```
 
-Dojo stores provides a helper package that can generate `PatchOperation` objects from `@dojo/framework/stores/state/operations`:
+Dojo stores provides a helper package that can generate `PatchOperation` objects from `@dojo-ng/framework/stores/state/operations`:
 
 -   `add` - Returns a `PatchOperation` of type `OperationType.ADD` for the `path` and `value`
 -   `remove` - Returns a `PatchOperation` of type `OperationType.REMOVE` for the `path`
@@ -183,7 +183,7 @@ const calculateCountsCommand = createCommand(({ get, path }) => {
 });
 ```
 
-_Important:_ Access to state root is not permitted and will throw an error, for example, `get(path('/'))`. This applies to `Operations` also, it is not possible to create an operation that will update the state root. Best practices with @dojo/framework/stores mean touching the smallest part of the store as is necessary.
+_Important:_ Access to state root is not permitted and will throw an error, for example, `get(path('/'))`. This applies to `Operations` also, it is not possible to create an operation that will update the state root. Best practices with @dojo-ng/framework/stores mean touching the smallest part of the store as is necessary.
 
 ##### Asynchronous Commands
 
@@ -373,7 +373,7 @@ Additionally, this means that there is no need to coordinate `actions` and `redu
 
 ### Connecting Store To Widgets
 
-Store data can be connected to widgets within your application using the `StoreProvider` widget provided by `@dojo/framework/stores`.
+Store data can be connected to widgets within your application using the `StoreProvider` widget provided by `@dojo-ng/framework/stores`.
 
 Container Property API:
 
@@ -387,9 +387,9 @@ There are two mechanisms to connect the `StoreProvider` to the `Store`:
 2.  A catch-all when no `paths` are defined for the container, it will invalidate when any data changes in the store.
 
 ```ts
-import { WidgetBase } from '@dojo/framework/core/WidgetBase';
-import { Store } from '@dojo/framework/stores/Stores';
-import StoreProvider from '@dojo/framework/stores/StoreProvider';
+import { WidgetBase } from '@dojo-ng/framework/core/WidgetBase';
+import { Store } from '@dojo-ng/framework/stores/Stores';
+import StoreProvider from '@dojo-ng/framework/stores/StoreProvider';
 
 interface State {
 	foo: string;
@@ -723,8 +723,8 @@ export const myProcess = createProcess(
 ```
 
 ```ts
-import { load } from '@dojo/framework/stores/middleware/localStorage';
-import { Store } from '@dojo/framework/stores/Store';
+import { load } from '@dojo-ng/framework/stores/middleware/localStorage';
+import { Store } from '@dojo-ng/framework/stores/Store';
 
 const store = new Store();
 load('my-process', store);

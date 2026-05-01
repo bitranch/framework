@@ -27,8 +27,8 @@ The store holds the global, atomic state for the entire application. The store s
 > main.ts
 
 ```ts
-import { registerStoreInjector } from '@dojo/framework/stores/StoreInjector';
-import Store from '@dojo/framework/stores/Store';
+import { registerStoreInjector } from '@dojo-ng/framework/stores/StoreInjector';
+import Store from '@dojo-ng/framework/stores/Store';
 import { State } from './interfaces';
 
 const store = new Store<State>();
@@ -77,7 +77,7 @@ Stores have a simple wrapper function that acts as a type-safe factory for creat
 To create a store factory:
 
 ```ts
-import { createCommandFactory } from '@dojo/framework/stores/process';
+import { createCommandFactory } from '@dojo-ng/framework/stores/process';
 import { State } from './interfaces';
 
 const createCommand = createCommandFactory<State>();
@@ -124,9 +124,9 @@ This path refers to the `User` located at `/users/list` at offset `1`.
 Adds a value to an object or inserts it into an array.
 
 ```ts
-import { createCommandFactory } from '@dojo/framework/stores/process';
+import { createCommandFactory } from '@dojo-ng/framework/stores/process';
 import { State } from './interfaces';
-import { add } from '@dojo/framework/stores/state/operations';
+import { add } from '@dojo-ng/framework/stores/state/operations';
 
 const createCommand = createCommandFactory<State>();
 const myCommand = createCommand(({ at, get, path, payload, state }) => {
@@ -143,9 +143,9 @@ This adds `user` to the beginning of the user list.
 Removes a value from an object or an array.
 
 ```ts
-import { createCommandFactory } from '@dojo/framework/stores/process';
+import { createCommandFactory } from '@dojo-ng/framework/stores/process';
 import { State } from './interfaces';
-import { add, remove } from '@dojo/framework/stores/state/operations';
+import { add, remove } from '@dojo-ng/framework/stores/state/operations';
 
 const createCommand = createCommandFactory<State>();
 const myCommand = createCommand(({ at, get, path, payload, state }) => {
@@ -168,9 +168,9 @@ This example adds an initial state for `users` and removes the first `user` in t
 Replaces a value. Equivalent to a `remove` followed by an `add`.
 
 ```ts
-import { createCommandFactory } from '@dojo/framework/stores/process';
+import { createCommandFactory } from '@dojo-ng/framework/stores/process';
 import { State } from './interfaces';
-import { add, replace } from '@dojo/framework/stores/state/operations';
+import { add, replace } from '@dojo-ng/framework/stores/state/operations';
 
 const createCommand = createCommandFactory<State>();
 const myCommand = createCommand(({ at, get, path, payload, state }) => {
@@ -194,9 +194,9 @@ This example replaces the second user in the `list` with `newUser`.
 The `get` function returns a value from the store at a specified path or `undefined` if a value does not exist at that location.
 
 ```ts
-import { createCommandFactory } from '@dojo/framework/stores/process';
+import { createCommandFactory } from '@dojo-ng/framework/stores/process';
 import { State } from './interfaces';
-import { remove, replace } from '@dojo/framework/stores/state/operations';
+import { remove, replace } from '@dojo-ng/framework/stores/state/operations';
 
 const createCommand = createCommandFactory<State>();
 
@@ -219,9 +219,9 @@ This example checks for the presence of an authentication token and works to upd
 The `payload` is an object literal passed into a command when it is called from a process. The `payload`'s type may be defined when constructing the command.
 
 ```ts
-import { createCommandFactory } from '@dojo/framework/stores/process';
+import { createCommandFactory } from '@dojo-ng/framework/stores/process';
 import { State } from './interfaces';
-import { remove, replace } from '@dojo/framework/stores/state/operations';
+import { remove, replace } from '@dojo-ng/framework/stores/state/operations';
 
 const createCommand = createCommandFactory<State>();
 
@@ -245,9 +245,9 @@ A `Process` is a construct used to sequentially execute commands against a `stor
 First, create a couple commands responsible for obtaining a user token and use that token to load a `User`. Then create a process that uses those commands. Every process must be identified by a unique process ID. This ID is used internally in the store.
 
 ```ts
-import { createCommandFactory, createProcess } from "@dojo/framework/stores/process";
+import { createCommandFactory, createProcess } from "@dojo-ng/framework/stores/process";
 import { State } from './interfaces';
-import { add, replace } from "@dojo/framework/stores/state/operations";
+import { add, replace } from "@dojo-ng/framework/stores/state/operations";
 
 const createCommand = createCommandFactory<State>();
 
@@ -303,7 +303,7 @@ When using function-based widgets, the `createStoreMiddleware` helper can be use
 > middleware/store.ts
 
 ```tsx
-import createStoreMiddleware from '@dojo/framework/core/middleware/store';
+import createStoreMiddleware from '@dojo-ng/framework/core/middleware/store';
 import { State } from '../interfaces';
 
 export default createStoreMiddleware<State>();
@@ -312,7 +312,7 @@ export default createStoreMiddleware<State>();
 > widgets/User.tsx
 
 ```tsx
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 import store from '../middleware/store';
 import { State } from '../../interfaces';
 
@@ -328,7 +328,7 @@ export const User = factory(function User({ middleware: { store } }) {
 This middleware contains an `executor` method that can be used to run processes on the store.
 
 ```tsx
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 import store from '../middleware/store';
 import logout from '../processes/logout';
 import { State } from '../../interfaces';
@@ -358,7 +358,7 @@ A `StoreProvider` is a Dojo widget that has its own `renderer` and connects to t
 > widget/User.ts
 
 ```tsx
-import { create } from '@dojo/framework/core/vdom';
+import { create } from '@dojo-ng/framework/core/vdom';
 import { State } from '../../interfaces';
 
 const factory = create().properties();
@@ -387,7 +387,7 @@ A `Container` is a widget that fully encapsulates another widget. It connects th
 > widget/User.tsx
 
 ```tsx
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 interface UserProperties {
 	name?: string;
@@ -402,7 +402,7 @@ export const User = factory(function User({ properties }) {
 > widget/User.container.ts
 
 ```ts
-import { createStoreContainer } from '@dojo/framework/stores/StoreContainer';
+import { createStoreContainer } from '@dojo-ng/framework/stores/StoreContainer';
 import { State } from '../interfaces';
 import User from './User';
 
@@ -427,10 +427,10 @@ A process simply defines an execution flow for a set of data. To execute a proce
 
 ```tsx
 import { logout } from './processes/logout';
-import StoreProvider from '@dojo/framework/stores/StoreProvider';
+import StoreProvider from '@dojo-ng/framework/stores/StoreProvider';
 import { State } from '../../interfaces';
 import User from './User';
-import { create, tsx } from '@dojo/framework/core/vdom';
+import { create, tsx } from '@dojo-ng/framework/core/vdom';
 
 const factory = create().properties();
 export const UserProvider = factory(function UserProvider() {
