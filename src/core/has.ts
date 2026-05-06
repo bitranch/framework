@@ -81,7 +81,7 @@ const staticCache: StaticHasFeatures = staticFeatures
  * @param normalize Resolves a relative module id into an absolute module id
  */
 export function normalize(resourceId: string, normalize: (moduleId: string) => string): string | null {
-	const tokens: RegExpMatchArray = resourceId.match(/[\?:]|[^:\?]*/g) || [];
+	const tokens: RegExpMatchArray = (resourceId.match(/[\?:]|[^:\?]*/g) || []) as RegExpMatchArray;
 	let i = 0;
 
 	function get(skip?: boolean): string | null {
@@ -498,7 +498,7 @@ add(
 	'dom-passive-event',
 	() => {
 		let supportsPassive = false;
-		if ('host-browser') {
+		if (has('host-browser')) {
 			try {
 				const opts = Object.defineProperty({}, 'passive', {
 					get() {

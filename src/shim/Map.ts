@@ -186,7 +186,7 @@ if (!has('es6-map')) {
 				}
 			);
 
-			return new ShimIterator(values);
+			return new ShimIterator(values) as IterableIterator<[K, V]>;
 		}
 
 		forEach(callback: (value: V, key: K, mapInstance: Map<K, V>) => any, context?: {}) {
@@ -207,7 +207,7 @@ if (!has('es6-map')) {
 		}
 
 		keys(): IterableIterator<K> {
-			return new ShimIterator(this._keys);
+			return new ShimIterator(this._keys) as IterableIterator<K>;
 		}
 
 		set(key: K, value: V): Map<K, V> {
@@ -219,7 +219,7 @@ if (!has('es6-map')) {
 		}
 
 		values(): IterableIterator<V> {
-			return new ShimIterator(this._values);
+			return new ShimIterator(this._values) as IterableIterator<V>;
 		}
 
 		[Symbol.iterator](): IterableIterator<[K, V]> {

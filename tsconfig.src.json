@@ -4,7 +4,6 @@
 		"downlevelIteration": true,
 		"experimentalDecorators": true,
 		"ignoreDeprecations": "6.0",
-		"inlineSources": true,
 		"jsx": "react",
 		"jsxFactory": "tsx",
 		"lib": [
@@ -18,21 +17,20 @@
 			"es2015.proxy",
 			"ES2019.Array"
 		],
-		"module": "es2015",
+		"module": "umd",
 		"moduleResolution": "node10",
-		"noUnusedLocals": true,
-		"outDir": "dist/esm",
+		"noUnusedLocals": false,
+		"outDir": "dist/umd",
+		"rootDir": "./src",
 		"removeComments": false,
 		"skipLibCheck": true,
 		"sourceMap": true,
 		"strict": true,
 		"target": "es5",
-		"types": ["intern", "node"]
+		"types": ["node"]
 	},
 	"include": [
 		"./src/**/*.ts",
-		"./src/**/*.tsx",
-		"./tests/**/*.ts",
-		"./tests/**/*.tsx"
+		"./src/**/*.tsx"
 	]
 }

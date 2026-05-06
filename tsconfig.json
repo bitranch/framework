@@ -1,9 +1,12 @@
 {
-	"extends": "./node_modules/@dojo-ng/scripts/tsconfig/umd.json",
 	"compilerOptions": {
+		"declaration": true,
+		"downlevelIteration": true,
+		"experimentalDecorators": true,
+		"ignoreDeprecations": "6.0",
+		"inlineSources": true,
 		"jsx": "react",
 		"jsxFactory": "tsx",
-		"types": [ "intern" ],
 		"lib": [
 			"dom",
 			"es5",
@@ -14,7 +17,17 @@
 			"es2015.symbol.wellknown",
 			"es2015.proxy",
 			"ES2019.Array"
-		]
+		],
+		"module": "umd",
+		"moduleResolution": "node10",
+		"noUnusedLocals": true,
+		"outDir": "dist/umd",
+		"removeComments": false,
+		"skipLibCheck": true,
+		"sourceMap": true,
+		"strict": true,
+		"target": "es5",
+		"types": ["intern", "node"]
 	},
 	"include": [
 		"./src/**/*.ts",
